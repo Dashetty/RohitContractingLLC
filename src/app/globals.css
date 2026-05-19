@@ -71,6 +71,13 @@
   --color-chart-5:              var(--color-chart-5);
   --font-sans:                  var(--font-sans);
   --font-mono:                  var(--font-mono);
+  --font-playfair:              var(--font-playfair);
+  --font-cormorant:             var(--font-cormorant);
+  --color-secondary-accent:     var(--color-secondary-accent);
+  --color-heading:              var(--color-heading);
+  --color-warm-muted:           var(--color-warm-muted);
+  --color-warm-text:            var(--color-warm-text);
+  --color-card-border:          var(--color-card-border);
 }
 
 /* ========================================
@@ -245,6 +252,27 @@ body {
     linear-gradient(color-mix(in oklch, var(--color-foreground) 3%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in oklch, var(--color-foreground) 3%, transparent) 1px, transparent 1px);
   background-size: 40px 40px;
+}
+
+/* Accent word utility — Playfair italic orange accent */
+.font-display-accent {
+  font-family: var(--font-playfair);
+  font-style: italic;
+  color: #D85A30;
+}
+
+/* Hero heading serif display — Cormorant Garamond */
+.font-heading-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 400;
+}
+
+/* Warm earth italic — for 'Across Dubai' rhythm beat */
+.font-text-warm-italic {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #8B6347;
 }
 
 /* Loading bar animation */

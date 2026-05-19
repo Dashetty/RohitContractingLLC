@@ -47,16 +47,17 @@
   /* ========================================
      TYPOGRAPHY
      ======================================== */
-  --font-dm-sans:               "dmSans", sans-serif;
-  --font-inter:                 "inter", sans-serif;
-  --font-sans:                  var(--font-dm-sans), var(--font-inter),
-                                ui-sans-serif, system-ui, sans-serif;
+  --font-plus-jakarta:          var(--font-plus-jakarta);
+  --font-playfair:              var(--font-playfair);
+  --font-cormorant:             var(--font-cormorant);
+  --font-sans:                  var(--font-plus-jakarta), ui-sans-serif,
+                                system-ui, sans-serif;
   --font-serif:                 ui-serif, Georgia, Cambria,
                                 "Times New Roman", Times, serif;
   --font-mono:                  ui-monospace, SFMono-Regular, Menlo, Monaco,
                                 Consolas, "Liberation Mono", "Courier New", monospace;
   --font-display:               var(--font-sans);
-  --font-text:                  var(--font-inter);
+  --font-text:                  var(--font-plus-jakarta);
   --font-weight-display:        600;
   --font-weight-text:           400;
 
@@ -143,6 +144,12 @@
   --color-sidebar-accent-foreground: oklch(0.12 0.01 260);
   --color-sidebar-border:       oklch(0.87 0.008 80);
   --color-sidebar-ring:         var(--color-accent-brand);
+  /* Brand accent — warm earth secondary */
+  --color-secondary-accent:     #C17F4A;
+  --color-heading:              #1C1A17;
+  --color-warm-muted:           #8B6347;
+  --color-warm-text:            #5C5047;
+  --color-card-border:          #E8DFD0;
   /* Alternate section background */
   --color-dark-surface:         oklch(0.93 0.005 80);
 }

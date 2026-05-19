@@ -103,7 +103,9 @@ export default function WhyChooseUs() {
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
             Built on{" "}
-            <span className="text-gradient">Trust & Excellence</span>
+            <span className="font-display-accent">Trust</span>
+            {" "}&{" "}
+            <span className="text-gradient">Excellence</span>
           </h2>
           <p className="text-lg text-foreground/60 leading-relaxed max-w-2xl mx-auto">
             What sets Rohit Contracting apart in the UAE construction industry

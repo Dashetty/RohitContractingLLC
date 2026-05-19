@@ -181,9 +181,67 @@ Some unusual icons used in the code (`Container`, `Cable`, `SquareStack`, `Shiel
 | `--color-dark-surface` | `oklch(0.145 0 0)` | Alternating section bg |
 | (all other dark mode colors also preserved) |
 
+## Typography Revamp — Mixed Font Technique (2026-05-20)
+
+### Changes Applied
+
+**Fonts** — Replaced Geist (which was loaded but never wired into CSS) with proper font loading:
+- **Plus Jakarta Sans** → Base heading & body font via `next/font/google` (`--font-plus-jakarta`)
+- **Playfair Display** → Accent font for dramatic emphasis (`--font-playfair`)
+- **Geist_Mono** still loaded but unused (pre-existing, harmless)
+
+**CSS Wiring** (`theme.css`, `globals.css`):
+- `--font-sans` now points to `var(--font-plus-jakarta)` — the fonts are actually rendered
+- Removed dead references to `--font-dm-sans` and `--font-inter` (fonts that were never loaded)
+- Added `.font-display-accent` utility class in `globals.css` — Playfair Display, italic, `#D85A30`
+- Registered `--font-playfair` in `@theme inline` for potential Tailwind usage
+
+**3 Accented Headings** (rule: max 2-3 times total, one word each):
+1. **Hero** → "Building **Excellence** Across Dubai" — "Excellence" accented (defining noun)
+2. **Why Choose Us** → "Built on **Trust** & Excellence" — "Trust" accented (defining noun)
+3. **CTA** → "Let's Build Something **Exceptional**" — "Exceptional" accented (strong adjective)
+
+**Rules followed:**
+- ✅ Max one accented word per heading
+- ✅ Only on the most important heading per section
+- ✅ Words are strong semantic words (nouns/adjectives)
+- ✅ Unaffected sections left plain
+- ✅ Span only changes font-family, font-style, and color (no size/weight/underline)
+
+---
+
+## 🎨 Design System
+
+### Color Palette
+
+#### Light Mode (Default)
+| Token | Oklch Value | Usage |
+|-------|-------------|-------|
+| `--color-background` | `oklch(0.97 0.008 80)` | Main background (warm off-white) |
+| `--color-foreground` | `oklch(0.12 0.01 260)` | Main text (near-black) |
+| `--color-card` | `oklch(0.985 0.004 80)` | Card/surface backgrounds |
+| `--color-secondary` | `oklch(0.925 0.006 80)` | Secondary surfaces |
+| `--color-muted` | `oklch(0.94 0.005 80)` | Muted elements |
+| `--color-muted-foreground` | `oklch(0.53 0.01 260)` | Muted text |
+| `--color-accent` | `var(--color-accent-brand)` | Primary accent (orange: `oklch(0.68 0.19 45)`) |
+| `--color-accent-foreground` | `oklch(1 0 0)` | Text on accent (white) |
+| `--color-border` | `oklch(0.87 0.008 80)` | Borders & dividers |
+| `--color-dark-surface` | `oklch(0.93 0.005 80)` | Alternating section bg (slightly darker off-white) |
+| `--color-destructive` | `oklch(0.55 0.2 30)` | Error/alert red |
+
+#### Dark Mode (`.dark` class)
+| Token | Oklch Value | Usage |
+|-------|-------------|-------|
+| `--color-background` | `oklch(0.145 0 0)` | Main background (near-black) |
+| `--color-foreground` | `oklch(0.985 0 0)` | Main text (white) |
+| `--color-accent` | `var(--color-accent-brand)` | Same orange accent as light mode |
+| `--color-dark-surface` | `oklch(0.145 0 0)` | Alternating section bg |
+| (all other dark mode colors also preserved) |
+
 ### Typography
-- Font: Geist Sans (from Google Fonts via `next/font`)
-- Mono: Geist Mono (for code)
+- Font: **Plus Jakarta Sans** (body + base headings via `next/font/google`)
+- Accent: **Playfair Display** (italic, used sparingly — 3 words across page)
+- Mono: Geist Mono (loaded but not wired into CSS — pre-existing)
 - Headings: Bold, tracking-tight, text-gradient accent spans
 - Body: `text-foreground/60` to `text-foreground/80` (light mode)
 
@@ -206,15 +264,16 @@ Some unusual icons used in the code (`Container`, `Cable`, `SquareStack`, `Shiel
 ## 📝 Content Summary
 
 ### Hero
-- 3-line heading: "Building Dubai / With Strength / & Precision"
-- 4 stats: 10+ Years, 500+ Projects, 7 Emirates coverage, 99% Retention
+- Heading: "Building **Excellence** Across Dubai" — Cormorant Garamond + Playfair italic accent
+- Subheading: "Premium villa construction and turnkey contracting across Dubai."
 - CTA: "Request Quote" (#contact), "Explore Services" (#services)
+- Stat cards (right side): 500+ Projects, ISO Certified (98% Quality), Dubai Operations
 
-### Services (8)
-Building Contracting, Construction Management, Material Trading, Industrial Procurement, Infrastructure Projects, Renovation & Civil Works, Logistics & Supply, Structural Support
+### Services (6 villa-focused)
+New Construction, Renovation & Fit-Out, Residential Villas, Civil & Structural, MEP Works, Project Management
 
-### Projects (6)
-Dubai Commercial Tower (Commercial), Industrial Warehouse Complex (Industrial), Material Supply - Emirates Steel (Supply), Infrastructure Development (Infrastructure), Luxury Residential Complex (Residential), Industrial Equipment Supply (Industrial)
+### Projects (7 villa projects)
+Selected completed villas in: Al Barsha South 2, Al Barsha Second, Nad Al Sheba 1, Al Warqa Fourth, Al Awir First, Al Khawaneej First, Al Yalayis 3
 
 ### Why Choose Us (8 reasons)
 Fast Delivery, Quality Assurance, UAE Compliance, Professional Team, Reliable Procurement, Cost Efficiency, Trusted Partner, Safety Standards
@@ -310,6 +369,49 @@ npm run lint
 - ✅ All pages generate as static content
 - ✅ Route: `/` (static prerendered)
 - ⚠️ No tests written yet
+
+---
+
+## Hero & Layout Revamp — Warm Earth Tones + Mixed Serif Typography (2026-05-20)
+
+### Changes Applied
+
+**Fonts** — Added **Cormorant Garamond** (`next/font/google`, weights 300-700, normal + italic):
+- `--font-cormorant` CSS variable registered in `layout.tsx`, wired into `theme.css`
+- `.font-heading-serif` class — Cormorant Garamond regular weight (hero base heading)
+- `.font-text-warm-italic` class — Cormorant Garamond italic, color `#8B6347` ("Across Dubai")
+
+**New Color Tokens** (`theme.css` + `globals.css` @theme inline):
+- `--color-secondary-accent: #C17F4A` — warm earth secondary accent
+- `--color-heading: #1C1A17` — warm near-black for all headings
+- `--color-warm-muted: #8B6347` — muted earth tone ("Across Dubai", stat card labels)
+- `--color-warm-text: #5C5047` — body/small text earth tone
+- `--color-card-border: #E8DFD0` — soft warm border for cards
+
+**HeroSection.tsx** — Full revamp:
+- Base heading switched from Plus Jakarta Sans → **Cormorant Garamond** (`.font-heading-serif`)
+- "Excellence" retains **Playfair Display italic orange** (`.font-display-accent` — unchanged)
+- "Across Dubai" → **Cormorant italic** `#8B6347` (`.font-text-warm-italic`)
+- Subheading: `text-base sm:text-lg`, color `#5C5047` (`text-warm-text`)
+- **Explore Services ghost button**: `1.5px` border `#1C1A17`, hover transitions to accent
+- **Stat cards** (3 right-side cards):
+  - `1px solid #E8DFD0` border with `3px solid #C17F4A` left accent bar
+  - Tightened gap from `gap-6` to `gap-4`
+  - Warm earth icon backgrounds and label colors
+- Grid layout tightened to `lg:grid-cols-12` (7+5 split)
+- Scroll indicator uses warm earth colors
+
+**Navbar.tsx** — Added `borderBottom: 1px solid #E8DFD0` on scroll (inline style, scrolled state only)
+
+### Rules Followed
+- ✅ Max 2-3 accented italic words total across page (Hero "Excellence", WhyChooseUs "Trust", CTA "Exceptional")
+- ✅ One word per heading, strong semantic words only
+- ✅ Warm earth #1C1A17 for all headings (hero H1 uses `text-heading`)
+- ✅ Background unchanged (#FAF7F2 range)
+- ✅ Explore Services button has 1.5px border
+- ✅ Nav border only appears on scroll, not on load
+
+---
 
 ## UI Fixes (2026-05-19)
 
