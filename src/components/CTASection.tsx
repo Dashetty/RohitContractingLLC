@@ -36,9 +36,9 @@ export default function CTASection() {
           </motion.div>
 
           {/* Heading */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+          <h2 className="heading-serif text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
             Let&apos;s Build Something{" "}
-            <span className="font-display-accent">Exceptional</span>
+            <span className="font-accent-primary">Exceptional</span>
           </h2>
 
           <p className="text-lg sm:text-xl text-foreground/60 max-w-2xl mx-auto mb-12 leading-relaxed">

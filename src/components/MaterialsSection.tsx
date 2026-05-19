@@ -92,7 +92,7 @@ export default function MaterialsSection() {
               Materials & Supply
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6">
             Premium{" "}
             <span className="text-gradient">Building Materials</span>
           </h2>

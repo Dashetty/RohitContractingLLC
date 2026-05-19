@@ -44,7 +44,6 @@ A premium construction & building materials company website for **Rohit Contract
 │       ├── ProjectsSection.tsx # Masonry gallery with filter tabs and modal
 │       ├── WhyChooseUs.tsx    # Dark section with animated counters + 8 reasons
 │       ├── MaterialsSection.tsx # 8 building material cards with quality badges
-│       ├── TestimonialsSection.tsx # Glassmorphism carousel with controls
 │       ├── CTASection.tsx     # Bold conversion section
 │       ├── ContactSection.tsx # 5-column layout: info cards + form + WhatsApp CTA
 │       └── Footer.tsx         # 6-column footer with social, links, scroll-to-top
@@ -281,15 +280,70 @@ Fast Delivery, Quality Assurance, UAE Compliance, Professional Team, Reliable Pr
 ### Materials (8)
 Cement, Steel, Pipes & Fittings, Electrical Supplies, Wood & Plywood, Construction Hardware, Industrial Equipment, Specialty Materials
 
-### Testimonials (4)
-Ahmed Al Maktoum (Al Shafar GC), Sarah Johnson (Dubai Properties Group), Rashid Al Qasimi (Gulf Infrastructure LLC), Priya Sharma (Emirates Steel Industries)
-
 ### Contact Info
 - Location: Dubai Festival City, Al Kheeran 1, Dubai, UAE
 - Phone: +971 50 123 4567
 - Email: info@rohitcontracting.ae
 - Hours: Sat-Thu 8AM-7PM, Fri Closed
 - WhatsApp: +971501234567
+
+---
+
+---
+
+## Footer Revamp — Warm-Earth Cleanup (2026-05-21)
+
+### Changes Applied
+
+**Complete rewrite** of `src/components/Footer.tsx` to match the warm-earth design system.
+
+**Removed:**
+- `industrial-texture` overlay div (not warm-earth aesthetic)
+- `glass` class from social icons (no glassmorphism)
+- Unused `Building2` lucide icon import
+- `bg-background`, `border-border`, `text-foreground/*` theme var references
+
+**Typography:**
+- Brand name "Rohit" → `.heading-serif` (Cormorant Garamond), color `#1C1A17`
+- Column headings (Services, Company, Support) → `.heading-serif` uppercase, `#1C1A17`
+- All body text → Plus Jakarta Sans (default), `#5C5047` or `#7A6250`
+
+**Colors:**
+- Background: `#E6D7C3` (matches WhyChooseUs warm earth)
+- Links: `#7A6250`, hover → `#D85A30` (JS hover handlers since base is inline)
+- Social icons: bg `#F2E8DB`, border `#D8C7B5`, text `#7A6250`, hover → bg `#D85A30` text `#FDF8F5`
+- Brand logo: bg `#D85A30`, text `#FDF8F5`
+- Contact icons: `#D85A30` accent
+- Contact text: `#5C5047`, secondary email: `#7A6250`
+- Borders: `#D8C7B5`
+- Bottom bar: `#7A6250` text
+- Scroll-to-top: bg `#D85A30`, text `#FDF8F5`
+
+**Layout:**
+- Max-width 1440px, horizontal padding 80/40/20px (class-based)
+- Scroll-to-top button: absolute positioning (reverted from hacky `left-full` approach)
+
+---
+
+---
+
+## Footer Polish — Warmth Boost & Social Icons (2026-05-21)
+
+### Changes Applied
+
+**Background warmth** — `#E6D7C3` (cool beige, grey undertone) → `#EDE0CE` (warm sand)
+
+**Social icons** — Replaced placeholder letter initials (L, T, F, I) with actual Lucide icons:
+- LinkedIn → `ExternalLink` icon
+- Twitter → `MessageCircle` icon
+- Facebook → `Globe` icon
+- Instagram → `Camera` icon
+- Moved to a `socialLinks` data array for cleaner code (icon component passed via `social.icon`)
+- Icons: 16px, strokeWidth 1.5
+
+**Column heading color** — Services / Company / Support headings: `#1C1A17` (near-black) → `#5C5047` (warm brown)
+
+**Bottom bar divider** — `1px solid #D8C7B5` → `1px solid #E8DFD0` (lighter, softer separation)
 
 ---
 
@@ -313,6 +367,9 @@ npm run lint
 
 ## 📌 Future Development Notes
 
+### Recently Removed
+- **TestimonialsSection** — removed entirely (section + component + all references) per client request
+
 ### High Priority
 - **Icon verification**: Verify all Lucide icons exist when upgrading the package
 - **Form backend**: Wire up the contact form (`handleSubmit` currently just `console.log`s the data)
@@ -332,6 +389,81 @@ npm run lint
 - **Animation timing**: Fine-tune stagger delays for smoother entrance
 - **Bundle splitting**: Group sections into fewer dynamic chunks to reduce HTTP requests
 - **Form state reset**: Add reset after submission
+
+---
+
+## Typography Consistency Pass + Testimonials Removal (2026-05-20)
+
+### Changes Applied
+
+**TestimonialsSection removed** — Section, component file (`src/components/TestimonialsSection.tsx`), and all references (`page.tsx` import + usage) deleted. No code remnants.
+
+**New CSS utility** — `.heading-serif` class added to `globals.css`:
+- Sets `font-family: var(--font-cormorant), Georgia, serif` (Cormorant Garamond)
+- Paired with Tailwind's `font-bold` for weight (all section h2s already use `font-bold`)
+- Replaces the more-specific `.font-heading-serif` (removed as dead code)
+
+**All section headings standardized to Cormorant Garamond (`.heading-serif`):**
+- AboutSection: "Delivering Excellence in Dubai Construction" + "Our Journey" h3
+- ServicesSection: "Comprehensive Construction Solutions"
+- ProjectsSection: "Featured Projects"
+- MaterialsSection: "Premium Building Materials"
+- ContactSection: "Get In Touch"
+- WhyChooseUs: "Built on Trust & Excellence"
+- CTASection: "Let's Build Something Exceptional"
+
+**Italic accent standardization** — Changed Playfair Display (`font-display-accent`) → Cormorant italic (`font-accent-primary`) for:
+- WhyChooseUs: "Trust" (now matches Hero's "Excellence" font family)
+- CTASection: "Exceptional" (now matches Hero's "Excellence" font family)
+- Playfair-only utility `.font-display-accent` removed as dead code
+
+**Italic accent count:** 3 words total — "Excellence" (Hero), "Trust" (WhyChooseUs), "Exceptional" (CTA)
+
+---
+
+---
+
+## Why Choose Us — Warm-Earth Premium Redesign (2026-05-21)
+
+### Changes Applied
+
+**Complete rewrite** of `src/components/WhyChooseUs.tsx` with a rich warm-earth architectural palette.
+
+**Color Palette:**
+- Section background: `#E6D7C3` (warm earth)
+- Card surfaces: `#F2E8DB` (slightly lighter than bg)
+- Card borders: `#D8C7B5`
+- Hover state: bg → `#EDE0D0`, border → `#C17F4A`, translateY(`-3px`)
+- No pure black or white used anywhere
+- No gradients, no glassmorphism, no shadows, no neumorphism
+
+**Typography:**
+- Badge: Cormorant Garamond 15px `#D85A30` on `rgba(216,90,48,0.08)` bg
+- Main heading: Cormorant Garamond weight 600, `clamp(38px, 7vw, 72px)`, color `#1C1A17`
+  - "Trust" in `.font-accent-primary` (Cormorant italic #D85A30 weight 600)
+  - "Excellence" in `.font-accent-secondary` (Cormorant italic #C17F4A weight 400)
+- Subheading: Plus Jakarta Sans `clamp(16px, 2vw, 20px)`, color `#5C5047`, line-height 1.6
+
+**Layout:**
+- Max-width 1440px, horizontal padding 80/40/20px, vertical 140/100/72px
+- Stats grid: 4-col → 2-col → 1-col responsive, gap-7 (28px)
+- Feature grid: same responsive pattern, matching card styling
+
+**Card styling:**
+- Border-radius 28px, padding 48px (28px mobile)
+- Left-aligned text desktop, centered text mobile
+- Icon container: 64x64px, bg `rgba(216,90,48,0.08)`, border-radius 18px
+- Icon: 28px, `#D85A30`, strokeWidth 1.5
+- Card titles: Cormorant Garamond `clamp(22px, 2.5vw, 28px)`, `#1C1A17`
+- Card descriptions: `clamp(15px, 1.5vw, 18px)`, `#5C5047`, line-height 1.6
+- Stat footer: Cormorant Garamond `clamp(20px, 2vw, 24px)` `#D85A30` + label `#7A6250`
+
+**Spacing:**
+- Badge → heading: 36px | Heading → subheading: 36px
+- Heading block → stats: 72px | Stats → features: 40px
+- Icon → title: 24px | Title → desc: 16px | Desc → stat: 20px
+
+**Hover:** Pure CSS via Tailwind utilities (no JS event handlers) — background warms, border shifts to `#C17F4A`, card lifts 3px.
 
 ---
 

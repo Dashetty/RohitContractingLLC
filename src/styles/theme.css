@@ -47,9 +47,6 @@
   /* ========================================
      TYPOGRAPHY
      ======================================== */
-  --font-plus-jakarta:          var(--font-plus-jakarta);
-  --font-playfair:              var(--font-playfair);
-  --font-cormorant:             var(--font-cormorant);
   --font-sans:                  var(--font-plus-jakarta), ui-sans-serif,
                                 system-ui, sans-serif;
   --font-serif:                 ui-serif, Georgia, Cambria,

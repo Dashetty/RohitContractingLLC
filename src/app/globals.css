@@ -254,23 +254,38 @@ body {
   background-size: 40px 40px;
 }
 
-/* Accent word utility — Playfair italic orange accent */
-.font-display-accent {
-  font-family: var(--font-playfair);
-  font-style: italic;
-  color: #D85A30;
-}
-
-/* Hero heading serif display — Cormorant Garamond */
-.font-heading-serif {
+/* Section heading serif — Cormorant Garamond (pair with font-bold for weight) */
+.heading-serif {
   font-family: var(--font-cormorant), Georgia, serif;
-  font-weight: 400;
 }
 
 /* Warm earth italic — for 'Across Dubai' rhythm beat */
 .font-text-warm-italic {
   font-family: var(--font-cormorant), Georgia, serif;
   font-style: italic;
+  font-weight: 400;
+  color: #8B6347;
+}
+
+/* Hero primary accent — Cormorant italic orange, weight 600 */
+.font-accent-primary {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #D85A30;
+}
+
+/* Hero secondary accent — Cormorant italic warm earth, weight 400 */
+.font-accent-secondary {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #C17F4A;
+}
+
+/* Hero badge font — Cormorant Garamond regular small */
+.font-badge {
+  font-family: var(--font-cormorant), Georgia, serif;
   font-weight: 400;
   color: #8B6347;
 }

@@ -64,7 +64,7 @@ const reasons = [
     statLabel: "Client Retention",
   },
   {
-    icon: ShieldCheck,
+    icon: CheckCircle2,
     title: "Safety Standards",
     desc: "Zero-compromise safety protocols and PPE compliance",
     stat: "0",
@@ -79,65 +79,107 @@ const stats = [
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
 
+const cardClasses =
+  "rounded-[28px] p-12 max-sm:p-7 transition-all duration-300 ease-out " +
+  "bg-[#F2E8DB] border border-[#D8C7B5] " +
+  "hover:-translate-y-[3px] hover:bg-[#EDE0D0] hover:border-[#C17F4A]";
+
 export default function WhyChooseUs() {
   return (
-    <section className="relative py-24 sm:py-32 bg-background overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent opacity-30" />
-      <div className="absolute inset-0 grid-pattern opacity-10" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/3 rounded-full blur-3xl" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "#EDE0CE" }}
+    >
+      <div
+        className="relative z-10 mx-auto px-5 sm:px-10 lg:px-20 py-[72px] sm:py-[100px] lg:py-[140px]"
+        style={{ maxWidth: "1440px" }}
+      >
+        {/* ── Header block ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="flex flex-col items-center text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-accent rounded-full mb-6">
-            <span className="w-2 h-2 bg-accent rounded-full" />
-            <span className="text-accent text-sm font-medium tracking-wide">
-              Why Choose Us
-            </span>
+          {/* Badge */}
+          <div
+            className="inline-flex items-center justify-center rounded-full px-6 py-3 mb-9"
+            style={{
+              background: "rgba(216, 90, 48, 0.08)",
+              border: "1px solid rgba(216, 90, 48, 0.18)",
+              color: "#D85A30",
+              fontSize: "15px",
+              lineHeight: "1",
+            }}
+          >
+            Why Choose Us
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
+
+          {/* Heading */}
+          <h2
+            className="heading-serif font-semibold leading-[1.1] text-[#1C1A17] mb-9 max-w-4xl"
+            style={{ fontSize: "clamp(38px, 7vw, 72px)" }}
+          >
             Built on{" "}
-            <span className="font-display-accent">Trust</span>
-            {" "}&{" "}
-            <span className="text-gradient">Excellence</span>
+            <span className="font-accent-primary">Trust</span>
+            {" & "}
+            <span className="font-accent-secondary">Excellence</span>
           </h2>
-          <p className="text-lg text-foreground/60 leading-relaxed max-w-2xl mx-auto">
+
+          {/* Subheading */}
+          <p
+            className="text-[#5C5047] max-w-2xl leading-[1.6] mb-[72px]"
+            style={{ fontSize: "clamp(16px, 2vw, 20px)" }}
+          >
             What sets Rohit Contracting apart in the UAE construction industry
           </p>
         </motion.div>
 
-        {/* Stats bar */}
+        {/* ── Stats grid ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mb-10"
         >
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="glass rounded-2xl p-6 text-center hover:border-accent/20 transition-all duration-300"
+              className={`${cardClasses} text-center`}
             >
-              <div className="text-4xl sm:text-5xl font-bold text-accent mb-2">
-                <AnimatedCounter end={stat.value} suffix={stat.suffix} duration={2} />
+              <div
+                className="font-semibold leading-none mb-2"
+                style={{
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontSize: "clamp(36px, 6vw, 64px)",
+                  color: "#D85A30",
+                }}
+              >
+                <AnimatedCounter
+                  end={stat.value}
+                  suffix={stat.suffix}
+                  duration={2}
+                />
               </div>
-              <div className="text-sm text-foreground/60">{stat.label}</div>
+              <div
+                className="font-medium"
+                style={{
+                  fontSize: "clamp(14px, 1.5vw, 16px)",
+                  color: "#5C5047",
+                }}
+              >
+                {stat.label}
+              </div>
             </div>
           ))}
         </motion.div>
 
-        {/* Reasons grid */}
+        {/* ── Features grid ── */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7"
         >
           {reasons.map((reason, i) => (
             <motion.div
@@ -146,24 +188,65 @@ export default function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group glass rounded-xl p-5 hover:bg-foreground/[0.03] hover:border-accent/20 transition-all duration-300"
+              className={`${cardClasses} text-left max-sm:text-center`}
             >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 group-hover:bg-accent/20 border border-accent/10 flex items-center justify-center shrink-0 transition-all duration-300">
-                  <reason.icon className="text-accent" size="22" />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="font-semibold text-foreground mb-1 group-hover:text-accent transition-colors">
-                    {reason.title}
-                  </h3>
-                  <p className="text-sm text-foreground/50 leading-relaxed">
-                    {reason.desc}
-                  </p>
-                  <div className="mt-3 flex items-center gap-1 text-accent">
-                    <span className="text-lg font-bold">{reason.stat}</span>
-                    <span className="text-xs text-foreground/40">| {reason.statLabel}</span>
-                  </div>
-                </div>
+              {/* Icon */}
+              <div
+                className="flex items-center justify-center mb-6 mx-auto sm:mx-0"
+                style={{
+                  width: "64px",
+                  height: "64px",
+                  background: "rgba(216, 90, 48, 0.08)",
+                  borderRadius: "18px",
+                }}
+              >
+                <reason.icon
+                  style={{ color: "#D85A30" }}
+                  size={28}
+                  strokeWidth={1.5}
+                />
+              </div>
+
+              {/* Title */}
+              <h3
+                className="heading-serif font-semibold leading-tight text-[#1C1A17] mb-4"
+                style={{ fontSize: "clamp(22px, 2.5vw, 28px)" }}
+              >
+                {reason.title}
+              </h3>
+
+              {/* Description */}
+              <p
+                className="leading-[1.6] mb-5"
+                style={{
+                  fontSize: "clamp(15px, 1.5vw, 18px)",
+                  color: "#5C5047",
+                }}
+              >
+                {reason.desc}
+              </p>
+
+              {/* Stat footer */}
+              <div className="flex items-center gap-2 max-sm:justify-center">
+                <span
+                  className="font-semibold"
+                  style={{
+                    fontFamily: "var(--font-cormorant), Georgia, serif",
+                    fontSize: "clamp(20px, 2vw, 24px)",
+                    color: "#D85A30",
+                  }}
+                >
+                  {reason.stat}
+                </span>
+                <span
+                  style={{
+                    fontSize: "13px",
+                    color: "#7A6250",
+                    lineHeight: "1",
+                  }}
+                >
+                  {reason.statLabel}
+                </span>
               </div>
             </motion.div>
           ))}

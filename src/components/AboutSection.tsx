@@ -111,7 +111,7 @@ export default function AboutSection() {
             className="space-y-8"
           >
             {/* Heading */}
-            <h2 className="text-4xl sm:text-5xl font-bold leading-tight">
+            <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight">
               Delivering Excellence in{" "}
               <span className="text-gradient">Dubai Construction</span>
             </h2>
@@ -168,7 +168,7 @@ export default function AboutSection() {
           className="mt-24"
         >
           <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold text-foreground/90">Our Journey</h3>
+            <h3 className="heading-serif text-2xl font-bold text-foreground/90">Our Journey</h3>
             <p className="text-foreground/40 mt-2">Key milestones in our growth</p>
           </div>
 

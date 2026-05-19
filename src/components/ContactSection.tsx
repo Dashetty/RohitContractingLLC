@@ -45,7 +45,7 @@ export default function ContactSection() {
               Contact Us
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6">
             Get In <span className="text-gradient">Touch</span>
           </h2>
           <p className="text-lg text-foreground/60 leading-relaxed">

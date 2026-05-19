@@ -4,14 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2,
-  Warehouse,
-  Cog,
-  HardHat,
   MapPin,
-  Calendar,
   ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
   X,
 } from "lucide-react";
 
@@ -95,16 +89,8 @@ const projects = [
   },
 ];
 
-const categories = ["All", "Commercial", "Industrial", "Infrastructure", "Supply", "Residential"];
-
 export default function ProjectsSection() {
-  const [filter, setFilter] = useState("All");
   const [selected, setSelected] = useState<typeof projects[0] | null>(null);
-
-  const filtered =
-    filter === "All"
-      ? projects
-      : projects.filter((p) => p.category === filter);
 
   return (
     <section id="projects" className="relative py-24 sm:py-32 bg-dark-surface">
@@ -124,42 +110,18 @@ export default function ProjectsSection() {
               Portfolio
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6">
             Featured <span className="text-gradient">Projects</span>
           </h2>
           <p className="text-lg text-foreground/60 leading-relaxed">
-            Showcasing our finest work across Dubai
+            Completed villas we have built across Dubai
           </p>
-        </motion.div>
-
-        {/* Completed villas are presented as project cards below */}
-
-        {/* Filter tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                filter === cat
-                  ? "bg-accent text-white shadow-lg shadow-accent/25"
-                  : "glass text-foreground/60 hover:text-foreground hover:bg-foreground/5"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
         </motion.div>
 
         {/* Project grid */}
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
+            {projects.map((project, i) => (
               <motion.div
                 key={project.id}
                 layout
@@ -176,9 +138,7 @@ export default function ProjectsSection() {
                 onClick={() => setSelected(project)}
               >
                 {/* Project background placeholder */}
-                <div
-                  className={`absolute inset-0 ${project.color} steel-gradient`}
-                >
+                <div className={`absolute inset-0 ${project.color} steel-gradient`}>
                   {/* Pattern overlay */}
                   <div className="absolute inset-0 grid-pattern opacity-20" />
                 </div>
@@ -195,7 +155,7 @@ export default function ProjectsSection() {
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="heading-serif text-2xl font-bold text-white mb-2 group-hover:text-accent transition-colors">
                     {project.title}
                   </h3>
 
@@ -204,10 +164,12 @@ export default function ProjectsSection() {
                       <MapPin size="14" />
                       {project.location}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar size="14" />
-                      {project.year}
-                    </span>
+                    {project.year && (
+                      <span className="flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        {project.year}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -246,19 +208,18 @@ export default function ProjectsSection() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="glass rounded-2xl max-w-2xl w-full overflow-hidden"
+              className="bg-[#1C1A17] rounded-2xl max-w-2xl w-full overflow-hidden border border-[#D8C7B5]/20"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Image area */}                <div
-                  className={`h-64 ${selected.color} relative`}
-                >
+              {/* Image area */}
+              <div className={`h-64 ${selected.color} relative`}>
                 <div className="absolute inset-0 grid-pattern opacity-20" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Building2 className="text-foreground/20" size="64" />
+                  <Building2 className="text-white/20" size="64" />
                 </div>
                 <button
                   onClick={() => setSelected(null)}
-                  className="absolute top-4 right-4 w-10 h-10 glass rounded-lg flex items-center justify-center text-foreground hover:text-accent transition-colors"
+                  className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white/80 hover:text-accent transition-colors"
                 >
                   <X size="20" />
                 </button>
@@ -266,20 +227,23 @@ export default function ProjectsSection() {
 
               {/* Content */}
               <div className="p-8">
-                <span className="px-3 py-1 glass-accent rounded-full text-xs text-accent">
+                <span className="px-3 py-1 bg-[#D85A30]/10 text-[#D85A30] rounded-full text-xs font-medium tracking-wide">
                   {selected.category}
                 </span>
-                <h3 className="text-2xl font-bold text-foreground mt-4 mb-3">
+                <h3 className="heading-serif text-2xl font-bold text-white mt-4 mb-3">
                   {selected.title}
                 </h3>
-                <p className="text-foreground/60 mb-6">{selected.description}</p>
-                <div className="flex items-center gap-6 text-sm text-foreground/50">
-                  <span className="flex items-center gap-1">
-                    <MapPin size="16" /> {selected.location}
+                <p className="text-[#C4B8A8] text-[17px] leading-[1.6] mb-6">{selected.description}</p>
+                <div className="flex items-center gap-6 text-sm text-[#7A6250]">
+                  <span className="flex items-center gap-1.5">
+                    <MapPin size="16" className="text-[#D85A30]" /> {selected.location}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar size="16" /> {selected.year}
-                  </span>
+                  {selected.year && (
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D8C7B5]" />
+                      {selected.year}
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.div>

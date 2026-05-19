@@ -91,7 +91,7 @@ export default function ServicesSection() {
               Our Services
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6">
             Comprehensive{" "}
             <span className="text-gradient">Construction Solutions</span>
           </h2>
