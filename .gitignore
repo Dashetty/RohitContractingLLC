@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Project-specific ignores
+doc_text*.txt
+rohittxt.txt
+ERROR_LOG.md
+~$*
+.~lock.*
+Rohit_Contracting_LLC_Company_Profile_08052026.docx
+doc_text.txt
+
+# Local editor / OS
+.vscode/
+.idea/
+Thumbs.db
+public/.DS_Store

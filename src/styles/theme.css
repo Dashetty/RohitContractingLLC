@@ -1,0 +1,189 @@
+/* ==========================================================
+   Theme Design Tokens
+   Source: mainline project/src/styles/globals.css
+   Framework: Tailwind CSS v4 (shadcn/ui style)
+   ==========================================================
+   Usage: Import this file in your global CSS:
+     @import "../theme.css";
+
+   Then reference variables like:
+     var(--color-primary)
+     var(--font-sans)
+     var(--radius-lg)
+     var(--shadow-md)
+   ==========================================================
+
+   ╔══════════════════════════════════════════════════════════╗
+   ║  NOTE: Color scales (e.g. primary-50..primary-900)     ║
+   ║  are NOT available in the original source.              ║
+   ║  The source uses single Oklch values per semantic      ║
+   ║  role, not a 10-step scale.  This file reproduces      ║
+   ║  the exact tokens as-authored.                         ║
+   ╚══════════════════════════════════════════════════════════╝
+   ========================================================== */
+
+/* ==========================================================
+   Theme Design Tokens
+   Framework: Tailwind CSS v4 (shadcn/ui style)
+   ========================================================== */
+
+/* ╔══════════════════════════════════════════════════════════╗
+   ║  NOTE: Color scales (e.g. primary-50..primary-900)     ║
+   ║  are NOT available. The source uses single Oklch       ║
+   ║  values per semantic role, not a 10-step scale.        ║
+   ╚══════════════════════════════════════════════════════════╝
+   ========================================================== */
+
+/* ========================================
+   SHARED — variables that stay the same
+   across light and dark mode
+   ======================================== */
+:root {
+  /* Accent brand orange — consistent in both modes */
+  --color-accent-brand:         oklch(0.68 0.19 45);
+  --color-accent-brand-dark:    oklch(0.60 0.18 45);
+  --color-accent-brand-light:   oklch(0.78 0.15 45);
+
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+  --font-dm-sans:               "dmSans", sans-serif;
+  --font-inter:                 "inter", sans-serif;
+  --font-sans:                  var(--font-dm-sans), var(--font-inter),
+                                ui-sans-serif, system-ui, sans-serif;
+  --font-serif:                 ui-serif, Georgia, Cambria,
+                                "Times New Roman", Times, serif;
+  --font-mono:                  ui-monospace, SFMono-Regular, Menlo, Monaco,
+                                Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-display:               var(--font-sans);
+  --font-text:                  var(--font-inter);
+  --font-weight-display:        600;
+  --font-weight-text:           400;
+
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  --radius:                     8px;
+  --radius-xs:                  calc(var(--radius) - 4px);
+  --radius-sm:                  calc(var(--radius) - 4px);
+  --radius-md:                  calc(var(--radius) - 2px);
+  --radius-lg:                  var(--radius);
+  --radius-xl:                  calc(var(--radius) * 2 - 4px);
+  --radius-2xl:                 calc(var(--radius) * 2);
+  --radius-3xl:                 calc(var(--radius) * 3);
+  --radius-4xl:                 calc(var(--radius) * 4);
+
+  /* ========================================
+     SHADOWS
+     ======================================== */
+  --shadow-2xs:                 0 1px 3px 0px hsl(0 0% 0% / 0.06);
+  --shadow-xs:                  0 1px 3px 0px hsl(0 0% 0% / 0.06);
+  --shadow-sm:                  0 1px 3px 0px hsl(0 0% 0% / 0.1),
+                                0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow:                     0 1px 3px 0px hsl(0 0% 0% / 0.1),
+                                0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md:                  0 1px 3px 0px hsl(0 0% 0% / 0.1),
+                                0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg:                  0 1px 3px 0px hsl(0 0% 0% / 0.1),
+                                0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl:                  0 1px 3px 0px hsl(0 0% 0% / 0.1),
+                                0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl:                 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+
+  /* ========================================
+     BREAKPOINTS
+     ======================================== */
+  --breakpoint-sm:              640px;
+  --breakpoint-md:              768px;
+  --breakpoint-lg:              1024px;
+  --breakpoint-xl:              1280px;
+  --breakpoint-2xl:             1400px;
+
+  /* ========================================
+     ANIMATIONS
+     ======================================== */
+  --animate-accordion-down:     accordion-down 0.2s ease-out;
+  --animate-accordion-up:       accordion-up 0.2s ease-out;
+}
+
+/* ========================================
+   LIGHT MODE (default)
+   Warm off-white with dark text, brand orange accent
+   ======================================== */
+:root {
+  --color-background:           oklch(0.97 0.008 80);
+  --color-foreground:           oklch(0.12 0.01 260);
+  --color-card:                 oklch(0.985 0.004 80);
+  --color-card-foreground:      oklch(0.12 0.01 260);
+  --color-popover:              oklch(0.985 0.004 80);
+  --color-popover-foreground:   oklch(0.12 0.01 260);
+  --color-primary:              oklch(0.12 0.01 260);
+  --color-primary-foreground:   oklch(0.985 0.004 80);
+  --color-secondary:            oklch(0.925 0.006 80);
+  --color-secondary-foreground: oklch(0.12 0.01 260);
+  --color-muted:                oklch(0.94 0.005 80);
+  --color-muted-foreground:     oklch(0.53 0.01 260);
+  --color-accent:               var(--color-accent-brand);
+  --color-accent-foreground:    oklch(1 0 0);
+  --color-destructive:          oklch(0.55 0.2 30);
+  --color-destructive-foreground: oklch(1 0 0);
+  --color-border:               oklch(0.87 0.008 80);
+  --color-input:                oklch(0.87 0.008 80);
+  --color-ring:                 var(--color-accent-brand);
+  --color-chart-1:              oklch(0.55 0.18 30);
+  --color-chart-2:              oklch(0.6 0.12 180);
+  --color-chart-3:              oklch(0.55 0.12 240);
+  --color-chart-4:              oklch(0.7 0.14 80);
+  --color-chart-5:              oklch(0.65 0.14 50);
+  --color-sidebar:              oklch(0.975 0.004 80);
+  --color-sidebar-foreground:   oklch(0.12 0.01 260);
+  --color-sidebar-primary:      oklch(0.12 0.01 260);
+  --color-sidebar-primary-foreground: oklch(0.985 0.004 80);
+  --color-sidebar-accent:       oklch(0.925 0.006 80);
+  --color-sidebar-accent-foreground: oklch(0.12 0.01 260);
+  --color-sidebar-border:       oklch(0.87 0.008 80);
+  --color-sidebar-ring:         var(--color-accent-brand);
+  /* Alternate section background */
+  --color-dark-surface:         oklch(0.93 0.005 80);
+}
+
+/* ========================================
+   DARK MODE
+   Original dark values but with brand orange accent
+   ======================================== */
+.dark {
+  --color-background:           oklch(0.145 0 0);
+  --color-foreground:           oklch(0.985 0 0);
+  --color-card:                 oklch(0.205 0 0);
+  --color-card-foreground:      oklch(0.985 0 0);
+  --color-popover:              oklch(0.205 0 0);
+  --color-popover-foreground:   oklch(0.985 0 0);
+  --color-primary:              oklch(0.922 0 0);
+  --color-primary-foreground:   oklch(0.205 0 0);
+  --color-secondary:            oklch(0.269 0 0);
+  --color-secondary-foreground: oklch(0.985 0 0);
+  --color-muted:                oklch(0.269 0 0);
+  --color-muted-foreground:     oklch(0.708 0 0);
+  --color-accent:               var(--color-accent-brand);
+  --color-accent-foreground:    oklch(1 0 0);
+  --color-destructive:          oklch(0.704 0.191 22.216);
+  --color-destructive-foreground: oklch(1 0 0);
+  --color-border:               oklch(1 0 0 / 10%);
+  --color-input:                oklch(1 0 0 / 15%);
+  --color-ring:                 var(--color-accent-brand);
+  --color-chart-1:              oklch(0.488 0.243 264.376);
+  --color-chart-2:              oklch(0.696 0.17 162.48);
+  --color-chart-3:              oklch(0.769 0.188 70.08);
+  --color-chart-4:              oklch(0.627 0.265 303.9);
+  --color-chart-5:              oklch(0.645 0.246 16.439);
+  --color-sidebar:              oklch(0.205 0 0);
+  --color-sidebar-foreground:   oklch(0.985 0 0);
+  --color-sidebar-primary:      oklch(0.488 0.243 264.376);
+  --color-sidebar-primary-foreground: oklch(0.985 0 0);
+  --color-sidebar-accent:       oklch(0.269 0 0);
+  --color-sidebar-accent-foreground: oklch(0.985 0 0);
+  --color-sidebar-border:       oklch(1 0 0 / 10%);
+  --color-sidebar-ring:         oklch(0.556 0 0);
+  --color-dark-surface:         oklch(0.145 0 0);
+}
+
