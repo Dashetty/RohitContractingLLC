@@ -71,9 +71,9 @@ const cardVariants = {
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 sm:py-32 bg-background">
+    <section id="services" className="relative py-24 sm:py-32" style={{ background: "var(--bg-beige)" }}>
       {/* Background */}
-      <div className="absolute inset-0 grid-pattern opacity-10" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.05]" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/3 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/2 rounded-full blur-3xl" />
 
@@ -85,7 +85,13 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-accent rounded-full mb-6">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+            style={{
+              background: "rgba(216, 90, 48, 0.08)",
+              border: "1px solid rgba(216, 90, 48, 0.18)",
+            }}
+          >
             <span className="w-2 h-2 bg-accent rounded-full" />
             <span className="text-accent text-sm font-medium tracking-wide">
               Our Services
@@ -93,9 +99,9 @@ export default function ServicesSection() {
           </div>
           <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6">
             Comprehensive{" "}
-            <span className="text-gradient">Construction Solutions</span>
+            <span className="text-gradient-warm">Construction Solutions</span>
           </h2>
-            <p className="text-lg text-foreground/60 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--text-body)" }}>
             End-to-end contracting, material supply, and trusted partnerships
             across Dubai — from new construction and MEP works to renovation
             and project management.
@@ -114,11 +120,21 @@ export default function ServicesSection() {
             <motion.div
               key={service.title}
               variants={cardVariants}
-              className="group relative glass rounded-2xl p-6 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 overflow-hidden"
+              className="group relative rounded-2xl p-6 transition-all duration-500 overflow-hidden"
+              style={{
+                background: "var(--card-beige)",
+                border: "1px solid var(--border-earth)",
+                boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
+                e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-earth)";
+                e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
+              }}
             >
-              {/* Hover glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-
               <div className="relative z-10">
                 {/* Icon */}
                 <div className="w-14 h-14 rounded-xl bg-accent/10 group-hover:bg-accent/20 border border-accent/10 group-hover:border-accent/30 flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/20">
@@ -129,12 +145,12 @@ export default function ServicesSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
+                <h3 className="text-lg font-bold mb-3 group-hover:text-accent transition-colors" style={{ color: "var(--text-heading)" }}>
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-foreground/50 leading-relaxed mb-4">
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-body)" }}>
                   {service.description}
                 </p>
 

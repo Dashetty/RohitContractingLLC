@@ -30,10 +30,10 @@ const values = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-dark-surface">
-      {/* Background pattern */}
-      <div className="absolute inset-0 industrial-texture opacity-30" />
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+    <section id="about" className="relative py-24 sm:py-32" style={{ background: "var(--bg-cream)" }}>
+      {/* Background pattern — subtle warm texture */}
+      <div className="absolute inset-0 industrial-texture opacity-[0.06]" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
@@ -41,7 +41,11 @@ export default function AboutSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="inline-flex items-center gap-2 px-4 py-2 glass-accent rounded-full mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
+          style={{
+            background: "rgba(216, 90, 48, 0.08)",
+            border: "1px solid rgba(216, 90, 48, 0.18)",
+          }}
         >
           <span className="w-2 h-2 bg-accent rounded-full" />
           <span className="text-accent text-sm font-medium tracking-wide">
@@ -58,23 +62,32 @@ export default function AboutSection() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Main image placeholder with industrial design */}
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden steel-gradient border border-foreground/10">
+            {/* Main image placeholder with warm editorial card */}
+            <div
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden"
+              style={{
+                background: "var(--card-cream)",
+                border: "1px solid var(--border-earth)",
+                boxShadow: "0 4px 20px rgba(92, 80, 71, 0.1), 0 1px 4px rgba(92, 80, 71, 0.06)",
+              }}
+            >
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center space-y-4">
-                  <Building2 className="mx-auto text-accent/40" size="64" />
-                  <div className="text-foreground/20 text-lg font-medium">
+                  <Building2 className="mx-auto text-accent/30" size="64" />
+                  <div className="text-lg font-medium" style={{ color: "var(--text-muted)" }}>
                     Construction Site
                   </div>
                 </div>
               </div>
               {/* Decorative elements */}
-              <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-foreground/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 h-1/3" style={{
+                background: "linear-gradient(to top, rgba(28, 26, 23, 0.06), transparent)"
+              }} />
               <div className="absolute bottom-4 left-4 flex items-center gap-2">
                 <div className="w-10 h-10 rounded-lg bg-accent/90 flex items-center justify-center">
                   <HardHat size="20" className="text-white" />
                 </div>
-                <span className="text-white text-sm font-medium">
+                <span className="text-sm font-medium" style={{ color: "var(--text-heading)" }}>
                   Safety First
                 </span>
               </div>
@@ -86,7 +99,12 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="absolute -bottom-6 -right-6 glass rounded-xl p-5 max-w-[200px]"
+              className="absolute -bottom-6 -right-6 rounded-xl p-5 max-w-[200px]"
+              style={{
+                background: "var(--card-cream)",
+                border: "1px solid var(--border-earth)",
+                boxShadow: "0 4px 20px rgba(92, 80, 71, 0.12), 0 1px 4px rgba(92, 80, 71, 0.06)",
+              }}
             >
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
@@ -94,7 +112,7 @@ export default function AboutSection() {
                 </div>
                 <div className="text-2xl font-bold text-accent">10+</div>
               </div>
-              <div className="text-sm text-foreground/70">Years of Excellence in UAE Construction</div>
+              <div className="text-sm" style={{ color: "var(--text-body)" }}>Years of Excellence in UAE Construction</div>
             </motion.div>
 
             {/* Decorative element */}
@@ -111,12 +129,12 @@ export default function AboutSection() {
             className="space-y-8"
           >
             {/* Heading */}
-            <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight">
+            <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight" style={{ color: "var(--text-heading)" }}>
               Delivering Excellence in{" "}
-              <span className="text-gradient">Dubai Construction</span>
+              <span className="text-gradient-warm">Dubai Construction</span>
             </h2>
 
-            <p className="text-lg text-foreground/60 leading-relaxed">
+            <p className="text-lg leading-relaxed" style={{ color: "var(--text-body)" }}>
               Rohit Contracting is a Dubai-based construction company committed
               to delivering high-quality construction services across Dubai.
               Strategically located in Dubai Festival City, we serve both
@@ -136,23 +154,40 @@ export default function AboutSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="glass rounded-xl p-4 hover:border-accent/20 transition-all duration-300 group"
+                  className="rounded-xl p-4 transition-all duration-300 group"
+                  style={{
+                    background: "var(--card-cream)",
+                    border: "1px solid var(--border-earth)",
+                    boxShadow: "0 4px 20px rgba(92, 80, 71, 0.1), 0 1px 4px rgba(92, 80, 71, 0.06)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "var(--border-earth)";
+                  }}
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors flex items-center justify-center">
                       <value.icon className="text-accent" size="18" />
                     </div>
-                    <span className="font-semibold text-foreground">{value.label}</span>
+                    <span className="font-semibold" style={{ color: "var(--text-heading)" }}>{value.label}</span>
                   </div>
-                  <p className="text-sm text-foreground/50">{value.desc}</p>
+                  <p className="text-sm" style={{ color: "var(--text-muted)" }}>{value.desc}</p>
                 </motion.div>
               ))}
             </div>
 
             {/* Safety badge */}
-            <div className="flex items-center gap-3 glass-accent rounded-xl px-5 py-3">
+            <div
+              className="flex items-center gap-3 rounded-xl px-5 py-3"
+              style={{
+                background: "rgba(216, 90, 48, 0.06)",
+                border: "1px solid rgba(216, 90, 48, 0.15)",
+              }}
+            >
               <Shield className="text-accent shrink-0" size="20" />
-              <span className="text-sm text-foreground/80">
+              <span className="text-sm" style={{ color: "var(--text-body)" }}>
                 Committed to Dubai safety standards and regulatory compliance
               </span>
             </div>
@@ -168,13 +203,13 @@ export default function AboutSection() {
           className="mt-24"
         >
           <div className="text-center mb-12">
-            <h3 className="heading-serif text-2xl font-bold text-foreground/90">Our Journey</h3>
-            <p className="text-foreground/40 mt-2">Key milestones in our growth</p>
+            <h3 className="heading-serif text-2xl font-bold" style={{ color: "var(--text-heading)" }}>Our Journey</h3>
+            <p className="mt-2" style={{ color: "var(--text-muted)" }}>Key milestones in our growth</p>
           </div>
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-0 right-0 top-1/2 h-px bg-foreground/10 hidden lg:block" />
+            <div className="absolute left-0 right-0 top-1/2 h-px hidden lg:block" style={{ background: "var(--border-warm)" }} />
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {milestones.map((m, i) => (
@@ -190,10 +225,10 @@ export default function AboutSection() {
                     <div className="w-2 h-2 rounded-full bg-accent" />
                   </div>
                   <div className="text-accent font-bold text-lg">{m.year}</div>
-                  <div className="text-foreground font-semibold text-sm mt-1">
+                  <div className="font-semibold text-sm mt-1" style={{ color: "var(--text-heading)" }}>
                     {m.title}
                   </div>
-                  <div className="text-foreground/40 text-xs mt-1 hidden sm:block">
+                  <div className="text-xs mt-1 hidden sm:block" style={{ color: "var(--text-muted)" }}>
                     {m.description}
                   </div>
                 </motion.div>

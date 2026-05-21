@@ -87,20 +87,6 @@ export default function RootLayout({
             }),
           }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              setTimeout(function(){
-                var el=document.getElementById('rc-loading-screen');
-                if(el&&el.style.display!=='none'){
-                  el.style.opacity='0';
-                  el.style.pointerEvents='none';
-                  setTimeout(function(){el.style.display='none'},500);
-                }
-              },6000);
-            `,
-          }}
-        />
         <ErrorBoundary>
           {children}
         </ErrorBoundary>

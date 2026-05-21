@@ -347,6 +347,28 @@ Cement, Steel, Pipes & Fittings, Electrical Supplies, Wood & Plywood, Constructi
 
 ---
 
+## Navbar Performance Fix (2026-05-21)
+
+### Changes Applied
+
+**`src/components/Navbar.tsx`** — Two performance improvements identified by code review:
+
+**1. Passive scroll listener**
+- Changed `addEventListener("scroll", handleScroll)` → `addEventListener("scroll", handleScroll, { passive: true })`
+- With `{ passive: true }`, the browser can optimize scroll frame timing without waiting for `preventDefault()` — eliminates potential scroll jank on mobile
+- The `handleScroll` handler now only does `setScrolled(window.scrollY > 80)` — a single number comparison with zero DOM queries
+
+**2. IntersectionObserver for active section tracking**
+- **Before**: A `for` loop called `getBoundingClientRect()` on all 5 sections every scroll frame — 5 forced synchronous layout recalculations per frame
+- **After**: IntersectionObserver with `rootMargin: "-80px 0px -70% 0px"` creates a trigger zone (80px to 30% from viewport top, matching the original ~200px threshold). Observer fires only when sections cross the zone boundary — zero layout thrashing during scroll
+- The callback still accesses `entry.boundingClientRect.top` for sorting, but only when the observer fires (not per scroll frame)
+- Initial `activeSection` state changed from `""` to `"home"` for immediate highlight on page load
+- Both `removeEventListener` and `observer.disconnect()` are properly cleaned up on unmount
+
+**Performance impact:** Eliminates 5× forced layout calls per scroll frame while maintaining identical visual behavior.
+
+---
+
 ## 🔧 Common Commands
 
 ```bash
@@ -494,6 +516,23 @@ npm run lint
 - **Fix**: Removed the stray duplicate block from the end of `theme.css`
 
 ---
+
+## Warm Rhythm Redesign — Phase 1 Progress
+
+### Completed
+- ✅ **CSS custom properties** — Added `--bg-cream`, `--bg-beige`, `--bg-earth`, `--card-cream`, `--card-beige`, `--card-earth`, `--text-heading`, `--text-body`, `--text-muted`, `--border-warm`, `--border-earth` in `globals.css`
+- ✅ **`.text-gradient-warm` class** — `#1C1A17 → #D85A30 → #FF8C42` for warm editorial sections
+- ✅ **About Section** — `--bg-cream` bg, solid `--card-cream` cards with `--border-earth`, `text-gradient-warm` heading, warm typography
+- ✅ **Services Section** — `--bg-beige` bg, solid `--card-beige` cards with `--border-earth`, `text-gradient-warm` heading, warm typography
+
+### Remaining
+- ✅ **Projects Section** — `--bg-cream` bg, solid warm cards with subtle color variations (cream/beige/earth cycle), warm shimmer, glass removed from toggle, cards, badges, and modal. Blueprint-shimmer renamed to warm-shimmer with warm tones. `project-*` CSS classes removed.
+- ⏳ WhyChooseUs — `--bg-earth`, existing cards already solid (verify)
+- ⏳ Materials — `--bg-cream`, solid cards
+- ⏳ CTA — `--bg-dark-cta` (already dark, minimal changes)
+- ⏳ Footer — already `#EDE0CE`, verify alignment
+- ⏳ Navbar scrolled state — update to `rgba(250,247,242,0.92)`
+- ⏳ Hardcoded hex cleanup — replace `#FDF8F5`, `#EDE0CE`, etc.
 
 ## 🧪 Build Status
 - ✅ Build passes with ZERO errors
