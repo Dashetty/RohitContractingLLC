@@ -79,19 +79,17 @@ const stats = [
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
 
-const cardClasses =
-  "rounded-[28px] p-12 max-sm:p-7 transition-all duration-300 ease-out " +
-  "bg-[#F2E8DB] border border-[#D8C7B5] " +
-  "hover:-translate-y-[3px] hover:bg-[#EDE0D0] hover:border-[#C17F4A]";
-
 export default function WhyChooseUs() {
   return (
     <section
-      className="relative overflow-hidden"
-      style={{ background: "#EDE0CE" }}
+      className="relative overflow-hidden py-24 sm:py-32"
+      style={{ background: "var(--bg-earth)" }}
     >
+      <div className="absolute inset-0 industrial-texture opacity-[0.06]" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
+
       <div
-        className="relative z-10 mx-auto px-5 sm:px-10 lg:px-20 py-[72px] sm:py-[100px] lg:py-[140px]"
+        className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8"
         style={{ maxWidth: "1440px" }}
       >
         {/* ── Header block ── */}
@@ -103,22 +101,22 @@ export default function WhyChooseUs() {
         >
           {/* Badge */}
           <div
-            className="inline-flex items-center justify-center rounded-full px-6 py-3 mb-9"
+            className="inline-flex items-center justify-center rounded-full px-4 py-2 mb-6"
             style={{
               background: "rgba(216, 90, 48, 0.08)",
               border: "1px solid rgba(216, 90, 48, 0.18)",
-              color: "#D85A30",
-              fontSize: "15px",
-              lineHeight: "1",
             }}
           >
-            Why Choose Us
+            <span className="w-2 h-2 bg-accent rounded-full mr-2" />
+            <span className="text-accent text-sm font-medium tracking-wide">
+              Why Choose Us
+            </span>
           </div>
 
           {/* Heading */}
           <h2
-            className="heading-serif font-semibold leading-[1.1] text-[#1C1A17] mb-9 max-w-4xl"
-            style={{ fontSize: "clamp(38px, 7vw, 72px)" }}
+            className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6 max-w-4xl"
+            style={{ color: "var(--text-heading)" }}
           >
             Built on{" "}
             <span className="font-accent-primary">Trust</span>
@@ -128,8 +126,8 @@ export default function WhyChooseUs() {
 
           {/* Subheading */}
           <p
-            className="text-[#5C5047] max-w-2xl leading-[1.6] mb-[72px]"
-            style={{ fontSize: "clamp(16px, 2vw, 20px)" }}
+            className="text-lg leading-relaxed max-w-2xl mb-16"
+            style={{ color: "var(--text-body)" }}
           >
             What sets Rohit Contracting apart in the UAE construction industry
           </p>
@@ -140,19 +138,32 @@ export default function WhyChooseUs() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mb-10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12"
         >
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className={`${cardClasses} text-center`}
+              className="rounded-2xl p-8 text-center transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: "var(--card-earth)",
+                border: "1px solid var(--border-earth)",
+                boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
+                e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-earth)";
+                e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
+              }}
             >
               <div
                 className="font-semibold leading-none mb-2"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
-                  fontSize: "clamp(36px, 6vw, 64px)",
-                  color: "#D85A30",
+                  fontSize: "clamp(32px, 5vw, 52px)",
+                  color: "var(--color-accent)",
                 }}
               >
                 <AnimatedCounter
@@ -165,7 +176,7 @@ export default function WhyChooseUs() {
                 className="font-medium"
                 style={{
                   fontSize: "clamp(14px, 1.5vw, 16px)",
-                  color: "#5C5047",
+                  color: "var(--text-body)",
                 }}
               >
                 {stat.label}
@@ -179,7 +190,7 @@ export default function WhyChooseUs() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {reasons.map((reason, i) => (
             <motion.div
@@ -188,65 +199,77 @@ export default function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className={`${cardClasses} text-left max-sm:text-center`}
+              className="group relative rounded-2xl p-6 text-left max-sm:text-center transition-all duration-300"
+              style={{
+                background: "var(--card-earth)",
+                border: "1px solid var(--border-earth)",
+                boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
+                e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-earth)";
+                e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
+              }}
             >
-              {/* Icon */}
-              <div
-                className="flex items-center justify-center mb-6 mx-auto sm:mx-0"
-                style={{
-                  width: "64px",
-                  height: "64px",
-                  background: "rgba(216, 90, 48, 0.08)",
-                  borderRadius: "18px",
-                }}
-              >
-                <reason.icon
-                  style={{ color: "#D85A30" }}
-                  size={28}
-                  strokeWidth={1.5}
-                />
-              </div>
+              {/* Subtle grid pattern overlay */}
+              <div className="absolute inset-0 grid-pattern opacity-[0.04] rounded-2xl pointer-events-none" />
 
-              {/* Title */}
-              <h3
-                className="heading-serif font-semibold leading-tight text-[#1C1A17] mb-4"
-                style={{ fontSize: "clamp(22px, 2.5vw, 28px)" }}
-              >
-                {reason.title}
-              </h3>
-
-              {/* Description */}
-              <p
-                className="leading-[1.6] mb-5"
-                style={{
-                  fontSize: "clamp(15px, 1.5vw, 18px)",
-                  color: "#5C5047",
-                }}
-              >
-                {reason.desc}
-              </p>
-
-              {/* Stat footer */}
-              <div className="flex items-center gap-2 max-sm:justify-center">
-                <span
-                  className="font-semibold"
+              <div className="relative z-10">
+                {/* Icon */}
+                <div
+                  className="flex items-center justify-center mb-5 mx-auto sm:mx-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/15"
                   style={{
-                    fontFamily: "var(--font-cormorant), Georgia, serif",
-                    fontSize: "clamp(20px, 2vw, 24px)",
-                    color: "#D85A30",
+                    width: "52px",
+                    height: "52px",
+                    background: "rgba(216, 90, 48, 0.08)",
+                    borderRadius: "14px",
                   }}
                 >
-                  {reason.stat}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    color: "#7A6250",
-                    lineHeight: "1",
-                  }}
+                  <reason.icon
+                    style={{ color: "var(--color-accent)" }}
+                    size={24}
+                    strokeWidth={1.5}
+                  />
+                </div>
+
+                {/* Title */}
+                <h3
+                  className="heading-serif text-lg font-bold leading-snug mb-3 group-hover:text-accent transition-colors"
+                  style={{ color: "var(--text-heading)" }}
                 >
-                  {reason.statLabel}
-                </span>
+                  {reason.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="text-sm leading-relaxed mb-4"
+                  style={{ color: "var(--text-body)" }}
+                >
+                  {reason.desc}
+                </p>
+
+                {/* Stat footer */}
+                <div className="flex items-center gap-2 max-sm:justify-center">
+                  <span
+                    className="font-semibold"
+                    style={{
+                      fontFamily: "var(--font-cormorant), Georgia, serif",
+                      fontSize: "clamp(18px, 1.8vw, 22px)",
+                      color: "var(--color-accent)",
+                    }}
+                  >
+                    {reason.stat}
+                  </span>
+                  <span
+                    className="text-xs"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {reason.statLabel}
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}

@@ -1,49 +1,40 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  ArrowUp,
-  Mail,
-  Phone,
-  MapPin,
-  ExternalLink,
-  MessageCircle,
-  Globe,
-  Camera,
-} from "lucide-react";
+import { ArrowUp, Mail, Phone, MapPin } from "lucide-react";
 
-const footerLinks = {
-  Services: [
-    "Building Contracting",
-    "Construction Management",
-    "Material Trading",
-    "Industrial Procurement",
-    "Infrastructure Projects",
-    "Renovation & Civil Works",
-  ],
+const footerLinks: Record<string, { label: string; href: string; isPlaceholder?: boolean }[]> = {
   Company: [
-    "About Us",
-    "Our Team",
-    "Projects",
-    "Careers",
-    "News & Media",
-    "Sustainability",
+    { label: "About Us", href: "#about" },
+    { label: "Our Team", href: "#", isPlaceholder: true },
+    { label: "Projects", href: "#projects" },
+    { label: "Careers", href: "#", isPlaceholder: true },
+    { label: "News & Media", href: "#", isPlaceholder: true },
+    { label: "Sustainability", href: "#", isPlaceholder: true },
+  ],
+  Services: [
+    { label: "All Services", href: "#services" },
+    { label: "Building Contracting", href: "#", isPlaceholder: true },
+    { label: "Construction Management", href: "#", isPlaceholder: true },
+    { label: "Material Trading", href: "#", isPlaceholder: true },
+    { label: "Infrastructure Projects", href: "#", isPlaceholder: true },
+    { label: "Renovation & Civil Works", href: "#", isPlaceholder: true },
   ],
   Support: [
-    "Contact Us",
-    "Request Quote",
-    "FAQ",
-    "Privacy Policy",
-    "Terms of Service",
-    "Sitemap",
+    { label: "Contact Us", href: "#contact" },
+    { label: "Request Quote", href: "#contact" },
+    { label: "FAQ", href: "#", isPlaceholder: true },
+    { label: "Privacy Policy", href: "#", isPlaceholder: true },
+    { label: "Terms of Service", href: "#", isPlaceholder: true },
+    { label: "Sitemap", href: "#", isPlaceholder: true },
   ],
 };
 
 const socialLinks = [
-  { name: "LinkedIn", icon: ExternalLink, href: "#" },
-  { name: "Twitter", icon: MessageCircle, href: "#" },
-  { name: "Facebook", icon: Globe, href: "#" },
-  { name: "Instagram", icon: Camera, href: "#" },
+  { name: "LinkedIn", initial: "in", href: "#" },
+  { name: "X (Twitter)", initial: "X", href: "#" },
+  { name: "Facebook", initial: "f", href: "#" },
+  { name: "Instagram", initial: "ig", href: "#" },
 ];
 
 export default function Footer() {
@@ -52,7 +43,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative" style={{ background: "#EDE0CE" }}>
+    <footer className="relative" style={{ background: "var(--bg-earth)" }}>
+      {/* Subtle background textures */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 grid-pattern opacity-[0.03]" />
+        <div className="absolute inset-0 industrial-texture opacity-[0.04]" />
+      </div>
+
       <div
         className="relative z-10 mx-auto px-5 sm:px-10 lg:px-20"
         style={{ maxWidth: "1440px" }}
@@ -65,7 +62,7 @@ export default function Footer() {
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-xl"
                 style={{
-                  background: "#D85A30",
+                  background: "var(--color-accent)",
                   color: "#FDF8F5",
                 }}
               >
@@ -74,13 +71,13 @@ export default function Footer() {
               <div className="flex flex-col">
                 <span
                   className="heading-serif text-xl font-bold tracking-tight"
-                  style={{ color: "#1C1A17" }}
+                  style={{ color: "var(--text-heading)" }}
                 >
                   Rohit
                 </span>
                 <span
                   className="text-[10px] font-medium tracking-[0.2em] uppercase -mt-1"
-                  style={{ color: "#D85A30" }}
+                  style={{ color: "var(--color-accent)" }}
                 >
                   Contracting
                 </span>
@@ -89,78 +86,67 @@ export default function Footer() {
 
             <p
               className="text-sm leading-relaxed max-w-sm"
-              style={{ color: "#5C5047" }}
+              style={{ color: "var(--text-body)" }}
             >
               Premium contracting and building material solutions for commercial,
               industrial, and infrastructure projects across Dubai.
             </p>
 
-            {/* Social links */}
+            {/* Social links — letter initials */}
             <div className="flex gap-3">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-[1px]"
-                    style={{
-                      background: "#F2E8DB",
-                      border: "1px solid #D8C7B5",
-                      color: "#7A6250",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "#D85A30";
-                      e.currentTarget.style.borderColor = "#D85A30";
-                      e.currentTarget.style.color = "#FDF8F5";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "#F2E8DB";
-                      e.currentTarget.style.borderColor = "#D8C7B5";
-                      e.currentTarget.style.color = "#7A6250";
-                    }}
-                    aria-label={social.name}
-                  >
-                    <Icon size="16" strokeWidth={1.5} />
-                  </a>
-                );
-              })}
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-[1px] text-xs font-semibold"
+                  style={{
+                    background: "var(--card-earth)",
+                    border: "1px solid var(--border-earth)",
+                    color: "var(--text-muted)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "var(--color-accent)";
+                    e.currentTarget.style.borderColor = "var(--color-accent)";
+                    e.currentTarget.style.color = "#FDF8F5";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "var(--card-earth)";
+                    e.currentTarget.style.borderColor = "var(--border-earth)";
+                    e.currentTarget.style.color = "var(--text-muted)";
+                  }}
+                  aria-label={social.name}
+                >
+                  {social.initial}
+                </a>
+              ))}
             </div>
 
             {/* Contact info */}
             <div
               className="space-y-3 pt-4"
-              style={{ borderTop: "1px solid #D8C7B5" }}
+              style={{ borderTop: "1px solid var(--border-earth)" }}
             >
               <a
                 href="tel:+971501234567"
                 className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
-                style={{ color: "#5C5047" }}
+                style={{ color: "var(--text-body)" }}
               >
-                <Phone size="14" style={{ color: "#D85A30" }} />
+                <Phone size="14" style={{ color: "var(--color-accent)" }} />
                 +971 50 123 4567
               </a>
               <a
                 href="mailto:info@rohitcontracting.ae"
                 className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
-                style={{ color: "#5C5047" }}
+                style={{ color: "var(--text-body)" }}
               >
-                <Mail size="14" style={{ color: "#D85A30" }} />
+                <Mail size="14" style={{ color: "var(--color-accent)" }} />
                 info@rohitcontracting.ae
-              </a>
-              <a
-                href="mailto:rohitcontracting@gmail.com"
-                className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
-                style={{ color: "#7A6250" }}
-              >
-                <Mail size="14" style={{ color: "#7A6250" }} />
-                rohitcontracting@gmail.com
               </a>
               <div
                 className="flex items-start gap-3 text-sm"
-                style={{ color: "#5C5047" }}
+                style={{ color: "var(--text-body)" }}
               >
-                <MapPin size="14" style={{ color: "#D85A30", marginTop: "2px" }} />
+                <MapPin size="14" style={{ color: "var(--color-accent)", marginTop: "2px" }} />
                 <span>
                   Dubai Festival City, Al Kheeran 1
                   <br />
@@ -175,25 +161,33 @@ export default function Footer() {
             <div key={title}>
               <h4
                 className="heading-serif font-semibold text-sm mb-5 uppercase tracking-wider"
-                style={{ color: "#5C5047" }}
+                style={{ color: "var(--text-body)" }}
               >
                 {title}
               </h4>
               <ul className="space-y-3">
                 {links.map((link) => (
-                  <li key={link}>
+                  <li key={link.label}>
                     <a
-                      href="#"
-                      className="text-sm transition-colors duration-300"
-                      style={{ color: "#7A6250" }}
+                      href={link.href}
+                      className="text-sm transition-colors duration-300 flex items-center gap-1.5"
+                      style={{ color: "var(--text-muted)" }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.color = "#D85A30";
+                        e.currentTarget.style.color = "var(--color-accent)";
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.color = "#7A6250";
+                        e.currentTarget.style.color = "var(--text-muted)";
                       }}
                     >
-                      {link}
+                      {link.label}
+                      {link.isPlaceholder && (
+                        <span
+                          className="text-[10px] font-medium opacity-50"
+                          style={{ color: "var(--text-muted)" }}
+                        >
+                          [+]
+                        </span>
+                      )}
                     </a>
                   </li>
                 ))}
@@ -205,18 +199,18 @@ export default function Footer() {
         {/* Bottom bar */}
         <div
           className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ borderTop: "1px solid #E8DFD0" }}
+          style={{ borderTop: "1px solid var(--border-earth)" }}
         >
           <p
             className="text-xs text-center sm:text-left"
-            style={{ color: "#7A6250" }}
+            style={{ color: "var(--text-muted)" }}
           >
-            &copy; {new Date().getFullYear()} Rohit Contracting. All rights
+            &copy; {new Date().getFullYear()} Rohit Contracting L.L.C. All rights
             reserved. | Licensed by Dubai Municipality
           </p>
           <p
             className="text-xs text-center"
-            style={{ color: "#7A6250" }}
+            style={{ color: "var(--text-muted)" }}
           >
             Premium Construction & Building Materials | Dubai, UAE
           </p>
@@ -231,7 +225,7 @@ export default function Footer() {
         onClick={scrollToTop}
         className="absolute -top-5 right-8 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-[2px]"
         style={{
-          background: "#D85A30",
+          background: "var(--color-accent)",
           color: "#FDF8F5",
         }}
         aria-label="Scroll to top"

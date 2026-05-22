@@ -1,158 +1,213 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { Shield, ArrowRight, Building2 } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Shield } from "lucide-react";
 
 export default function HeroSection() {
-  const [mounted, setMounted] = useState(false);
-  const rootRef = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLElement | null>(null);
+
+  // Track scroll progress relative to this section.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  // Text fades out as the user scrolls through the section
+  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  // Scroll indicator: appear at 1.2s, auto-dismiss after 3s
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const t1 = setTimeout(() => setShowHint(true), 3000);
+    const t2 = setTimeout(() => setShowHint(false), 6000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
-
-  const shouldAnimate = mounted;
-
-  // Scroll-driven values: as the user scrolls through the hero section
-  // we expand the framed card and simultaneously zoom the image out.
-  const { scrollYProgress } = useScroll({ target: shouldAnimate ? rootRef : undefined, offset: ["start start", "end start"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 320, damping: 28 });
-
-  // Finish expansion earlier for a faster effect
-  const frameWidth = useTransform(progress, [0, 0.7], ["66%", "100vw"]);
-  const frameMaxWidth = useTransform(progress, [0, 0.7], ["1200px", "100vw"]);
-  const frameBorderRadius = useTransform(progress, [0, 0.7], [40, 0]);
-  // Slightly less aggressive initial zoom for a cinematic reveal
-  const imageScale = useTransform(progress, [0, 0.7], [1.4, 1]);
-  const textOpacity = useTransform(progress, [0, 0.7], [1, 0]);
-  const [textPointer, setTextPointer] = useState<"auto" | "none">("auto");
-
-  useEffect(() => {
-    return progress.on("change", (v) => {
-      setTextPointer(v >= 0.65 ? "none" : "auto");
-    });
-  }, [progress]);
-  
-  // do not early-return here; useScroll is now passed an undefined target until
-  // the ref hydrates which avoids the 'Target ref is defined but not hydrated' error.
-  // slightly taller initial frame so ground materials aren't cut off
-  const frameHeight = useTransform(progress, [0, 0.7], ["62vh", "100vh"]);
 
   return (
     <section
       id="home"
-      ref={rootRef}
-      className="relative overflow-hidden"
-      style={{ background: '#FAF7F2' }}
+      ref={ref}
+      className="relative h-screen w-full overflow-hidden"
     >
-      {/* container that pins the hero card while the user scrolls inside it */}
-      <div style={{ height: '120vh' }}>
-        <div className="sticky top-[15vh] left-0 right-0 flex justify-center items-start">
+      {/* Background image — cinematic inhale: zoomed out → settles in */}
+      <motion.div
+        className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+        initial={{ scale: 1.15 }}
+        animate={{ scale: 1.08 }}
+        transition={{ duration: 1.8, delay: 0.3, ease: "easeOut" }}
+        style={{
+          backgroundImage: "url('/bg.png')",
+          backgroundPosition: "center 30%",
+          filter: "brightness(0.85) contrast(0.98)",
+        }}
+      />
+
+      {/* Dark gradient overlay for readability */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(28,26,23,0.75) 0%, rgba(28,26,23,0.35) 40%, transparent 70%)",
+        }}
+      />
+
+      {/* Content — centered, fades on scroll */}
+      <div className="relative z-20 h-full flex items-center justify-center">
+        <motion.div
+          className="w-full max-w-3xl text-center px-6"
+          style={{ opacity: textOpacity, willChange: "opacity" }}
+        >
+          {/* Badge */}
           <motion.div
-            className="relative z-30 flex items-center justify-center overflow-hidden"
-            style={{
-              width: frameWidth,
-              maxWidth: frameMaxWidth,
-              height: frameHeight,
-              borderRadius: frameBorderRadius,
-              border: '1px solid #E8DFD0',
-              background: '#000',
-              boxShadow: '0 18px 40px rgba(28,26,23,0.04)'
-            }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.75, ease: "easeOut" }}
           >
-            <motion.div
-              className="absolute inset-0 bg-no-repeat bg-cover"
+            <div
+              className="inline-flex items-center gap-2.5 rounded-full mx-auto"
               style={{
-                backgroundImage: "url('/bg.png')",
-                backgroundPosition: 'center 30%',
-                scale: imageScale,
-                transformOrigin: 'center center',
-                filter: 'brightness(0.95) contrast(0.98)'
+                background: "var(--glass-bg)",
+                backdropFilter: "blur(var(--blur-sm))",
+                WebkitBackdropFilter: "blur(var(--blur-sm))",
+                border: "1px solid var(--glass-border)",
+                boxShadow: "var(--glass-shadow-sm)",
+                padding: "8px 24px",
+                fontSize: "15px",
               }}
-            />
-
-            <div className="relative w-full flex items-center justify-center" style={{ pointerEvents: textPointer }}>
-              <div className="relative z-20 w-full max-w-3xl text-center px-8 py-12">
-                <motion.div style={{ opacity: textOpacity, willChange: 'opacity' }}>
-                  <div className="inline-flex items-center gap-2.5 rounded-full font-badge"
-                    style={{
-                      background: '#F0E6D8',
-                      border: '1px solid #E8DFD0',
-                      padding: '7px 22px',
-                      fontSize: '13px',
-                      display: 'inline-flex',
-                    }}
-                  >
-                    <Shield size="14" style={{ color: '#8B6347' }} />
-                    <span className="leading-none tracking-wide" style={{ color: '#8B6347' }}>
-                      Premier Dubai Construction Company
-                    </span>
-                  </div>
-
-                  <div style={{ height: '20px' }} />
-
-                  <h1
-                    className="leading-[1.02] tracking-tight"
-                    style={{
-                      fontFamily: 'var(--font-cormorant), Georgia, serif',
-                      fontWeight: 600,
-                      color: '#FDF8F5',
-                      fontSize: 'clamp(40px, 6vw, 84px)',
-                      lineHeight: 1.02,
-                      textShadow: '0 2px 20px rgba(0,0,0,0.45)'
-                    }}
-                  >
-                    Building <span className="font-accent-primary" style={{ color: '#FFE8D6' }}>Excellence</span> Across <span className="font-accent-secondary" style={{ color: '#FFE8D6' }}>Dubai</span>
-                  </h1>
-
-                  <div style={{ height: '18px' }} />
-
-                  <p style={{ color: '#FDF8F5', maxWidth: '560px', margin: '0 auto', lineHeight: 1.6 }}>
-                    Premium villa construction and turnkey contracting across Dubai.
-                  </p>
-
-                  <div style={{ height: '24px' }} />
-
-                  <div className="flex items-center justify-center gap-3">
-                    <a href="#contact" className="inline-flex items-center gap-2"
-                      style={{ background: '#D85A30', color: '#FDF8F5', padding: '12px 26px', borderRadius: 10, fontWeight: 600 }}>
-                      Request Quote
-                    </a>
-                    <a href="#services" className="inline-flex items-center gap-2"
-                      style={{ border: '1.5px solid rgba(255,255,255,0.5)', color: '#FDF8F5', padding: '10px 22px', borderRadius: 6, backdropFilter: 'blur(8px)' }}>
-                      Explore Services
-                    </a>
-                  </div>
-                </motion.div>
-              </div>
+            >
+              <Shield size={14} style={{ color: "var(--color-accent)" }} />
+              <span
+                className="leading-none"
+                style={{
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  color: "var(--color-foreground)",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                Premier Dubai Construction Company
+              </span>
             </div>
           </motion.div>
-        </div>
+
+          <div style={{ height: "24px" }} />
+
+          {/* Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.85, ease: "easeOut" }}
+          >
+            <h1
+              className="leading-[1.02] tracking-tight"
+              style={{
+                fontFamily: "var(--font-cormorant), Georgia, serif",
+                fontWeight: 600,
+                color: "#FDF8F5",
+                fontSize: "clamp(36px, 6vw, 84px)",
+                textShadow: "0 2px 24px rgba(0,0,0,0.5)",
+              }}
+            >
+              Building{" "}
+              <span style={{ color: "#FFE8D6", fontStyle: "italic" }}>
+                Excellence
+              </span>{" "}
+              Across{" "}
+              <span style={{ color: "#FFE8D6", fontStyle: "italic" }}>
+                Dubai
+              </span>
+            </h1>
+          </motion.div>
+
+          <div style={{ height: "16px" }} />
+
+          {/* Subtext */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.98, ease: "easeOut" }}
+          >
+            <p
+              className="mx-auto"
+              style={{
+                color: "rgba(253,248,245,0.85)",
+                maxWidth: "520px",
+                lineHeight: 1.6,
+                fontSize: "clamp(14px, 1.4vw, 18px)",
+                textShadow: "0 1px 12px rgba(0,0,0,0.4)",
+              }}
+            >
+              Premium villa construction and turnkey contracting across Dubai.
+            </p>
+          </motion.div>
+
+          <div style={{ height: "28px" }} />
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 2.08, ease: "easeOut" }}
+          >
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto"
+                style={{
+                  background: "var(--color-accent)",
+                  color: "#FDF8F5",
+                  padding: "13px 28px",
+                  borderRadius: 10,
+                  fontWeight: 600,
+                  fontSize: "15px",
+                }}
+              >
+                Request Quote
+              </a>
+              <a
+                href="#services"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto"
+                style={{
+                  border: "1.5px solid rgba(255,255,255,0.4)",
+                  color: "#FDF8F5",
+                  padding: "11px 24px",
+                  borderRadius: 10,
+                  backdropFilter: "blur(8px)",
+                  fontSize: "15px",
+                }}
+              >
+                Explore Services
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — faster entry, auto-dismisses */}
       <motion.div
-        initial={shouldAnimate ? { opacity: 0 } : false}
-        animate={shouldAnimate ? { opacity: 1 } : undefined}
-        transition={shouldAnimate ? { delay: 2.5 } : undefined}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        animate={{ opacity: showHint ? 1 : 0 }}
+        transition={{ duration: 0.6 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span
           className="text-[11px] tracking-[0.15em] uppercase"
-          style={{ color: '#8B6347' }}
+          style={{ color: "rgba(196,184,168,0.8)" }}
         >
           Scroll
         </span>
         <motion.div
-          animate={shouldAnimate ? { y: [0, 6, 0] } : undefined}
-          transition={shouldAnimate ? { duration: 1.5, repeat: Infinity } : undefined}
+          animate={showHint ? { y: [0, 6, 0] } : { y: 0 }}
+          transition={{ duration: 1.5, repeat: showHint ? Infinity : 0 }}
           className="w-[18px] h-[28px] rounded-full flex justify-center pt-1.5"
-          style={{ border: '2px solid #E8DFD0' }}
+          style={{ border: "2px solid rgba(196,184,168,0.6)" }}
         >
           <motion.div
             className="w-[3px] h-[6px] rounded-full"
-            style={{ background: '#C17F4A' }}
+            style={{ background: "var(--color-accent)" }}
           />
         </motion.div>
       </motion.div>

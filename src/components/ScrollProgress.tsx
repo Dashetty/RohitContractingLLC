@@ -1,20 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
+  const cachedHeight = useRef(0);
 
   useEffect(() => {
+    // Cache layout-dependent values and only recalc on resize (not scroll).
+    const updateCache = () => {
+      cachedHeight.current =
+        document.documentElement.scrollHeight - window.innerHeight;
+    };
+    updateCache();
+
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      // window.scrollY is a free read — no layout recalc.
+      const scrollPercent =
+        cachedHeight.current > 0
+          ? (window.scrollY / cachedHeight.current) * 100
+          : 0;
       setProgress(Math.min(scrollPercent, 100));
     };
 
+    const handleResize = () => {
+      updateCache();
+      handleScroll();
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (

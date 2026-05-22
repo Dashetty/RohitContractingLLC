@@ -19,6 +19,32 @@
    @theme directive.
    ======================================== */
 :root {
+  /* Apple-style glass effect variables */
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(240, 248, 255, 0.3) 100%);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 20px rgba(255, 255, 255, 0.05);
+  --glass-shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 0 30px rgba(255, 255, 255, 0.08);
+  --glass-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 0 10px rgba(255, 255, 255, 0.03);
+  --blur: 30px;
+  --blur-sm: 15px;
+  --blur-lg: 50px;
+
+  /* Warm editorial design system */
+  --bg-cream:      #FAF7F2;
+  --bg-beige:      #F0E6D6;
+  --bg-earth:      #E8DCC8;
+  --card-cream:    #FDF8F3;
+  --card-beige:    #FAF7F2;
+  --card-earth:    #F5EDE0;
+  --text-heading:  #1C1A17;
+  --text-body:     #5C5047;
+  --text-muted:    #7A6250;
+  --border-warm:   #E8DDD0;
+  --border-earth:  #D8C7B5;
+
+  /* Dark anchors */
+  --bg-dark-cta:   #2C1F14;
+
   --color-accent-brand-derived: var(--color-accent);
   --color-primary-light:        color-mix(in oklch, var(--color-background) 88%, var(--color-foreground) 12%);
   --color-accent-derived:       var(--color-accent);
@@ -160,7 +186,33 @@ body {
   border: 1px solid color-mix(in oklch, var(--color-accent-derived) 20%, transparent);
 }
 
-/* Text gradient */
+/* Text gradient — dark/cinematic sections (Hero, CTA) */
+.text-gradient-dark {
+  background: linear-gradient(
+    135deg,
+    var(--color-foreground) 0%,
+    var(--color-accent-derived) 50%,
+    var(--color-accent-light) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Text gradient — warm editorial sections (About, Services, etc.) */
+.text-gradient-warm {
+  background: linear-gradient(
+    135deg,
+    #1C1A17 0%,
+    #D85A30 50%,
+    #FF8C42 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Legacy alias — retains backward compat for any remaining dark-section usage */
 .text-gradient {
   background: linear-gradient(
     135deg,
@@ -211,6 +263,17 @@ body {
 }
 
 /* Slide up animation */
+/* Loading screen fallback — fades out after 6s if React hydration fails */
+@keyframes loading-fallback {
+  0%, 90% { opacity: 1; }
+  99% { opacity: 0; pointer-events: none; }
+  100% { opacity: 0; pointer-events: none; visibility: hidden; }
+}
+
+#rc-loading-screen {
+  animation: loading-fallback 6.5s ease forwards;
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -300,46 +363,57 @@ body {
   animation: loadingBar 1.8s ease-in-out forwards;
 }
 
-/* ========================================
-   9. Project category card backgrounds
-   Used by ProjectsSection.tsx
-   ======================================== */
-.project-commercial {
-  background-image: linear-gradient(
-    to bottom right,
-    color-mix(in oklch, var(--color-chart-3) 40%, var(--color-background) 60%),
-    color-mix(in oklch, var(--color-background) 80%, transparent)
-  );
+/* Slow ambient pulse — for CTA glow blobs and accent blooms */
+@keyframes pulse-ambient {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.08); }
 }
 
-.project-industrial {
-  background-image: linear-gradient(
-    to bottom right,
-    color-mix(in oklch, var(--color-destructive) 40%, var(--color-background) 60%),
-    color-mix(in oklch, var(--color-background) 80%, transparent)
-  );
+.animate-pulse-ambient {
+  animation: pulse-ambient 6s ease-in-out infinite;
 }
 
-.project-supply {
-  background-image: linear-gradient(
-    to bottom right,
-    color-mix(in oklch, var(--color-muted) 40%, var(--color-background) 60%),
-    color-mix(in oklch, var(--color-background) 80%, transparent)
-  );
+.animate-pulse-ambient-delayed {
+  animation: pulse-ambient 6s ease-in-out infinite;
+  animation-delay: 3s;
 }
 
-.project-infrastructure {
-  background-image: linear-gradient(
-    to bottom right,
-    color-mix(in oklch, var(--color-chart-2) 40%, var(--color-background) 60%),
-    color-mix(in oklch, var(--color-background) 80%, transparent)
-  );
+/* Slow shimmer sweep — for CTA heading accent */
+@keyframes shimmer-sweep-dark {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
 }
 
-.project-residential {
-  background-image: linear-gradient(
-    to bottom right,
-    color-mix(in oklch, var(--color-chart-4) 40%, var(--color-background) 60%),
-    color-mix(in oklch, var(--color-background) 80%, transparent)
+.animate-shimmer-dark {
+  background-size: 200% auto;
+  animation: shimmer-sweep-dark 4s ease-in-out infinite;
+}
+
+/* Warm mesh shimmer — used by ongoing project cards */
+@keyframes warm-shimmer {
+  0% { mask-position: 200% 0; }
+  100% { mask-position: -200% 0; }
+}
+
+.warm-shimmer {
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(216, 199, 181, 0.4) 50%,
+    transparent 100%
   );
+  mask-size: 200% 100%;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(216, 199, 181, 0.4) 50%,
+    transparent 100%
+  );
+  -webkit-mask-size: 200% 100%;
+  animation: warm-shimmer 2.5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.group:hover .warm-shimmer {
+  animation-play-state: running;
 }

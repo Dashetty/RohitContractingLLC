@@ -11,7 +11,6 @@ const AboutSection = dynamic(() => import("@/components/AboutSection"), { ssr: f
 const ServicesSection = dynamic(() => import("@/components/ServicesSection"), { ssr: false });
 const ProjectsSection = dynamic(() => import("@/components/ProjectsSection"), { ssr: false });
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: false });
-const MaterialsSection = dynamic(() => import("@/components/MaterialsSection"), { ssr: false });
 const CTASection = dynamic(() => import("@/components/CTASection"), { ssr: false });
 const ContactSection = dynamic(() => import("@/components/ContactSection"), { ssr: false });
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
@@ -31,7 +30,6 @@ export default function Home() {
           <ServicesSection />
           <ProjectsSection />
           <WhyChooseUs />
-          <MaterialsSection />
           <CTASection />
           <ContactSection />
         </main>
