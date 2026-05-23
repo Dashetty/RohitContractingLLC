@@ -3,14 +3,10 @@
 import { motion } from "framer-motion";
 import {
   Building2,
-  HardHat,
-  Warehouse,
-  ShoppingCart,
   Cog,
   Hammer,
   Truck,
   Wrench,
-  ArrowRight,
 } from "lucide-react";
 
 const services = [

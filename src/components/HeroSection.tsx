@@ -68,19 +68,8 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.75, ease: "easeOut" }}
           >
-            <div
-              className="inline-flex items-center gap-2.5 rounded-full mx-auto"
-              style={{
-                background: "var(--glass-bg)",
-                backdropFilter: "blur(var(--blur-sm))",
-                WebkitBackdropFilter: "blur(var(--blur-sm))",
-                border: "1px solid var(--glass-border)",
-                boxShadow: "var(--glass-shadow-sm)",
-                padding: "8px 24px",
-                fontSize: "15px",
-              }}
-            >
-              <Shield size={14} style={{ color: "var(--color-accent)" }} />
+            <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-6 py-2 text-[15px]">
+              <Shield size={14} className="text-accent" />
               <span
                 className="leading-none"
                 style={{
@@ -89,12 +78,12 @@ export default function HeroSection() {
                   letterSpacing: "0.06em",
                 }}
               >
-                Premier Dubai Construction Company
+                Premier Dubai Construction & Materials
               </span>
             </div>
           </motion.div>
 
-          <div style={{ height: "24px" }} />
+          <div className="h-6" />
 
           {/* Heading */}
           <motion.div
@@ -103,27 +92,26 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 1.85, ease: "easeOut" }}
           >
             <h1
-              className="leading-[1.02] tracking-tight"
+              className="leading-[1.02] tracking-tight font-semibold"
               style={{
                 fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontWeight: 600,
                 color: "#FDF8F5",
-                fontSize: "clamp(36px, 6vw, 84px)",
+                fontSize: "clamp(42px, 7vw, 92px)",
                 textShadow: "0 2px 24px rgba(0,0,0,0.5)",
               }}
             >
               Building{" "}
-              <span style={{ color: "#FFE8D6", fontStyle: "italic" }}>
+              <span className="text-gradient-warm italic">
                 Excellence
               </span>{" "}
               Across{" "}
-              <span style={{ color: "#FFE8D6", fontStyle: "italic" }}>
+              <span className="text-gradient-warm italic">
                 Dubai
               </span>
             </h1>
           </motion.div>
 
-          <div style={{ height: "16px" }} />
+          <div className="h-4" />
 
           {/* Subtext */}
           <motion.div
@@ -135,17 +123,17 @@ export default function HeroSection() {
               className="mx-auto"
               style={{
                 color: "rgba(253,248,245,0.85)",
-                maxWidth: "520px",
+                maxWidth: "540px",
                 lineHeight: 1.6,
-                fontSize: "clamp(14px, 1.4vw, 18px)",
+                fontSize: "clamp(15px, 1.5vw, 19px)",
                 textShadow: "0 1px 12px rgba(0,0,0,0.4)",
               }}
             >
-              Premium villa construction and turnkey contracting across Dubai.
+              Mastering luxury villa construction, turnkey contracting, and precision material supply in the heart of the UAE.
             </p>
           </motion.div>
 
-          <div style={{ height: "28px" }} />
+          <div className="h-8" />
 
           {/* CTAs */}
           <motion.div
@@ -153,32 +141,16 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 2.08, ease: "easeOut" }}
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto"
-                style={{
-                  background: "var(--color-accent)",
-                  color: "#FDF8F5",
-                  padding: "13px 28px",
-                  borderRadius: 10,
-                  fontWeight: 600,
-                  fontSize: "15px",
-                }}
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-accent hover:bg-accent-dark text-[#FDF8F5] px-8 py-3.5 rounded-xl font-semibold text-[15px] transition-all hover:shadow-lg hover:shadow-accent/20 hover:scale-105 active:scale-95"
               >
                 Request Quote
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto"
-                style={{
-                  border: "1.5px solid rgba(255,255,255,0.4)",
-                  color: "#FDF8F5",
-                  padding: "11px 24px",
-                  borderRadius: 10,
-                  backdropFilter: "blur(8px)",
-                  fontSize: "15px",
-                }}
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border-[1.5px] border-white/40 text-[#FDF8F5] px-8 py-3.5 rounded-xl backdrop-blur-md text-[15px] transition-all hover:bg-white/10 hover:border-white/60 active:scale-95"
               >
                 Explore Services
               </a>
