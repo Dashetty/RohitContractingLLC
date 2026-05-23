@@ -1,27 +1,32 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Shield } from "lucide-react";
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement | null>(null);
 
-  // Track scroll progress relative to this section.
+  // Avoid passing an un-hydrated ref into useScroll — only bind after mount
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Track scroll progress relative to this section once mounted
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: mounted ? ref : undefined,
     offset: ["start start", "end start"],
   });
 
-  // Text fades out as the user scrolls through the section
-  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  // Text fades out as the user scrolls through the section and is spring-smoothed
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const smoothOpacity = useSpring(textOpacity, { stiffness: 140, damping: 28 });
 
   // Scroll indicator: appear at 1.2s, auto-dismiss after 3s
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setShowHint(true), 3000);
-    const t2 = setTimeout(() => setShowHint(false), 6000);
+    const t1 = setTimeout(() => setShowHint(true), 900);
+    const t2 = setTimeout(() => setShowHint(false), 4200);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -37,22 +42,37 @@ export default function HeroSection() {
       {/* Background image — cinematic inhale: zoomed out → settles in */}
       <motion.div
         className="absolute inset-0 bg-no-repeat bg-cover bg-center"
-        initial={{ scale: 1.15 }}
-        animate={{ scale: 1.08 }}
-        transition={{ duration: 1.8, delay: 0.3, ease: "easeOut" }}
+        initial={{ scale: 1.12 }}
+        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
         style={{
           backgroundImage: "url('/bg.png')",
           backgroundPosition: "center 30%",
           filter: "brightness(0.85) contrast(0.98)",
+          // parallax-like slow scale driven by scroll
+          transformOrigin: "center center",
         }}
-      />
+      >
+        {/* bind a scale transform to scroll for subtle parallax */}
+        <motion.div
+          style={{
+            scale: useTransform(scrollYProgress, [0, 1], [1.12, 1.02]),
+            width: "100%",
+            height: "100%",
+            backgroundImage: "url('/bg.png')",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center 30%",
+            filter: "brightness(0.85) contrast(0.98)",
+          }}
+        />
+      </motion.div>
 
-      {/* Dark gradient overlay for readability */}
+      {/* Dark gradient overlay for readability (slightly stronger for contrast) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, rgba(28,26,23,0.75) 0%, rgba(28,26,23,0.35) 40%, transparent 70%)",
+            "linear-gradient(to top, rgba(216,90,48,0.06) 0%, rgba(216,90,48,0.04) 30%, rgba(216,90,48,0.02) 60%), linear-gradient(to top, rgba(28,26,23,0.88) 0%, rgba(28,26,23,0.6) 40%, transparent 75%)",
         }}
       />
 
@@ -60,13 +80,13 @@ export default function HeroSection() {
       <div className="relative z-20 h-full flex items-center justify-center">
         <motion.div
           className="w-full max-w-3xl text-center px-6"
-          style={{ opacity: textOpacity, willChange: "opacity" }}
+          style={{ opacity: smoothOpacity, willChange: "opacity" }}
         >
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.75, ease: "easeOut" }}
+            transition={{ duration: 0.45, delay: 1.2, ease: "easeOut" }}
           >
             <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-6 py-2 text-[15px]">
               <Shield size={14} className="text-accent" />
@@ -89,7 +109,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.85, ease: "easeOut" }}
+            transition={{ duration: 0.45, delay: 1.3, ease: "easeOut" }}
           >
             <h1
               className="leading-[1.02] tracking-tight font-semibold"
@@ -97,15 +117,15 @@ export default function HeroSection() {
                 fontFamily: "var(--font-cormorant), Georgia, serif",
                 color: "#FDF8F5",
                 fontSize: "clamp(42px, 7vw, 92px)",
-                textShadow: "0 2px 24px rgba(0,0,0,0.5)",
+                textShadow: "0 3px 28px rgba(0,0,0,0.6)",
               }}
             >
               Building{" "}
-              <span className="text-gradient-warm italic">
+              <span className="font-accent-secondary italic">
                 Excellence
               </span>{" "}
               Across{" "}
-              <span className="text-gradient-warm italic">
+              <span className="font-accent-secondary italic">
                 Dubai
               </span>
             </h1>
@@ -117,7 +137,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.98, ease: "easeOut" }}
+            transition={{ duration: 0.45, delay: 1.4, ease: "easeOut" }}
           >
             <p
               className="mx-auto"
@@ -139,7 +159,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 2.08, ease: "easeOut" }}
+            transition={{ duration: 0.45, delay: 1.5, ease: "easeOut" }}
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

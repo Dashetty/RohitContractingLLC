@@ -133,8 +133,7 @@ export default function AboutSection() {
           >
             {/* Heading */}
             <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight" style={{ color: "var(--text-heading)" }}>
-              Delivering Excellence in{" "}
-              <span className="text-gradient-warm">Dubai Construction</span>
+              Building <span className="text-gradient-warm">Excellence</span> Across Dubai
             </h2>
 
             <p className="text-lg leading-relaxed" style={{ color: "var(--text-body)" }}>

@@ -276,6 +276,12 @@ body {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Hide server-rendered static fallbacks once client mounts to avoid duplicate UI */
+.client-mounted .static-fallback {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 /* Hero overlay gradient */
 .hero-overlay {
   background: linear-gradient(
