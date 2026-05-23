@@ -52,6 +52,52 @@
   --color-accent-light:         color-mix(in oklch, var(--color-accent) 60%, var(--color-foreground) 40%);
   --color-border-accent:        color-mix(in oklch, var(--color-accent) 30%, transparent);
   --color-glass-bg:             color-mix(in oklch, var(--color-background) 60%, transparent);
+
+  /* Spacing */
+  --section-padding: clamp(60px, 10vw, 120px);
+}
+
+@layer utilities {
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .glass-card {
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    border: 1px solid var(--color-border);
+    box-shadow: var(--glass-shadow-sm);
+  }
+
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FDF8F5] via-[#FFE8D6] to-[#FDF8F5];
+  }
+
+  .warm-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .warm-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 232, 214, 0.05),
+      transparent
+    );
+    animation: warm-shimmer-anim 3s infinite;
+  }
+}
+
+@keyframes warm-shimmer-anim {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* ========================================
@@ -228,6 +274,12 @@ body {
 /* Section transitions */
 .section-transition {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide server-rendered static fallbacks once client mounts to avoid duplicate UI */
+.client-mounted .static-fallback {
+  display: none !important;
+  visibility: hidden !important;
 }
 
 /* Hero overlay gradient */

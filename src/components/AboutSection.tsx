@@ -6,7 +6,6 @@ import {
   Clock,
   Shield,
   TrendingUp,
-  CheckCircle2,
   Building2,
   HardHat,
   Truck,
@@ -30,12 +29,16 @@ const values = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative py-24 sm:py-32" style={{ background: "var(--bg-cream)" }}>
+    <section
+      id="about"
+      className="relative overflow-hidden"
+      style={{ padding: "var(--section-padding) 0", background: "var(--bg-cream)" }}
+    >
       {/* Background pattern — subtle warm texture */}
       <div className="absolute inset-0 industrial-texture opacity-[0.06]" />
       <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 section-container">
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +52,7 @@ export default function AboutSection() {
         >
           <span className="w-2 h-2 bg-accent rounded-full" />
           <span className="text-accent text-sm font-medium tracking-wide">
-            About Us
+            Our Legacy
           </span>
         </motion.div>
 
@@ -130,8 +133,7 @@ export default function AboutSection() {
           >
             {/* Heading */}
             <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight" style={{ color: "var(--text-heading)" }}>
-              Delivering Excellence in{" "}
-              <span className="text-gradient-warm">Dubai Construction</span>
+              Building <span className="text-gradient-warm">Excellence</span> Across Dubai
             </h2>
 
             <p className="text-lg leading-relaxed" style={{ color: "var(--text-body)" }}>
