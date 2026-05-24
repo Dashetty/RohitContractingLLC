@@ -173,16 +173,16 @@ export default function ContactSection() {
                     Phone
                   </h3>
                   <a
-                    href="tel:+971501234567"
+                    href="tel:+97143986222"
                     className="text-sm text-accent hover:text-accent-light transition-colors"
                   >
-                    +971 50 123 4567
+                    +971 4 398 6222
                   </a>
                   <p
                     className="text-xs mt-1"
                     style={{ color: "var(--text-muted)" }}
                   >
-                    Available 24/7
+                    Mon–Sat, 7am–6pm
                   </p>
                 </div>
               </div>
@@ -221,7 +221,7 @@ export default function ContactSection() {
                     className="text-xs mt-1"
                     style={{ color: "var(--text-muted)" }}
                   >
-                    We reply within 24 hours
+                    We reply within 2 hours
                   </p>
                 </div>
               </div>
@@ -254,13 +254,13 @@ export default function ContactSection() {
                     className="text-sm"
                     style={{ color: "var(--text-body)" }}
                   >
-                    Sat - Thu: 8:00 AM - 7:00 PM
+                    Monday – Saturday: 7:00 AM – 6:00 PM
                   </p>
                   <p
                     className="text-xs mt-1"
                     style={{ color: "var(--text-muted)" }}
                   >
-                    Friday: Closed
+                    Sunday: Closed
                   </p>
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function ContactSection() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/971501234567"
+              href="https://wa.me/971559229581"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-2xl p-5 transition-all duration-300 group"

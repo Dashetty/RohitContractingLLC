@@ -115,7 +115,7 @@ export default function CTASection() {
               />
             </a>
             <a
-              href="tel:+971501234567"
+              href="tel:+97143986222"
               className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 font-semibold rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
               style={{
                 border: "1.5px solid rgba(253,248,245,0.25)",
@@ -149,7 +149,7 @@ export default function CTASection() {
             className="flex flex-wrap justify-center gap-x-6 gap-y-2 sm:gap-x-8 mt-12 sm:mt-16 text-xs sm:text-sm"
             style={{ color: "rgba(253,248,245,0.5)" }}
           >
-            {["Free Consultation", "No Obligation Quote", "UAE Licensed", "10+ Years Experience"].map(
+            {["Free Consultation", "No Obligation Quote", "UAE Licensed", "5+ Years Experience"].map(
               (text) => (
                 <motion.span
                   key={text}

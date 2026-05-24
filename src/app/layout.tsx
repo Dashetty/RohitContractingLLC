@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display, Cormorant_Garamond, Geist_Mono } from "next/font/google";
+import {
+  Plus_Jakarta_Sans,
+  Playfair_Display,
+  Cormorant_Garamond,
+  Geist_Mono,
+} from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Analytics } from "@vercel/analytics/react";
@@ -31,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rohitcontracting.com"),
   title: {
     default: "Rohit Contracting L.L.C — Premier Dubai Construction & Materials",
-    template: "%s | Rohit Contracting L.L.C"
+    template: "%s | Rohit Contracting L.L.C",
   },
   description:
     "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in high-end villa construction, turnkey contracting, and building material supply across the UAE.",
@@ -73,7 +78,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Rohit Contracting L.L.C — Dubai Construction Excellence",
-    description: "Premier villa construction and building material supply across Dubai and the UAE.",
+    description:
+      "Premier villa construction and building material supply across Dubai and the UAE.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -108,48 +114,48 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "Rohit Contracting L.L.C",
-              "image": "https://rohitcontracting.com/logo.png",
-              "description":
+              name: "Rohit Contracting L.L.C",
+              image: "https://rohitcontracting.com/logo.png",
+              description:
                 "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in villa construction, turnkey contracting, and building material supply.",
               "@id": "https://rohitcontracting.com",
-              "url": "https://rohitcontracting.com",
-              "telephone": "+97142514336",
-              "address": {
+              url: "https://rohitcontracting.com",
+              telephone: "+97143986222",
+              email: "info@rohitcontracting.ae",
+              address: {
                 "@type": "PostalAddress",
-                "streetAddress": "Sky Business Center, Floor 1–109 Office, Nadd Al Hamar Road",
-                "addressLocality": "Dubai Festival City",
-                "addressRegion": "Dubai",
-                "postalCode": "00000",
-                "addressCountry": "AE"
+                streetAddress:
+                  "Sky Business Center, Floor 1–109 Office, Nadd Al Hamar Road",
+                addressLocality: "Dubai Festival City",
+                addressRegion: "Dubai",
+                postalCode: "00000",
+                addressCountry: "AE",
               },
-              "geo": {
+              geo: {
                 "@type": "GeoCoordinates",
-                "latitude": 25.2227,
-                "longitude": 55.3588
+                latitude: 25.2227,
+                longitude: 55.3588,
               },
-              "openingHoursSpecification": {
+              openingHoursSpecification: {
                 "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
+                dayOfWeek: [
                   "Monday",
                   "Tuesday",
                   "Wednesday",
                   "Thursday",
                   "Friday",
-                  "Saturday"
+                  "Saturday",
                 ],
-                "opens": "08:00",
-                "closes": "18:00"
+                opens: "08:00",
+                closes: "18:00",
               },
-              "sameAs": [
-                "https://www.linkedin.com/company/rohit-contracting-l-l-c"
-              ]
+              sameAs: [
+                "https://www.linkedin.com/company/rohit-contracting-l-l-c",
+              ],
             }),
           }}
         />
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+        <ErrorBoundary>{children}</ErrorBoundary>
         <Analytics />
         <SpeedInsights />
       </body>

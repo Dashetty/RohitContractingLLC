@@ -1,40 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUp, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowUp, Mail, Phone, MapPin, Clock } from "lucide-react";
 
-const footerLinks: Record<string, { label: string; href: string; isPlaceholder?: boolean }[]> = {
+const footerLinks: Record<string, { label: string; href: string }[]> = {
   Company: [
     { label: "About Us", href: "#about" },
-    { label: "Our Team", href: "#", isPlaceholder: true },
     { label: "Projects", href: "#projects" },
-    { label: "Careers", href: "#", isPlaceholder: true },
-    { label: "News & Media", href: "#", isPlaceholder: true },
-    { label: "Sustainability", href: "#", isPlaceholder: true },
-  ],
-  Services: [
-    { label: "All Services", href: "#services" },
-    { label: "Building Contracting", href: "#", isPlaceholder: true },
-    { label: "Construction Management", href: "#", isPlaceholder: true },
-    { label: "Material Trading", href: "#", isPlaceholder: true },
-    { label: "Infrastructure Projects", href: "#", isPlaceholder: true },
-    { label: "Renovation & Civil Works", href: "#", isPlaceholder: true },
   ],
   Support: [
     { label: "Contact Us", href: "#contact" },
     { label: "Request Quote", href: "#contact" },
-    { label: "FAQ", href: "#", isPlaceholder: true },
-    { label: "Privacy Policy", href: "#", isPlaceholder: true },
-    { label: "Terms of Service", href: "#", isPlaceholder: true },
-    { label: "Sitemap", href: "#", isPlaceholder: true },
   ],
 };
 
+// TODO: Add actual LinkedIn company URL once provided by client
 const socialLinks = [
   { name: "LinkedIn", initial: "in", href: "#" },
-  { name: "X (Twitter)", initial: "X", href: "#" },
-  { name: "Facebook", initial: "f", href: "#" },
-  { name: "Instagram", initial: "ig", href: "#" },
+  {
+    name: "Instagram",
+    initial: "ig",
+    href: "https://www.instagram.com/rohitcontracting?igsh=b2dpdGFldXVtbHR4",
+  },
 ];
 
 export default function Footer() {
@@ -98,6 +85,8 @@ export default function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-[1px] text-xs font-semibold"
                   style={{
                     background: "var(--card-earth)",
@@ -126,14 +115,17 @@ export default function Footer() {
               className="space-y-3 pt-4"
               style={{ borderTop: "1px solid var(--border-earth)" }}
             >
+              {/* Phone */}
               <a
-                href="tel:+971501234567"
+                href="tel:+97143986222"
                 className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
                 style={{ color: "var(--text-body)" }}
               >
                 <Phone size="14" style={{ color: "var(--color-accent)" }} />
-                +971 50 123 4567
+                +971 4 398 6222
               </a>
+
+              {/* Email */}
               <a
                 href="mailto:info@rohitcontracting.ae"
                 className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
@@ -142,15 +134,37 @@ export default function Footer() {
                 <Mail size="14" style={{ color: "var(--color-accent)" }} />
                 info@rohitcontracting.ae
               </a>
-              <div
-                className="flex items-start gap-3 text-sm"
+
+              {/* Address */}
+              <a
+                href="https://www.google.com/maps/search/Sky+Business+Center+Dubai+Festival+City"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 text-sm transition-colors hover:opacity-80"
                 style={{ color: "var(--text-body)" }}
               >
                 <MapPin size="14" style={{ color: "var(--color-accent)", marginTop: "2px" }} />
                 <span>
-                  Dubai Festival City, Al Kheeran 1
+                  Sky Business Center, Office 109
                   <br />
-                  Dubai, United Arab Emirates
+                  Nadd Al Hammar Road, Al Kheeran
+                  <br />
+                  Dubai Festival City, Dubai, UAE
+                  <br />
+                  PO Box 182129
+                </span>
+              </a>
+
+              {/* Hours */}
+              <div
+                className="flex items-start gap-3 text-sm"
+                style={{ color: "var(--text-body)" }}
+              >
+                <Clock size="14" style={{ color: "var(--color-accent)", marginTop: "2px" }} />
+                <span>
+                  Monday – Saturday: 7:00 AM – 6:00 PM
+                  <br />
+                  Sunday: Closed
                 </span>
               </div>
             </div>
@@ -180,14 +194,7 @@ export default function Footer() {
                       }}
                     >
                       {link.label}
-                      {link.isPlaceholder && (
-                        <span
-                          className="text-[10px] font-medium opacity-50"
-                          style={{ color: "var(--text-muted)" }}
-                        >
-                          [+]
-                        </span>
-                      )}
+
                     </a>
                   </li>
                 ))}
@@ -196,24 +203,59 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
+        {/* ── Unified trust band: credentials + copyright + tagline ── */}
         <div
-          className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ borderTop: "1px solid var(--border-earth)" }}
+          className="rounded-2xl px-6 py-6 mt-8 mb-8"
+          style={{
+            background: "rgba(216, 90, 48, 0.03)",
+            border: "1px solid rgba(216, 90, 48, 0.06)",
+          }}
         >
-          <p
-            className="text-xs text-center sm:text-left"
+          {/* Credentials — compact, centered, dot-separated */}
+          <div
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-center mb-5"
             style={{ color: "var(--text-muted)" }}
           >
-            &copy; {new Date().getFullYear()} Rohit Contracting L.L.C. All rights
-            reserved. | Licensed by Dubai Municipality
-          </p>
-          <p
-            className="text-xs text-center"
-            style={{ color: "var(--text-muted)" }}
-          >
-            Premium Construction & Building Materials | Dubai, UAE
-          </p>
+            <span>Rohit Contracting L.L.C</span>
+            <span style={{ color: "rgba(216, 90, 48, 0.35)" }}>·</span>
+            <span>Trade License No. 1126644</span>
+            <span style={{ color: "rgba(216, 90, 48, 0.35)" }}>·</span>
+            <span>Dubai DED</span>
+            <span style={{ color: "rgba(216, 90, 48, 0.35)" }}>·</span>
+            <span>Contractor Classification: G+4</span>
+            <span style={{ color: "rgba(216, 90, 48, 0.35)" }}>·</span>
+            <span>Dubai Chamber Member No. 433957</span>
+            <span style={{ color: "rgba(216, 90, 48, 0.35)" }}>·</span>
+            <span>Established 2022</span>
+          </div>
+
+          {/* Divider */}
+          <div
+            className="mx-auto w-full max-w-xl mb-5"
+            style={{ height: "1px", background: "linear-gradient(to right, transparent, rgba(216, 90, 48, 0.12), transparent)" }}
+          />
+
+          {/* Copyright + Tagline */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-1">
+            <p
+              className="text-xs text-center"
+              style={{ color: "var(--text-muted)" }}
+            >
+              &copy; {new Date().getFullYear()} Rohit Contracting L.L.C. All rights reserved.
+            </p>
+            <span
+              className="hidden sm:inline text-xs"
+              style={{ color: "rgba(216, 90, 48, 0.35)" }}
+            >
+              ·
+            </span>
+            <p
+              className="text-xs text-center"
+              style={{ color: "var(--text-muted)" }}
+            >
+              Premium Construction &amp; Building Materials | Dubai, UAE
+            </p>
+          </div>
         </div>
       </div>
 

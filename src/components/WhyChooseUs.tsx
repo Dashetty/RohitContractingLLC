@@ -1,85 +1,156 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef, type ComponentType } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Zap,
   ShieldCheck,
   Award,
-  Users,
-  Package,
-  DollarSign,
   HeartHandshake,
   CheckCircle2,
 } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 
-const reasons = [
+/* ── Feature cards (two rows: 3 + 2, centered, no numeric claims) ── */
+type Reason = {
+  icon: ComponentType<{ size?: number; strokeWidth?: number; style?: Record<string, string> }>;
+  title: string;
+  desc: string;
+};
+
+const reasonsRow1: Reason[] = [
   {
     icon: Zap,
     title: "Fast Delivery",
-    desc: "Accelerated project timelines without compromising quality",
-    stat: "30%",
-    statLabel: "Faster Delivery",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Quality Assurance",
-    desc: "Rigorous quality control at every project stage",
-    stat: "100%",
-    statLabel: "Quality Checked",
-  },
-  {
-    icon: Award,
-    title: "UAE Compliance",
-    desc: "Full adherence to Dubai Municipality & UAE regulations",
-    stat: "100%",
-    statLabel: "Compliant",
-  },
-  {
-    icon: Users,
-    title: "Professional Team",
-    desc: "Expert engineers, project managers, and skilled workforce",
-    stat: "200+",
-    statLabel: "Team Members",
-  },
-  {
-    icon: Package,
-    title: "Reliable Procurement",
-    desc: "Global sourcing network for premium construction materials",
-    stat: "1000+",
-    statLabel: "Suppliers",
-  },
-  {
-    icon: DollarSign,
-    title: "Cost Efficiency",
-    desc: "Optimized budgets without compromising on quality",
-    stat: "25%",
-    statLabel: "Cost Savings",
+    desc: "Accelerated project timelines delivered without compromising quality or precision.",
   },
   {
     icon: HeartHandshake,
     title: "Trusted Partner",
-    desc: "Long-term relationships with leading UAE developers",
-    stat: "98%",
-    statLabel: "Client Retention",
+    desc: "Every project backed by 1 year complimentary maintenance and full accountability.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Quality Assurance",
+    desc: "Rigorous quality control at every project stage ensures consistent, reliable results.",
+  },
+];
+
+const reasonsRow2: Reason[] = [
+  {
+    icon: Award,
+    title: "UAE Compliance",
+    desc: "Full adherence to Dubai Municipality & UAE regulations for complete peace of mind.",
   },
   {
     icon: CheckCircle2,
     title: "Safety Standards",
-    desc: "Zero-compromise safety protocols and PPE compliance",
-    stat: "0",
-    statLabel: "Major Incidents",
+    desc: "Zero-compromise safety protocols and PPE compliance across all operations.",
   },
 ];
 
+/* ── Stats cards ── */
 const stats = [
-  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 5, suffix: "+", label: "Years Experience" },
   { value: 500, suffix: "+", label: "Projects Completed" },
-  { value: 200, suffix: "+", label: "Expert Team" },
+  { value: 50, suffix: "+", label: "Expert Professionals" },
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
 
+/* ── Animated heading words ── */
+const headingWords = ["Trust", "Excellence"];
+
+/* ── Feature card sub-component (module-level, stable reference) ── */
+function FeatureCard({ reason, index }: { reason: Reason; index: number }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08 }}
+      className="group w-full sm:w-[300px] rounded-2xl p-6 text-left cursor-default relative"
+      style={{
+        background: "var(--card-earth)",
+        border: hovered
+          ? "1px solid rgba(216, 90, 48, 0.3)"
+          : "1px solid var(--border-earth)",
+        boxShadow: hovered
+          ? "0 8px 28px rgba(92, 80, 71, 0.12)"
+          : "0 2px 12px rgba(92, 80, 71, 0.08)",
+        transition: "all 0.3s ease",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 grid-pattern opacity-[0.04] rounded-2xl pointer-events-none" />
+
+      <div className="relative z-10">
+        {/* Icon */}
+        <div
+          className="flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/15"
+          style={{
+            width: "52px",
+            height: "52px",
+            background: "rgba(216, 90, 48, 0.08)",
+            borderRadius: "14px",
+          }}
+        >
+          <reason.icon
+            style={{ color: "var(--color-accent)" }}
+            size={24}
+            strokeWidth={1.5}
+          />
+        </div>
+
+        {/* Title — Plus Jakarta Sans 600 */}
+        <h3
+          className="font-semibold text-base leading-snug mb-3 transition-colors group-hover:text-accent"
+          style={{ color: "var(--text-heading)" }}
+        >
+          {reason.title}
+        </h3>
+
+        {/* Description — Plus Jakarta Sans 400 */}
+        <p
+          className="text-sm leading-relaxed"
+          style={{ color: "var(--text-body)" }}
+        >
+          {reason.desc}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function WhyChooseUs() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const headingRef = useRef<HTMLDivElement | null>(null);
+  const [isHeadingInView, setIsHeadingInView] = useState(false);
+
+  /* ── IntersectionObserver for heading animation ── */
+  useEffect(() => {
+    const el = headingRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHeadingInView(entry.isIntersecting),
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  /* ── Word swap interval (only when in view) ── */
+  useEffect(() => {
+    if (!isHeadingInView) return;
+    const id = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % headingWords.length);
+    }, 3800);
+    return () => clearInterval(id);
+  }, [isHeadingInView]);
+
   return (
     <section
       className="relative overflow-hidden py-24 sm:py-32"
@@ -113,15 +184,27 @@ export default function WhyChooseUs() {
             </span>
           </div>
 
-          {/* Heading */}
+          {/* Animated heading — "Built on [Trust ↔ Excellence]" */}
           <h2
+            ref={headingRef}
             className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6 max-w-4xl"
             style={{ color: "var(--text-heading)" }}
           >
             Built on{" "}
-            <span className="font-accent-primary">Trust</span>
-            {" & "}
-            <span className="font-accent-secondary">Excellence</span>
+            <span className="relative inline-block min-w-[140px] sm:min-w-[170px] text-left">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={headingWords[wordIndex]}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                  className="inline-block font-accent-primary"
+                >
+                  {headingWords[wordIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
           </h2>
 
           {/* Subheading */}
@@ -138,7 +221,7 @@ export default function WhyChooseUs() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16"
         >
           {stats.map((stat) => (
             <div
@@ -185,93 +268,31 @@ export default function WhyChooseUs() {
           ))}
         </motion.div>
 
-        {/* ── Features grid ── */}
+        {/* ── Feature cards — Row 1 (3 cards, centered) ── */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          className="flex flex-wrap justify-center gap-5 mb-5"
         >
-          {reasons.map((reason, i) => (
-            <motion.div
+          {reasonsRow1.map((reason, i) => (
+            <FeatureCard key={reason.title} reason={reason} index={i} />
+          ))}
+        </motion.div>
+
+        {/* ── Feature cards — Row 2 (2 cards, centered) ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex flex-wrap justify-center gap-5"
+        >
+          {reasonsRow2.map((reason, i) => (
+            <FeatureCard
               key={reason.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="group relative rounded-2xl p-6 text-left max-sm:text-center transition-all duration-300"
-              style={{
-                background: "var(--card-earth)",
-                border: "1px solid var(--border-earth)",
-                boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
-                e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-earth)";
-                e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
-              }}
-            >
-              {/* Subtle grid pattern overlay */}
-              <div className="absolute inset-0 grid-pattern opacity-[0.04] rounded-2xl pointer-events-none" />
-
-              <div className="relative z-10">
-                {/* Icon */}
-                <div
-                  className="flex items-center justify-center mb-5 mx-auto sm:mx-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/15"
-                  style={{
-                    width: "52px",
-                    height: "52px",
-                    background: "rgba(216, 90, 48, 0.08)",
-                    borderRadius: "14px",
-                  }}
-                >
-                  <reason.icon
-                    style={{ color: "var(--color-accent)" }}
-                    size={24}
-                    strokeWidth={1.5}
-                  />
-                </div>
-
-                {/* Title */}
-                <h3
-                  className="heading-serif text-lg font-bold leading-snug mb-3 group-hover:text-accent transition-colors"
-                  style={{ color: "var(--text-heading)" }}
-                >
-                  {reason.title}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="text-sm leading-relaxed mb-4"
-                  style={{ color: "var(--text-body)" }}
-                >
-                  {reason.desc}
-                </p>
-
-                {/* Stat footer */}
-                <div className="flex items-center gap-2 max-sm:justify-center">
-                  <span
-                    className="font-semibold"
-                    style={{
-                      fontFamily: "var(--font-cormorant), Georgia, serif",
-                      fontSize: "clamp(18px, 1.8vw, 22px)",
-                      color: "var(--color-accent)",
-                    }}
-                  >
-                    {reason.stat}
-                  </span>
-                  <span
-                    className="text-xs"
-                    style={{ color: "var(--text-muted)" }}
-                  >
-                    {reason.statLabel}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
+              reason={reason}
+              index={i + reasonsRow1.length}
+            />
           ))}
         </motion.div>
       </div>
