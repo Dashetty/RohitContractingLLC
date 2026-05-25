@@ -198,22 +198,22 @@ export default function Footer() {
             >
               Our Credentials
             </h4>
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
+            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-3">
               {[
                 "Trade License No. 1126644",
                 "Dubai DED Registered",
                 "Contractor Classification: G+4",
                 "Dubai Chamber No. 433957",
               ].map((item) => (
-                <div
+                <li
                   key={item}
                   className="text-sm leading-snug"
                   style={{ color: "var(--text-muted)" }}
                 >
                   {item}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
 
