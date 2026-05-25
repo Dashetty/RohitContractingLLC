@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUp, Phone, Mail, MessageCircle } from "lucide-react";
+import { ArrowUp, Phone, Mail } from "lucide-react";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -20,12 +20,12 @@ export default function Footer() {
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         {/* ── 4-column grid ── */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+        <div className="py-16 grid grid-cols-5 md:grid-cols-5 lg:grid-cols-12 gap-3 md:gap-6 lg:gap-8">
           {/* ═══════════════════════════════════════════════════
               COL 1 — Brand (wider)
               Logo, description, social icons
               ═══════════════════════════════════════════════════ */}
-          <div className="lg:col-span-4 space-y-5">
+          <div className="col-span-5 lg:col-span-4 space-y-5">
             {/* Logo */}
             <a href="#home" className="flex items-center gap-2">
               <div
@@ -113,7 +113,7 @@ export default function Footer() {
           {/* ═══════════════════════════════════════════════════
               COL 2 — Company Links
               ═══════════════════════════════════════════════════ */}
-          <div className="lg:col-span-3">              <h4
+          <div className="col-span-2 lg:col-span-3">              <h4
               className="font-semibold text-sm mb-5 uppercase tracking-wider"
               style={{ color: "var(--text-body)" }}
             >
@@ -147,7 +147,7 @@ export default function Footer() {
           {/* ═══════════════════════════════════════════════════
               COL 3 — Contact Details
               ═══════════════════════════════════════════════════ */}
-          <div className="lg:col-span-3 space-y-3">
+          <div className="col-span-3 lg:col-span-3 space-y-3">
             <h4
               className="font-semibold text-sm mb-5 uppercase tracking-wider"
               style={{ color: "var(--text-body)" }}
@@ -165,7 +165,7 @@ export default function Footer() {
               +971 4 398 6222
             </a>
 
-            {/* WhatsApp */}
+            {/* Phone 2 (WhatsApp) */}
             <a
               href="https://wa.me/971559229581?text=Hello%2C%20I%27m%20interested%20in%20Rohit%20Contracting%27s%20services."
               target="_blank"
@@ -173,48 +173,47 @@ export default function Footer() {
               className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
               style={{ color: "var(--text-body)" }}
             >
-              <MessageCircle size="14" style={{ color: "var(--color-accent)" }} className="shrink-0" />
+              <Phone size="14" style={{ color: "var(--color-accent)" }} className="shrink-0" />
               +971 55 922 9581
             </a>
 
             {/* Email */}
             <a
               href="mailto:info@rohitcontracting.ae"
-              className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
+              className="flex items-start gap-3 text-sm transition-colors hover:opacity-80"
               style={{ color: "var(--text-body)" }}
             >
-              <Mail size="14" style={{ color: "var(--color-accent)" }} className="shrink-0" />
-              info@rohitcontracting.ae
+              <Mail size="14" style={{ color: "var(--color-accent)" }} className="shrink-0 mt-0.5" />
+              <span className="break-words">info@rohitcontracting.ae</span>
             </a>
           </div>
 
           {/* ═══════════════════════════════════════════════════
               COL 4 — Trust / Credentials
               ═══════════════════════════════════════════════════ */}
-          <div className="lg:col-span-2">
+          <div className="col-span-5 lg:col-span-2">
             <h4
               className="font-semibold text-sm mb-5 uppercase tracking-wider"
               style={{ color: "var(--text-body)" }}
             >
               Our Credentials
             </h4>
-            <ul className="space-y-3">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
               {[
                 "Trade License No. 1126644",
                 "Dubai DED Registered",
                 "Contractor Classification: G+4",
                 "Dubai Chamber No. 433957",
-                "Established 2022",
               ].map((item) => (
-                <li
+                <div
                   key={item}
                   className="text-sm leading-snug"
                   style={{ color: "var(--text-muted)" }}
                 >
                   {item}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 
