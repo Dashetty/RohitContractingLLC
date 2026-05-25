@@ -83,7 +83,7 @@ export default function AboutSection() {
           >
             {/* Main image placeholder with warm editorial card */}
             <div
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden"
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden overflow-x-clip"
               style={{
                 background: "var(--card-cream)",
                 border: "1px solid var(--border-earth)",
@@ -129,7 +129,7 @@ export default function AboutSection() {
                 <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
                   <Truck className="text-accent" size="20" />
                 </div>
-                <div className="text-2xl font-bold text-accent">10+</div>
+                <div className="text-2xl font-bold text-accent">5+</div>
               </div>
               <div className="text-sm" style={{ color: "var(--text-body)" }}>Years of Excellence in UAE Construction</div>
             </motion.div>
@@ -149,18 +149,16 @@ export default function AboutSection() {
           >
             {/* Heading */}
             <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight" style={{ color: "var(--text-heading)" }}>
-              Building <span className="text-gradient-warm">Excellence</span> Across Dubai
+              More Than Just{" "}
+              <span className="text-gradient-warm">Construction</span>
             </h2>
 
             <p className="text-lg leading-relaxed" style={{ color: "var(--text-body)" }}>
-              Rohit Contracting is a Dubai-based construction company committed
-              to delivering high-quality construction services across Dubai.
-              Strategically located in Dubai Festival City, we serve both
-              private and commercial clients with a full spectrum of contracting
-              solutions. Our team brings together experienced professionals and
-              skilled tradespeople who are dedicated to maintaining the highest
-              standards of workmanship, safety, and client satisfaction on
-              every project we undertake.
+              Based in Dubai Festival City, Rohit Contracting L.L.C brings together
+              professionals who genuinely care about their work, from villa groundworks
+              to full-scale commercial projects. We handle everything end-to-end,
+              with an unwavering focus on quality, safety, and making sure our clients
+              are happy with the result.
             </p>
 
             {/* Values */}

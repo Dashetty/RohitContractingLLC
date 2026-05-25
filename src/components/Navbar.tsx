@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 
 const navLinks = [
@@ -159,6 +159,7 @@ export default function Navbar() {
             </a>
 
             {/* Desktop Nav */}
+            <LayoutGroup>
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
                 <a
@@ -214,6 +215,7 @@ export default function Navbar() {
                 Get a Quote
               </a>
             </div>
+            </LayoutGroup>
 
             {/* Mobile Menu Button */}
             <button
@@ -237,7 +239,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 pt-24"
+            className="fixed inset-0 z-40 pt-24 overflow-y-auto"
             style={{
               background: scrolled ? "rgba(250, 247, 242, 0.95)" : "rgba(10,10,10,0.95)",
               backdropFilter: scrolled ? undefined : "blur(20px)",

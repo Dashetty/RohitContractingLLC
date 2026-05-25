@@ -63,7 +63,6 @@ const completedProjects = [
 export default function ProjectsStatic() {
   return (
     <section 
-      id="projects" 
       className="static-fallback relative overflow-hidden bg-[#FAF7F2]" 
       style={{ padding: "var(--section-padding) 0" }}
     >

@@ -94,13 +94,13 @@ export default function ServicesSection() {
             </span>
           </div>
           <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6">
-            Comprehensive{" "}
-            <span className="text-gradient-warm">Construction Solutions</span>
+            Construction &{" "}
+            <span className="text-gradient-warm">Contracting Services</span>
           </h2>
             <p className="text-lg leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--text-body)" }}>
-            End-to-end contracting, material supply, and trusted partnerships
-            across Dubai — from new construction and MEP works to renovation
-            and project management.
+            Contracting, material supply, and trusted partnerships across Dubai.
+            From new construction and MEP works to renovations and full project
+            management.
           </p>
         </motion.div>
 

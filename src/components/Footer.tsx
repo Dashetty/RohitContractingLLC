@@ -1,41 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUp, Mail, Phone, MapPin } from "lucide-react";
-
-const footerLinks: Record<string, { label: string; href: string; isPlaceholder?: boolean }[]> = {
-  Company: [
-    { label: "About Us", href: "#about" },
-    { label: "Our Team", href: "#", isPlaceholder: true },
-    { label: "Projects", href: "#projects" },
-    { label: "Careers", href: "#", isPlaceholder: true },
-    { label: "News & Media", href: "#", isPlaceholder: true },
-    { label: "Sustainability", href: "#", isPlaceholder: true },
-  ],
-  Services: [
-    { label: "All Services", href: "#services" },
-    { label: "Building Contracting", href: "#", isPlaceholder: true },
-    { label: "Construction Management", href: "#", isPlaceholder: true },
-    { label: "Material Trading", href: "#", isPlaceholder: true },
-    { label: "Infrastructure Projects", href: "#", isPlaceholder: true },
-    { label: "Renovation & Civil Works", href: "#", isPlaceholder: true },
-  ],
-  Support: [
-    { label: "Contact Us", href: "#contact" },
-    { label: "Request Quote", href: "#contact" },
-    { label: "FAQ", href: "#", isPlaceholder: true },
-    { label: "Privacy Policy", href: "#", isPlaceholder: true },
-    { label: "Terms of Service", href: "#", isPlaceholder: true },
-    { label: "Sitemap", href: "#", isPlaceholder: true },
-  ],
-};
-
-const socialLinks = [
-  { name: "LinkedIn", initial: "in", href: "#" },
-  { name: "X (Twitter)", initial: "X", href: "#" },
-  { name: "Facebook", initial: "f", href: "#" },
-  { name: "Instagram", initial: "ig", href: "#" },
-];
+import { ArrowUp, Phone, Mail, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -54,13 +20,17 @@ export default function Footer() {
         className="relative z-10 mx-auto px-5 sm:px-10 lg:px-20"
         style={{ maxWidth: "1440px" }}
       >
-        {/* Top section */}
-        <div className="py-16 grid lg:grid-cols-6 gap-12">
-          {/* Brand column */}
-          <div className="lg:col-span-2 space-y-6">
+        {/* ── 4-column grid ── */}
+        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+          {/* ═══════════════════════════════════════════════════
+              COL 1 — Brand (wider)
+              Logo, description, social icons
+              ═══════════════════════════════════════════════════ */}
+          <div className="lg:col-span-4 space-y-5">
+            {/* Logo */}
             <a href="#home" className="flex items-center gap-2">
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-xl"
+                className="w-11 h-11 rounded-xl flex items-center justify-center font-bold text-lg shrink-0"
                 style={{
                   background: "var(--color-accent)",
                   color: "#FDF8F5",
@@ -70,149 +40,197 @@ export default function Footer() {
               </div>
               <div className="flex flex-col">
                 <span
-                  className="heading-serif text-xl font-bold tracking-tight"
+                  className="text-lg font-bold tracking-tight"
                   style={{ color: "var(--text-heading)" }}
                 >
                   Rohit
                 </span>
-                <span
-                  className="text-[10px] font-medium tracking-[0.2em] uppercase -mt-1"
-                  style={{ color: "var(--color-accent)" }}
-                >
+                <span className="text-[10px] font-medium tracking-[0.2em] uppercase -mt-1" style={{ color: "var(--color-accent)" }}>
                   Contracting
                 </span>
               </div>
             </a>
 
+            {/* Description */}
             <p
-              className="text-sm leading-relaxed max-w-sm"
+              className="text-sm leading-relaxed max-w-xs"
               style={{ color: "var(--text-body)" }}
             >
-              Premium contracting and building material solutions for commercial,
+              Contracting and building material services for commercial,
               industrial, and infrastructure projects across Dubai.
             </p>
 
-            {/* Social links — letter initials */}
+            {/* Social links — Instagram + LinkedIn only */}
             <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-[1px] text-xs font-semibold"
-                  style={{
-                    background: "var(--card-earth)",
-                    border: "1px solid var(--border-earth)",
-                    color: "var(--text-muted)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "var(--color-accent)";
-                    e.currentTarget.style.borderColor = "var(--color-accent)";
-                    e.currentTarget.style.color = "#FDF8F5";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "var(--card-earth)";
-                    e.currentTarget.style.borderColor = "var(--border-earth)";
-                    e.currentTarget.style.color = "var(--text-muted)";
-                  }}
-                  aria-label={social.name}
-                >
-                  {social.initial}
-                </a>
-              ))}
-            </div>
-
-            {/* Contact info */}
-            <div
-              className="space-y-3 pt-4"
-              style={{ borderTop: "1px solid var(--border-earth)" }}
-            >
               <a
-                href="tel:+971501234567"
-                className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
-                style={{ color: "var(--text-body)" }}
+                href="https://www.instagram.com/rohitcontracting?igsh=b2dpdGFldXVtbHR4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-[1px] text-[11px] font-semibold"
+                style={{
+                  background: "var(--card-earth)",
+                  border: "1px solid var(--border-earth)",
+                  color: "var(--text-muted)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--color-accent)";
+                  e.currentTarget.style.borderColor = "var(--color-accent)";
+                  e.currentTarget.style.color = "#FDF8F5";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "var(--card-earth)";
+                  e.currentTarget.style.borderColor = "var(--border-earth)";
+                  e.currentTarget.style.color = "var(--text-muted)";
+                }}
+                aria-label="Instagram"
               >
-                <Phone size="14" style={{ color: "var(--color-accent)" }} />
-                +971 50 123 4567
+                ig
               </a>
               <a
-                href="mailto:info@rohitcontracting.ae"
-                className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
-                style={{ color: "var(--text-body)" }}
+                href="#" // TODO: LinkedIn URL to be added
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-[1px] text-[11px] font-semibold"
+                style={{
+                  background: "var(--card-earth)",
+                  border: "1px solid var(--border-earth)",
+                  color: "var(--text-muted)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--color-accent)";
+                  e.currentTarget.style.borderColor = "var(--color-accent)";
+                  e.currentTarget.style.color = "#FDF8F5";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "var(--card-earth)";
+                  e.currentTarget.style.borderColor = "var(--border-earth)";
+                  e.currentTarget.style.color = "var(--text-muted)";
+                }}
+                aria-label="LinkedIn"
               >
-                <Mail size="14" style={{ color: "var(--color-accent)" }} />
-                info@rohitcontracting.ae
+                in
               </a>
-              <div
-                className="flex items-start gap-3 text-sm"
-                style={{ color: "var(--text-body)" }}
-              >
-                <MapPin size="14" style={{ color: "var(--color-accent)", marginTop: "2px" }} />
-                <span>
-                  Dubai Festival City, Al Kheeran 1
-                  <br />
-                  Dubai, United Arab Emirates
-                </span>
-              </div>
             </div>
           </div>
 
-          {/* Links columns */}
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
-              <h4
-                className="heading-serif font-semibold text-sm mb-5 uppercase tracking-wider"
-                style={{ color: "var(--text-body)" }}
-              >
-                {title}
-              </h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm transition-colors duration-300 flex items-center gap-1.5"
-                      style={{ color: "var(--text-muted)" }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.color = "var(--color-accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.color = "var(--text-muted)";
-                      }}
-                    >
-                      {link.label}
-                      {link.isPlaceholder && (
-                        <span
-                          className="text-[10px] font-medium opacity-50"
-                          style={{ color: "var(--text-muted)" }}
-                        >
-                          [+]
-                        </span>
-                      )}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* ═══════════════════════════════════════════════════
+              COL 2 — Company Links
+              ═══════════════════════════════════════════════════ */}
+          <div className="lg:col-span-3">              <h4
+              className="font-semibold text-sm mb-5 uppercase tracking-wider"
+              style={{ color: "var(--text-body)" }}
+            >
+              Company
+            </h4>
+            <ul className="space-y-3">
+              {[
+                { label: "About Us", href: "#about" },
+                { label: "Services", href: "#services" },
+                { label: "Projects", href: "#projects" },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm transition-colors duration-300"
+                    style={{ color: "var(--text-muted)" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "var(--color-accent)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "var(--text-muted)";
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ═══════════════════════════════════════════════════
+              COL 3 — Contact Details
+              ═══════════════════════════════════════════════════ */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4
+              className="font-semibold text-sm mb-5 uppercase tracking-wider"
+              style={{ color: "var(--text-body)" }}
+            >
+              Contact
+            </h4>
+
+            {/* Phone */}
+            <a
+              href="tel:+97143986222"
+              className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
+              style={{ color: "var(--text-body)" }}
+            >
+              <Phone size="14" style={{ color: "var(--color-accent)" }} className="shrink-0" />
+              +971 4 398 6222
+            </a>
+
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/971559229581?text=Hello%2C%20I%27m%20interested%20in%20Rohit%20Contracting%27s%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
+              style={{ color: "var(--text-body)" }}
+            >
+              <MessageCircle size="14" style={{ color: "var(--color-accent)" }} className="shrink-0" />
+              +971 55 922 9581
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:info@rohitcontracting.ae"
+              className="flex items-center gap-3 text-sm transition-colors hover:opacity-80"
+              style={{ color: "var(--text-body)" }}
+            >
+              <Mail size="14" style={{ color: "var(--color-accent)" }} className="shrink-0" />
+              info@rohitcontracting.ae
+            </a>
+          </div>
+
+          {/* ═══════════════════════════════════════════════════
+              COL 4 — Trust / Credentials
+              ═══════════════════════════════════════════════════ */}
+          <div className="lg:col-span-2">
+            <h4
+              className="font-semibold text-sm mb-5 uppercase tracking-wider"
+              style={{ color: "var(--text-body)" }}
+            >
+              Our Credentials
+            </h4>
+            <ul className="space-y-3">
+              {[
+                "Trade License No. 1126644",
+                "Dubai DED Registered",
+                "Contractor Classification: G+4",
+                "Dubai Chamber No. 433957",
+                "Established 2022",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="text-sm leading-snug"
+                  style={{ color: "var(--text-muted)" }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* ═══════════════════════════════════════════════════
+            BOTTOM BAR — clean: copyright left, tagline right
+            ═══════════════════════════════════════════════════ */}
         <div
-          className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+          className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3"
           style={{ borderTop: "1px solid var(--border-earth)" }}
         >
-          <p
-            className="text-xs text-center sm:text-left"
-            style={{ color: "var(--text-muted)" }}
-          >
-            &copy; {new Date().getFullYear()} Rohit Contracting L.L.C. All rights
-            reserved. | Licensed by Dubai Municipality
+          <p className="text-xs text-center sm:text-left" style={{ color: "var(--text-muted)" }}>
+            &copy; {new Date().getFullYear()} Rohit Contracting L.L.C. All rights reserved.
           </p>
-          <p
-            className="text-xs text-center"
-            style={{ color: "var(--text-muted)" }}
-          >
-            Premium Construction & Building Materials | Dubai, UAE
+          <p className="text-xs text-center sm:text-right" style={{ color: "var(--text-muted)" }}>
+            Premium Construction &amp; Building Materials | Dubai, UAE
           </p>
         </div>
       </div>
