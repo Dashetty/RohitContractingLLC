@@ -17,8 +17,7 @@ export default function Footer() {
       </div>
 
       <div
-        className="relative z-10 mx-auto px-5 sm:px-10 lg:px-20"
-        style={{ maxWidth: "1440px" }}
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         {/* ── 4-column grid ── */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
