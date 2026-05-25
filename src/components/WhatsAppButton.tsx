@@ -50,7 +50,7 @@ export default function WhatsAppButton() {
               </a>
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-full mt-2 py-1.5 text-xs text-foreground/30 hover:text-foreground/50 transition-colors"
+                className="w-full mt-2 py-1.5 text-xs text-foreground/80 hover:text-foreground transition-colors font-medium"
               >
                 Dismiss
               </button>

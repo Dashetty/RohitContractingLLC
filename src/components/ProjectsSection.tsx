@@ -718,7 +718,7 @@ export default function ProjectsSection() {
               <button
                 key={tab.id}
                 onClick={() => setViewMode(tab.id)}
-                className="relative px-6 py-2.5 text-sm font-semibold rounded-xl transition-colors duration-300"
+                className="relative px-4 sm:px-6 py-2.5 text-sm font-semibold rounded-xl transition-colors duration-300"
                 style={viewMode !== tab.id ? { color: colors.textMuted } : undefined}
               >
                 {viewMode === tab.id && (
