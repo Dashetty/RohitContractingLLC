@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Shield } from "lucide-react";
 
@@ -55,13 +56,19 @@ export default function HeroSection() {
             scale: useTransform(scrollYProgress, [0, 1], [1, 1.02]),
             width: "100%",
             height: "100%",
-            backgroundImage: "url('/bg.png')",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "center 30%",
             filter: "brightness(0.92) saturate(0.85)",
           }}
-        />
+        >
+          <Image
+            src="/bg.png"
+            alt="Dubai construction site"
+            fill
+            priority
+            className="object-cover"
+            style={{ objectPosition: "center 30%" }}
+            sizes="100vw"
+          />
+        </motion.div>
       </motion.div>
 
       {/* Light overlay — subtle center darkening + bottom gradient for readability */}
@@ -85,7 +92,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 1.2, ease: "easeOut" }}
           >
-            <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-6 py-2 text-[15px]">
+            <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-4 sm:px-6 py-2 text-sm sm:text-[15px] flex-wrap justify-center">
               <Shield size={14} className="text-accent" />
               <span
                 className="leading-none"

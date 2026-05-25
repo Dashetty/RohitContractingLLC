@@ -10,16 +10,7 @@ import {
   HardHat,
   Truck,
 } from "lucide-react";
-import TimelineDemo from "@/components/timeline-demo";
-
-const milestones = [
-  { year: "2014", title: "Founded in Dubai", description: "Started with a vision to revolutionize UAE contracting" },
-  { year: "2016", title: "First Major Project", description: "Completed first commercial tower project" },
-  { year: "2018", title: "Expanded Operations", description: "Opened material trading division" },
-  { year: "2020", title: "Industrial Division", description: "Launched industrial procurement services" },
-  { year: "2023", title: "500+ Projects", description: "Reached milestone of 500 completed projects" },
-  { year: "2024", title: "UAE Market Leader", description: "Recognized as top contracting partner" },
-];
+import HorizontalTimeline from "@/components/timeline-demo";
 
 const values = [
   { icon: Shield, label: "Reliability", desc: "Consistent delivery excellence" },
@@ -47,8 +38,8 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden"
-      style={{ padding: "var(--section-padding) 0", background: "var(--bg-cream)" }}
+      className="relative overflow-hidden py-24 sm:py-32"
+      style={{ background: "var(--bg-cream)" }}
     >
       {/* Background pattern — subtle warm texture */}
       <div className="absolute inset-0 industrial-texture opacity-[0.06]" />
@@ -118,7 +109,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="absolute -bottom-6 -right-6 rounded-xl p-5 max-w-[200px]"
+              className="sm:absolute sm:-bottom-6 sm:-right-6 relative mt-4 sm:mt-0 rounded-xl p-5 max-w-[200px]"
               style={{
                 background: "var(--card-cream)",
                 border: "1px solid var(--border-earth)",
@@ -162,7 +153,7 @@ export default function AboutSection() {
             </p>
 
             {/* Values */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {values.map((value, i) => (
                 <motion.div
                   key={value.label}
@@ -210,15 +201,9 @@ export default function AboutSection() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-24"
-        >
-          <TimelineDemo />
-        </motion.div>
+        <div className="mt-24">
+          <HorizontalTimeline />
+        </div>
       </div>
     </section>
   );

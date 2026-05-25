@@ -52,7 +52,7 @@ const featureCards: FeatureCard[] = [
 /* ── Stats ── */
 const stats = [
   { value: 5, suffix: "+", label: "Years Experience" },
-  { value: 500, suffix: "+", label: "Projects Completed" },
+  { value: 7, suffix: "", label: "Projects Completed" },
   { value: 50, suffix: "+", label: "Expert Professionals" },
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
@@ -82,8 +82,7 @@ function AnimatedHeading() {
     return () => clearInterval(timer);
   }, [inView]);
 
-  const a = words[wordIndex];          // first slot
-  const b = words[(wordIndex + 1) % 2]; // second slot
+  const currentWord = words[wordIndex];
 
   return (
     <h2
@@ -92,31 +91,26 @@ function AnimatedHeading() {
       style={{ color: "var(--text-heading)" }}
     >
       Built on{" "}
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={a}
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 12 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="font-accent-primary inline-block"
-        >
-          {a}
-        </motion.span>
-      </AnimatePresence>{" "}
-      &{" "}
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={b}
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 12 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="font-accent-secondary inline-block"
-        >
-          {b}
-        </motion.span>
-      </AnimatePresence>
+      <span className="inline-block relative">
+        {/* Invisible spacer — renders the longer word to keep container width stable */}
+        <span aria-hidden="true" className="invisible">
+          {words.reduce((a, b) => a.length >= b.length ? a : b)}
+        </span>
+        {/* Animated overlay — baseline-aligned with "Built on", container stays fixed via invisible spacer */}
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={currentWord}
+            className="absolute inset-0"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            style={{ fontFamily: "var(--font-cormorant), Georgia, serif", color: "var(--color-accent)" }}
+          >
+            {currentWord}
+          </motion.span>
+        </AnimatePresence>
+      </span>
     </h2>
   );
 }
@@ -201,10 +195,7 @@ export default function WhyChooseUs() {
       <div className="absolute inset-0 industrial-texture opacity-[0.06]" />
       <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
 
-      <div
-        className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8"
-        style={{ maxWidth: "1440px" }}
-      >
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ── Header block ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -264,10 +255,10 @@ export default function WhyChooseUs() {
               }}
             >
               <div
-                className="font-semibold leading-none mb-2"
+                className="font-bold leading-none mb-2"
                 style={{
-                  fontFamily: "var(--font-cormorant), Georgia, serif",
-                  fontSize: "clamp(32px, 5vw, 52px)",
+                  fontSize: "clamp(24px, 3.5vw, 30px)",
+                  fontFamily: "var(--font-serif), Georgia, serif",
                   color: "var(--color-accent)",
                 }}
               >

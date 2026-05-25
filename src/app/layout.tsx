@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display, Cormorant_Garamond, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Analytics } from "@vercel/analytics/react";
@@ -10,21 +10,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
-
 const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -98,7 +88,7 @@ export default function RootLayout({
     <html
       lang="en-AE"
       suppressHydrationWarning
-      className={`${plusJakartaSans.variable} ${playfairDisplay.variable} ${cormorantGaramond.variable} ${geistMono.variable}`}
+      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable}`}
     >
       <body className="bg-background text-foreground antialiased selection:bg-accent/30 selection:text-accent-foreground">
         {/* JSON-LD LocalBusiness structured data for SEO */}
