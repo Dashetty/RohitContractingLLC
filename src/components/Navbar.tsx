@@ -34,68 +34,59 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
-  // ── Scroll-spy: IntersectionObserver for reliable section detection ──
+  // ── Scroll-spy: choose the nearest section above the nav offset ──
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Only process when user is scrolled past hero
-        if (window.scrollY <= 80) return;
-
-        // Track entries that are currently intersecting the detection zone
-        let latestActive = activeSectionRef.current;
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            // Since we iterate from top to bottom, the last intersecting
-            // section in the batch is the one deepest on the page — that's
-            // the one we want (the user has scrolled furthest into it)
-            latestActive = entry.target.id;
-          }
+    const updateActiveSection = () => {
+      if (window.scrollY <= 80) {
+        if (activeSectionRef.current !== "") {
+          activeSectionRef.current = "";
+          setActiveSection("");
         }
+        return;
+      }
 
-        if (latestActive !== activeSectionRef.current) {
-          activeSectionRef.current = latestActive;
-          setActiveSection(latestActive);
+      const sections = ids
+        .map((id) => Array.from(document.querySelectorAll<HTMLElement>(`[id="${id}"]`)))
+        .flat()
+        .filter((el) => {
+          const rect = el.getBoundingClientRect();
+          return rect.height > 0 && rect.width > 0;
+        });
+
+      if (sections.length === 0) return;
+
+      const offset = 120;
+      const scrollPosition = window.scrollY + offset;
+      const active = sections.reduce<{ id: string; top: number } | null>((best, section) => {
+        const top = section.offsetTop;
+        if (top <= scrollPosition && (!best || top > best.top)) {
+          return { id: section.id, top };
         }
-      },
-      {
-        // Detection zone: from 80px (navbar height) down to 60% viewport height.
-        // A section is "active" when its top is visible in the upper portion.
-        rootMargin: "-80px 0px -60% 0px",
-        threshold: 0,
-      }
-    );
+        return best;
+      }, null);
 
-    // Try to find and observe sections — retry on scroll if not all are mounted yet
-    const tryObserve = () => {
-      const elements = ids
-        .map((id) => document.getElementById(id))
-        .filter(Boolean) as HTMLElement[];
-      if (elements.length === ids.length) {
-        elements.forEach((el) => observer.observe(el));
-        return true;
+      if (active && active.id !== activeSectionRef.current) {
+        activeSectionRef.current = active.id;
+        setActiveSection(active.id);
       }
-      return false;
     };
 
-    let retry: (() => void) | null = null;
-    if (!tryObserve()) {
-      // Sections might not be mounted yet (dynamic imports), retry on next scroll
-      retry = () => {
-        if (tryObserve()) {
-          window.removeEventListener("scroll", retry!);
-          retry = null;
-        }
-      };
-      window.addEventListener("scroll", retry, { passive: true });
-    }
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll();
 
     return () => {
-      observer.disconnect();
-      if (retry) {
-        window.removeEventListener("scroll", retry);
-      }
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 

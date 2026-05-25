@@ -398,6 +398,17 @@ body {
   color: #C17F4A;
 }
 
+/* Subtle cream outline and soft backdrop for hero accented words */
+.hero-accent-outline {
+  display: inline-block;
+  padding: 0 0.45rem;
+  border-radius: 6px;
+  background: rgba(253,248,245,0.06);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-shadow: 0 3px 20px rgba(0,0,0,0.55);
+}
+
 /* Hero badge font — Cormorant Garamond regular small */
 .font-badge {
   font-family: var(--font-cormorant), Georgia, serif;

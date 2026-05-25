@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2,
   MapPin,
   ArrowUpRight,
   X,
+  FileText,
 } from "lucide-react";
 
 // ── Completed Projects ──
@@ -16,9 +18,11 @@ const completedProjects = [
     title: "Al Barsha South 2",
     category: "Residential",
     location: "Al Barsha South 2",
+    villaNo: "Villa-106",
     year: "",
     description: "Private Villa (G+1+R)",
-    image: null,
+    images: ["/projects/106/106.jpeg", "/projects/106/106-2.jpeg"],
+    certificate: "/projects/106/106-Completion Doc.pdf",
     size: "medium",
   },
   {
@@ -26,9 +30,11 @@ const completedProjects = [
     title: "Al Barsha Second",
     category: "Residential",
     location: "Al Barsha Second",
+    villaNo: "Villa-107",
     year: "",
     description: "Private Villa (G+1) with Annex",
-    image: null,
+    images: ["/projects/107/107.jpeg"],
+    certificate: "/projects/107/107-Completion Doc.pdf",
     size: "medium",
   },
   {
@@ -36,9 +42,11 @@ const completedProjects = [
     title: "Nad Al Sheba 1",
     category: "Residential",
     location: "Nad Al Sheba 1",
+    villaNo: "Villa-102",
     year: "",
     description: "Private Villa (G+1) with Service Annex",
-    image: null,
+    images: ["/projects/102/102.jpeg"],
+    certificate: "/projects/102/102-Completion Doc.pdf",
     size: "medium",
   },
   {
@@ -46,39 +54,47 @@ const completedProjects = [
     title: "Al Warqa Fourth",
     category: "Residential",
     location: "Al Warqa Fourth",
+    villaNo: "Villa-103",
     year: "",
     description: "Private Villa (G+1)",
-    image: null,
+    images: ["/projects/103/103.jpeg", "/projects/103/103-2.jpeg"],
+    certificate: "/projects/103/103-Completion certificate.pdf",
     size: "medium",
   },
   {
     id: 5,
-    title: "Al Awir First (G+2)",
+    title: "Al Awir First",
     category: "Residential",
     location: "Al Awir First",
+    villaNo: "Villa-104",
     year: "",
-    description: "Private Villa (G+2)",
-    image: null,
+    description: "Private Villa (G+1)",
+    images: ["/projects/104/104.jpeg", "/projects/104/104-2.jpeg", "/projects/104/104-3.jpeg"],
+    certificate: "/projects/104/104 - Completion1925910.pdf",
     size: "medium",
   },
   {
     id: 6,
-    title: "Al Awir First (G+1)",
+    title: "Al Awir First",
     category: "Residential",
     location: "Al Awir First",
+    villaNo: "Villa-105",
     year: "",
     description: "Private Villa (G+1)",
-    image: null,
+    images: ["/projects/105/105.jpeg"],
+    certificate: "/projects/105/105-COMPLETION DOC.pdf",
     size: "medium",
   },
   {
     id: 7,
-    title: "Al Barsha South 2 (Svc Annex)",
+    title: "Wadi Al Shabak",
     category: "Residential",
-    location: "Al Barsha South 2",
+    location: "Wadi Al Shabak",
+    villaNo: "Villa-113",
     year: "",
-    description: "Private Villa (G+1+R) with Service Annex",
-    image: null,
+    description: "Private Villa",
+    images: ["/projects/113/113.jpeg", "/projects/113/113-2.jpeg"],
+    certificate: "/projects/113/113-completion.pdf",
     size: "medium",
   },
 ];
@@ -142,16 +158,12 @@ const tabs = [
 
 type ViewMode = (typeof tabs)[number]["id"];
 
-// Subtle warm card variations for completed cards
-const warmCardColors = [
-  "var(--card-cream)",  // #FDF8F3 — lightest
-  "var(--card-beige)",  // #FAF7F2 — mid
-  "var(--card-earth)",  // #F5EDE0 — warmest
-];
+type CompletedProject = (typeof completedProjects)[number];
 
 export default function ProjectsSection() {
   const [viewMode, setViewMode] = useState<ViewMode>("completed");
-  const [selected, setSelected] = useState<(typeof completedProjects)[0] | null>(null);
+  const [selected, setSelected] = useState<CompletedProject | null>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   return (
     <section id="projects" className="relative py-24 sm:py-32" style={{ background: "var(--bg-cream)" }}>
@@ -182,7 +194,7 @@ export default function ProjectsSection() {
           </h2>
           <p className="text-lg leading-relaxed" style={{ color: "var(--text-body)" }}>
             {viewMode === "completed"
-              ? "Completed villas we have built across Dubai"
+              ? "Completed villas across Dubai, each with site photos and completion certificate"
               : "Currently under construction across Dubai"}
           </p>
 
@@ -244,11 +256,13 @@ export default function ProjectsSection() {
                   }`}
                   style={{
                     minHeight: project.size === "large" ? "400px" : "320px",
-                    background: warmCardColors[i % 3],
                     border: "1px solid var(--border-earth)",
                     boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
                   }}
-                  onClick={() => setSelected(project)}
+                  onClick={() => {
+                    setSelected(project);
+                    setActiveImageIndex(0);
+                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
                     e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
@@ -258,27 +272,45 @@ export default function ProjectsSection() {
                     e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
                   }}
                 >
-                  {/* Subtle grid pattern overlay */}
-                  <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
+                  <div className="absolute inset-0">
+                    <Image
+                      src={project.images[0]}
+                      alt={`${project.villaNo} - ${project.location}`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C1A17]/80 via-[#1C1A17]/25 to-transparent" />
+                  </div>
 
                   {/* Content */}
                   <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                    <div className="mb-3">
+                    <div className="mb-3 flex items-center gap-2 flex-wrap">
                       <span
                         className="inline-block px-3 py-1 rounded-full text-xs font-medium"
                         style={{
-                          background: "var(--card-beige)",
+                          background: "rgba(253,248,243,0.92)",
                           border: "1px solid var(--border-earth)",
                           color: "var(--text-muted)",
                         }}
                       >
                         {project.category}
                       </span>
+                      <span
+                        className="inline-block px-3 py-1 rounded-full text-xs font-semibold"
+                        style={{
+                          background: "rgba(216,90,48,0.14)",
+                          border: "1px solid rgba(216,90,48,0.34)",
+                          color: "#FDF8F5",
+                        }}
+                      >
+                        {project.villaNo}
+                      </span>
                     </div>
-                    <h3 className="heading-serif text-2xl font-bold mb-2 group-hover:text-accent transition-colors" style={{ color: "var(--text-heading)" }}>
+                    <h3 className="heading-serif text-2xl font-bold mb-2 group-hover:text-accent transition-colors" style={{ color: "#FDF8F5" }}>
                       {project.title}
                     </h3>
-                    <div className="flex items-center gap-4 text-sm" style={{ color: "var(--text-muted)" }}>
+                    <div className="flex items-center gap-4 text-sm" style={{ color: "rgba(253,248,245,0.82)" }}>
                       <span className="flex items-center gap-1">
                         <MapPin size="14" />
                         {project.location}
@@ -290,6 +322,31 @@ export default function ProjectsSection() {
                         </span>
                       )}
                     </div>
+
+                    <div className="mt-4 flex items-center gap-2">
+                      <span
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
+                        style={{
+                          background: "rgba(253,248,243,0.9)",
+                          color: "#5C5047",
+                        }}
+                      >
+                        {project.images.length} Photo{project.images.length > 1 ? "s" : ""}
+                      </span>
+                      <a
+                        href={project.certificate}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
+                        style={{
+                          background: "rgba(216,90,48,0.18)",
+                          color: "#FDF8F5",
+                        }}
+                      >
+                        <FileText size={13} /> Certificate
+                      </a>
+                    </div>
                   </div>
 
                   {/* Arrow up-right on hover */}
@@ -297,7 +354,7 @@ export default function ProjectsSection() {
                     <div
                       className="w-10 h-10 rounded-lg flex items-center justify-center"
                       style={{
-                        background: "var(--card-beige)",
+                        background: "rgba(253,248,243,0.92)",
                         border: "1px solid var(--border-earth)",
                       }}
                     >
@@ -310,7 +367,7 @@ export default function ProjectsSection() {
                     className="absolute inset-0 scale-105 group-hover:scale-110 transition-transform duration-700 opacity-0 group-hover:opacity-20"
                     style={{
                       backgroundImage:
-                        "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(92,80,71,0.06) 2px, rgba(92,80,71,0.06) 4px)",
+                        "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(253,248,243,0.12) 2px, rgba(253,248,243,0.12) 4px)",
                     }}
                   />
                 </motion.div>
@@ -418,10 +475,37 @@ export default function ProjectsSection() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="h-64 relative" style={{ background: "var(--card-earth)" }}>
-                <div className="absolute inset-0 grid-pattern opacity-[0.08]" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Building2 className="text-accent/20" size="64" />
+                <Image
+                  src={selected.images[activeImageIndex]}
+                  alt={`${selected.villaNo} - ${selected.location}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1A17]/75 via-[#1C1A17]/10 to-transparent" />
+
+                <div className="absolute left-4 bottom-4 flex gap-2">
+                  {selected.images.map((image, index) => (
+                    <button
+                      key={image}
+                      onClick={() => setActiveImageIndex(index)}
+                      className="w-14 h-10 rounded-md overflow-hidden border transition-colors"
+                      style={{
+                        borderColor: index === activeImageIndex ? "rgba(216,90,48,0.8)" : "rgba(253,248,243,0.45)",
+                      }}
+                      aria-label={`View image ${index + 1} of ${selected.images.length}`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`${selected.villaNo} preview ${index + 1}`}
+                        width={56}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
                 </div>
+
                 <button
                   onClick={() => setSelected(null)}
                   className="absolute top-4 right-4 w-10 h-10 rounded-lg flex items-center justify-center transition-colors"
@@ -437,14 +521,19 @@ export default function ProjectsSection() {
               </div>
 
               <div className="p-8">
-                <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium tracking-wide">
-                  {selected.category}
-                </span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium tracking-wide">
+                    {selected.category}
+                  </span>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#FDF8F5]/10 text-[#FDF8F5] border border-[#FDF8F5]/30">
+                    {selected.villaNo}
+                  </span>
+                </div>
                 <h3 className="heading-serif text-2xl font-bold text-white mt-4 mb-3">
                   {selected.title}
                 </h3>
                 <p className="text-[#C4B8A8] text-[17px] leading-[1.6] mb-6">{selected.description}</p>
-                <div className="flex items-center gap-6 text-sm text-[#7A6250]">
+                <div className="flex items-center gap-6 text-sm text-[#7A6250] mb-6">
                   <span className="flex items-center gap-1.5">
                     <MapPin size="16" className="text-accent" /> {selected.location}
                   </span>
@@ -455,6 +544,15 @@ export default function ProjectsSection() {
                     </span>
                   )}
                 </div>
+
+                <a
+                  href={selected.certificate}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white font-medium hover:bg-accent-dark transition-colors"
+                >
+                  <FileText size={16} /> View Completion Certificate
+                </a>
               </div>
             </motion.div>
           </motion.div>
