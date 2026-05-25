@@ -12,7 +12,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Maximize2,
-  Clock,
   HardHat,
   CheckCircle2,
 } from "lucide-react";
