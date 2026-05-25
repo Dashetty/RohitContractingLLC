@@ -121,11 +121,11 @@ export default function HeroSection() {
               }}
             >
               Building{" "}
-              <span className="font-accent-secondary italic">
+              <span className="font-accent-secondary italic hero-accent-outline">
                 Excellence
               </span>{" "}
               Across{" "}
-              <span className="font-accent-secondary italic">
+              <span className="font-accent-secondary italic hero-accent-outline">
                 Dubai
               </span>
             </h1>

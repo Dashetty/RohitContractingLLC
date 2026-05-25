@@ -23,7 +23,7 @@ export default function HeroStatic() {
           className="leading-[1.02] tracking-tight font-semibold text-white"
           style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(42px, 7vw, 92px)" }}
         >
-          Building <span className="italic text-[#FFE8D6]">Excellence</span> Across <span className="italic text-[#FFE8D6]">Dubai</span>
+          Building <span className="italic font-accent-secondary hero-accent-outline">Excellence</span> Across <span className="italic font-accent-secondary hero-accent-outline">Dubai</span>
         </h1>
 
         <div className="h-4" />

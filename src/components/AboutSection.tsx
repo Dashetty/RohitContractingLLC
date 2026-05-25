@@ -10,6 +10,7 @@ import {
   HardHat,
   Truck,
 } from "lucide-react";
+import TimelineDemo from "@/components/timeline-demo";
 
 const milestones = [
   { year: "2014", title: "Founded in Dubai", description: "Started with a vision to revolutionize UAE contracting" },
@@ -28,6 +29,21 @@ const values = [
 ];
 
 export default function AboutSection() {
+  const containerVariants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.12 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.2, 0.8, 0.2, 1] } },
+  };
+
+  const dotVariants = {
+    hidden: { scale: 0.7, opacity: 0 },
+    show: { scale: 1, opacity: 1, transition: { type: "spring", stiffness: 280, damping: 22 } },
+  };
+
   return (
     <section
       id="about"
@@ -196,7 +212,6 @@ export default function AboutSection() {
           </motion.div>
         </div>
 
-        {/* Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -204,39 +219,7 @@ export default function AboutSection() {
           transition={{ delay: 0.3 }}
           className="mt-24"
         >
-          <div className="text-center mb-12">
-            <h3 className="heading-serif text-2xl font-bold" style={{ color: "var(--text-heading)" }}>Our Journey</h3>
-            <p className="mt-2" style={{ color: "var(--text-muted)" }}>Key milestones in our growth</p>
-          </div>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 right-0 top-1/2 h-px hidden lg:block" style={{ background: "var(--border-warm)" }} />
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {milestones.map((m, i) => (
-                <motion.div
-                  key={m.year}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="relative text-center group"
-                >
-                  <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                    <div className="w-2 h-2 rounded-full bg-accent" />
-                  </div>
-                  <div className="text-accent font-bold text-lg">{m.year}</div>
-                  <div className="font-semibold text-sm mt-1" style={{ color: "var(--text-heading)" }}>
-                    {m.title}
-                  </div>
-                  <div className="text-xs mt-1 hidden sm:block" style={{ color: "var(--text-muted)" }}>
-                    {m.description}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          <TimelineDemo />
         </motion.div>
       </div>
     </section>
