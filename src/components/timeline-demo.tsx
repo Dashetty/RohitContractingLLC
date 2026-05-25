@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft,
@@ -50,8 +50,8 @@ const milestones = [
   },
   {
     year: "2023",
-    title: "500 Projects",
-    description: "Reached 500 completed projects milestone.",
+    title: "7 Projects",
+    description: "Reached 7 completed projects milestone.",
     detail: "A strong sign of consistent execution and client confidence.",
     icon: Trophy,
     position: "top" as const,
@@ -99,6 +99,9 @@ function TimelineNode({
       {/* Content Card */}
       <motion.div
         onClick={onClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }}
         className={`relative w-full cursor-pointer rounded-2xl p-5 transition-all duration-500 ${
           isTop ? "mb-8" : "mt-8 order-3"
         }`}
@@ -223,13 +226,13 @@ function TimelineTrack({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElemen
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const checkScroll = () => {
+  const checkScroll = useCallback(() => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       setCanScrollLeft(scrollLeft > 20);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
     }
-  };
+  }, [scrollRef]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -248,7 +251,7 @@ function TimelineTrack({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElemen
       checkScroll();
       return () => el.removeEventListener("scroll", checkScroll);
     }
-  }, []);
+  }, [scrollRef, checkScroll]);
 
   return (
     <>
@@ -264,6 +267,7 @@ function TimelineTrack({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElemen
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => scroll("left")}
+          aria-label="Scroll timeline left"
           className={`w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-300 ${
             canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
@@ -283,6 +287,7 @@ function TimelineTrack({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElemen
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => scroll("right")}
+          aria-label="Scroll timeline right"
           className={`w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-300 ${
             canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
@@ -399,6 +404,9 @@ export default function HorizontalTimeline() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
                   onClick={() => setActiveIndex(isActive ? -1 : i)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveIndex(isActive ? -1 : i); } }}
                   className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500"
                   style={{
                     background: isActive ? "var(--card-cream)" : "var(--card-beige)",

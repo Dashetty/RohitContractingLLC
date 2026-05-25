@@ -155,7 +155,7 @@ export default function ProjectsStatic() {
 
         {/* Project Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {completedProjects.map((project, i) => (
+          {completedProjects.map((project) => (
             <article
               key={project.id}
               className={`rounded-2xl overflow-hidden bg-[#F5EDE4] border border-[#D8C7B5] ${project.featured ? 'md:col-span-2' : ''}`}

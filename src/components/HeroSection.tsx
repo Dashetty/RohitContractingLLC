@@ -10,6 +10,7 @@ export default function HeroSection() {
 
   // Avoid passing an un-hydrated ref into useScroll — only bind after mount
   const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line
   useEffect(() => setMounted(true), []);
 
   // Track scroll progress relative to this section once mounted
@@ -52,6 +53,7 @@ export default function HeroSection() {
       >
         {/* Parallax scroll scale (starts from 1 after zoom-in completes) */}
         <motion.div
+          className="relative"
           style={{
             scale: useTransform(scrollYProgress, [0, 1], [1, 1.02]),
             width: "100%",

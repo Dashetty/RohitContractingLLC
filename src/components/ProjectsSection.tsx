@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
@@ -453,23 +453,29 @@ function OngoingCard({ project, index }: { project: typeof ongoingProjects[0]; i
 function ProjectModal({ project, onClose }: { project: CompletedProject; onClose: () => void }) {
   const [activeImage, setActiveImage] = useState(0);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     setActiveImage((prev) => (prev + 1) % project.images.length);
-  };
+  }, [project.images.length]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     setActiveImage((prev) => (prev - 1 + project.images.length) % project.images.length);
-  };
+  }, [project.images.length]);
+
+  // Ref for onClose to avoid stale closure in the keydown listener
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onCloseRef.current();
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [nextImage, prevImage]);
 
   return (
     <motion.div
@@ -517,12 +523,14 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
             <>
               <button
                 onClick={prevImage}
+                aria-label="Previous image"
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full backdrop-blur-md bg-black/40 border border-white/20 flex items-center justify-center text-white hover:bg-black/60 transition-colors"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={nextImage}
+                aria-label="Next image"
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full backdrop-blur-md bg-black/40 border border-white/20 flex items-center justify-center text-white hover:bg-black/60 transition-colors"
               >
                 <ChevronRight size={20} />
@@ -536,6 +544,7 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
               <button
                 key={img}
                 onClick={() => setActiveImage(idx)}
+                aria-label={`Image ${idx + 1}`}
                 className="relative w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300"
                 style={{
                   borderColor: idx === activeImage ? colors.accent : 'transparent',

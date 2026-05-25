@@ -20,21 +20,6 @@ const values = [
 ];
 
 export default function AboutSection() {
-  const containerVariants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.2, 0.8, 0.2, 1] } },
-  };
-
-  const dotVariants = {
-    hidden: { scale: 0.7, opacity: 0 },
-    show: { scale: 1, opacity: 1, transition: { type: "spring", stiffness: 280, damping: 22 } },
-  };
-
   return (
     <section
       id="about"
