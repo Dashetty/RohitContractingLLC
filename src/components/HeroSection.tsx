@@ -56,6 +56,7 @@ export default function HeroSection() {
             scale: useTransform(scrollYProgress, [0, 1], [1, 1.02]),
             width: "100%",
             height: "100%",
+            position: "relative",
             filter: "brightness(0.92) saturate(0.85)",
           }}
         >
