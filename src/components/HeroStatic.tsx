@@ -20,10 +20,16 @@ export default function HeroStatic() {
         <div className="h-6" />
 
         <h1 
-          className="leading-[1.02] tracking-tight font-semibold text-white"
-          style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(42px, 7vw, 92px)" }}
+          className="leading-[1.02] tracking-tight font-semibold"
+          style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(42px, 7vw, 92px)", color: "#F6EFE6" }}
         >
-          Building <span className="italic font-accent-secondary hero-accent-outline">Excellence</span> Across <span className="italic font-accent-secondary hero-accent-outline">Dubai</span>
+          Building <span 
+            className="italic"
+            style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, color: "#F0D5AD", letterSpacing: "0.01em" }}
+          >Excellence</span> Across <span 
+            className="italic"
+            style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, color: "#E0B88A", letterSpacing: "0.01em" }}
+          >Dubai</span>
         </h1>
 
         <div className="h-4" />
@@ -32,7 +38,7 @@ export default function HeroStatic() {
           className="mx-auto text-white/80"
           style={{ maxWidth: "540px", lineHeight: 1.6, fontSize: "clamp(15px, 1.5vw, 19px)" }}
         >
-          Mastering luxury villa construction, turnkey contracting, and precision material supply in the heart of the UAE.
+          Luxury villa construction, turnkey contracting, and material supply across Dubai and the UAE.
         </p>
 
         <div className="h-8" />

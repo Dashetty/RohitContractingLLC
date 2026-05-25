@@ -41,38 +41,35 @@ export default function HeroSection() {
     >
       {/* Background image — cinematic inhale: zoomed out → settles in */}
       <motion.div
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+        className="absolute inset-0"
         initial={{ scale: 1.12 }}
+        animate={{ scale: 1 }}
         transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
         style={{
-          backgroundImage: "url('/bg.png')",
-          backgroundPosition: "center 30%",
-          filter: "brightness(0.85) contrast(0.98)",
-          // parallax-like slow scale driven by scroll
           transformOrigin: "center center",
         }}
       >
-        {/* bind a scale transform to scroll for subtle parallax */}
+        {/* Parallax scroll scale (starts from 1 after zoom-in completes) */}
         <motion.div
           style={{
-            scale: useTransform(scrollYProgress, [0, 1], [1.12, 1.02]),
+            scale: useTransform(scrollYProgress, [0, 1], [1, 1.02]),
             width: "100%",
             height: "100%",
             backgroundImage: "url('/bg.png')",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center 30%",
-            filter: "brightness(0.85) contrast(0.98)",
+            filter: "brightness(0.92) saturate(0.85)",
           }}
         />
       </motion.div>
 
-      {/* Dark gradient overlay for readability (slightly stronger for contrast) */}
+      {/* Light overlay — subtle center darkening + bottom gradient for readability */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, rgba(216,90,48,0.06) 0%, rgba(216,90,48,0.04) 30%, rgba(216,90,48,0.02) 60%), linear-gradient(to top, rgba(28,26,23,0.88) 0%, rgba(28,26,23,0.6) 40%, transparent 75%)",
+            "linear-gradient(to bottom, rgba(18,14,10,0.15) 0%, rgba(18,14,10,0.08) 30%, rgba(18,14,10,0.18) 70%, rgba(18,14,10,0.25) 100%), linear-gradient(to top, rgba(28,26,23,0.75) 0%, rgba(28,26,23,0.35) 30%, transparent 65%)",
         }}
       />
 
@@ -115,17 +112,35 @@ export default function HeroSection() {
               className="leading-[1.02] tracking-tight font-semibold"
               style={{
                 fontFamily: "var(--font-cormorant), Georgia, serif",
-                color: "#FDF8F5",
+                color: "#F6EFE6",
                 fontSize: "clamp(42px, 7vw, 92px)",
                 textShadow: "0 3px 28px rgba(0,0,0,0.6)",
               }}
             >
               Building{" "}
-              <span className="font-accent-secondary italic hero-accent-outline">
+              <span
+                className="italic"
+                style={{
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontWeight: 600,
+                  color: "#F0D5AD",
+                  letterSpacing: "0.01em",
+                  textShadow: "0 2px 16px rgba(15,10,8,0.5), 0 0 40px rgba(15,10,8,0.2)",
+                }}
+              >
                 Excellence
               </span>{" "}
               Across{" "}
-              <span className="font-accent-secondary italic hero-accent-outline">
+              <span
+                className="italic"
+                style={{
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontWeight: 600,
+                  color: "#E0B88A",
+                  letterSpacing: "0.01em",
+                  textShadow: "0 2px 16px rgba(15,10,8,0.5), 0 0 40px rgba(15,10,8,0.2)",
+                }}
+              >
                 Dubai
               </span>
             </h1>
@@ -146,10 +161,10 @@ export default function HeroSection() {
                 maxWidth: "540px",
                 lineHeight: 1.6,
                 fontSize: "clamp(15px, 1.5vw, 19px)",
-                textShadow: "0 1px 12px rgba(0,0,0,0.4)",
+                textShadow: "0 1px 8px rgba(15,10,8,0.55), 0 0 24px rgba(15,10,8,0.15)",
               }}
             >
-              Mastering luxury villa construction, turnkey contracting, and precision material supply in the heart of the UAE.
+              Luxury villa construction, turnkey contracting, and material supply across Dubai and the UAE.
             </p>
           </motion.div>
 

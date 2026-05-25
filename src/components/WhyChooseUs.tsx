@@ -1,85 +1,198 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect, type ComponentType, type CSSProperties } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Zap,
+  HeartHandshake,
   ShieldCheck,
   Award,
-  Users,
-  Package,
-  DollarSign,
-  HeartHandshake,
   CheckCircle2,
 } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 
-const reasons = [
+/* ── Animated word swap ── */
+const words = ["Trust", "Excellence"];
+
+/* ── Feature cards data ── */
+interface FeatureCard {
+  icon: ComponentType<{ size?: number; strokeWidth?: number; className?: string; style?: CSSProperties }>;
+  title: string;
+  desc: string;
+}
+
+const featureCards: FeatureCard[] = [
   {
     icon: Zap,
     title: "Fast Delivery",
-    desc: "Accelerated project timelines without compromising quality",
-    stat: "30%",
-    statLabel: "Faster Delivery",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Quality Assurance",
-    desc: "Rigorous quality control at every project stage",
-    stat: "100%",
-    statLabel: "Quality Checked",
-  },
-  {
-    icon: Award,
-    title: "UAE Compliance",
-    desc: "Full adherence to Dubai Municipality & UAE regulations",
-    stat: "100%",
-    statLabel: "Compliant",
-  },
-  {
-    icon: Users,
-    title: "Professional Team",
-    desc: "Expert engineers, project managers, and skilled workforce",
-    stat: "200+",
-    statLabel: "Team Members",
-  },
-  {
-    icon: Package,
-    title: "Reliable Procurement",
-    desc: "Global sourcing network for premium construction materials",
-    stat: "1000+",
-    statLabel: "Suppliers",
-  },
-  {
-    icon: DollarSign,
-    title: "Cost Efficiency",
-    desc: "Optimized budgets without compromising on quality",
-    stat: "25%",
-    statLabel: "Cost Savings",
+    desc: "Accelerated project timelines without compromising quality or safety standards.",
   },
   {
     icon: HeartHandshake,
     title: "Trusted Partner",
-    desc: "Long-term relationships with leading UAE developers",
-    stat: "98%",
-    statLabel: "Client Retention",
+    desc: "Ongoing support with 1-year free maintenance on all completed projects.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Quality Assurance",
+    desc: "Rigorous quality control at every stage, from procurement to handover.",
+  },
+  {
+    icon: Award,
+    title: "UAE Compliance",
+    desc: "Full adherence to Dubai Municipality, DMCC, and UAE regulatory standards.",
   },
   {
     icon: CheckCircle2,
     title: "Safety Standards",
-    desc: "Zero-compromise safety protocols and PPE compliance",
-    stat: "0",
-    statLabel: "Major Incidents",
+    desc: "Zero-compromise safety protocols across every project site and operation.",
   },
 ];
 
+/* ── Stats ── */
 const stats = [
-  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 5, suffix: "+", label: "Years Experience" },
   { value: 500, suffix: "+", label: "Projects Completed" },
-  { value: 200, suffix: "+", label: "Expert Team" },
+  { value: 50, suffix: "+", label: "Expert Professionals" },
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
 
+/* ── Sub-component: animated heading ── */
+function AnimatedHeading() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const ref = useRef<HTMLHeadingElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+    const timer = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length);
+    }, 3800);
+    return () => clearInterval(timer);
+  }, [inView]);
+
+  const a = words[wordIndex];          // first slot
+  const b = words[(wordIndex + 1) % 2]; // second slot
+
+  return (
+    <h2
+      ref={ref}
+      className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6 max-w-4xl"
+      style={{ color: "var(--text-heading)" }}
+    >
+      Built on{" "}
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={a}
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+          className="font-accent-primary inline-block"
+        >
+          {a}
+        </motion.span>
+      </AnimatePresence>{" "}
+      &{" "}
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={b}
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+          className="font-accent-secondary inline-block"
+        >
+          {b}
+        </motion.span>
+      </AnimatePresence>
+    </h2>
+  );
+}
+
+/* ── Sub-component: single feature card ── */
+function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
+  const Icon = card.icon;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08 }}
+      className="group relative rounded-2xl p-6 text-left transition-all duration-300"
+      style={{
+        background: "var(--card-earth)",
+        border: "1px solid var(--border-earth)",
+        boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
+        e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "var(--border-earth)";
+        e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
+      }}
+    >
+      <div className="absolute inset-0 grid-pattern opacity-[0.04] rounded-2xl pointer-events-none" />
+
+      <div className="relative z-10">
+        {/* Icon */}
+        <div
+          className="flex items-center justify-center mb-5 mx-auto sm:mx-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
+          style={{
+            width: "52px",
+            height: "52px",
+            background: "rgba(216, 90, 48, 0.08)",
+            borderRadius: "14px",
+            boxShadow: "0 0 0 0 rgba(216, 90, 48, 0.15)",
+            transition: "box-shadow 0.3s, transform 0.3s",
+          }}
+        >
+          <Icon
+            style={{ color: "var(--color-accent)" }}
+            size={24}
+            strokeWidth={1.5}
+          />
+        </div>
+
+        {/* Title — Plus Jakarta Sans, not Cormorant */}
+        <h3
+          className="font-semibold text-lg leading-snug mb-3 group-hover:text-accent transition-colors"
+          style={{ color: "var(--text-heading)" }}
+        >
+          {card.title}
+        </h3>
+
+        {/* Description */}
+        <p
+          className="text-sm leading-relaxed"
+          style={{ color: "var(--text-body)" }}
+        >
+          {card.desc}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Main component ── */
 export default function WhyChooseUs() {
+  /* Split cards: first 3 in row 1, last 2 centered in row 2 */
+  const row1 = featureCards.slice(0, 3);
+  const row2 = featureCards.slice(3);
+
   return (
     <section
       className="relative overflow-hidden py-24 sm:py-32"
@@ -113,23 +226,15 @@ export default function WhyChooseUs() {
             </span>
           </div>
 
-          {/* Heading */}
-          <h2
-            className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6 max-w-4xl"
-            style={{ color: "var(--text-heading)" }}
-          >
-            Built on{" "}
-            <span className="font-accent-primary">Trust</span>
-            {" & "}
-            <span className="font-accent-secondary">Excellence</span>
-          </h2>
+          {/* Animated heading */}
+          <AnimatedHeading />
 
           {/* Subheading */}
           <p
             className="text-lg leading-relaxed max-w-2xl mb-16"
             style={{ color: "var(--text-body)" }}
           >
-            What sets Rohit Contracting apart in the UAE construction industry
+            The reasons our clients trust us with their projects
           </p>
         </motion.div>
 
@@ -138,7 +243,7 @@ export default function WhyChooseUs() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16"
         >
           {stats.map((stat) => (
             <div
@@ -185,95 +290,32 @@ export default function WhyChooseUs() {
           ))}
         </motion.div>
 
-        {/* ── Features grid ── */}
+        {/* ── Row 1 — 3 cards ── */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5"
         >
-          {reasons.map((reason, i) => (
-            <motion.div
-              key={reason.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="group relative rounded-2xl p-6 text-left max-sm:text-center transition-all duration-300"
-              style={{
-                background: "var(--card-earth)",
-                border: "1px solid var(--border-earth)",
-                boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
-                e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-earth)";
-                e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
-              }}
-            >
-              {/* Subtle grid pattern overlay */}
-              <div className="absolute inset-0 grid-pattern opacity-[0.04] rounded-2xl pointer-events-none" />
-
-              <div className="relative z-10">
-                {/* Icon */}
-                <div
-                  className="flex items-center justify-center mb-5 mx-auto sm:mx-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/15"
-                  style={{
-                    width: "52px",
-                    height: "52px",
-                    background: "rgba(216, 90, 48, 0.08)",
-                    borderRadius: "14px",
-                  }}
-                >
-                  <reason.icon
-                    style={{ color: "var(--color-accent)" }}
-                    size={24}
-                    strokeWidth={1.5}
-                  />
-                </div>
-
-                {/* Title */}
-                <h3
-                  className="heading-serif text-lg font-bold leading-snug mb-3 group-hover:text-accent transition-colors"
-                  style={{ color: "var(--text-heading)" }}
-                >
-                  {reason.title}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="text-sm leading-relaxed mb-4"
-                  style={{ color: "var(--text-body)" }}
-                >
-                  {reason.desc}
-                </p>
-
-                {/* Stat footer */}
-                <div className="flex items-center gap-2 max-sm:justify-center">
-                  <span
-                    className="font-semibold"
-                    style={{
-                      fontFamily: "var(--font-cormorant), Georgia, serif",
-                      fontSize: "clamp(18px, 1.8vw, 22px)",
-                      color: "var(--color-accent)",
-                    }}
-                  >
-                    {reason.stat}
-                  </span>
-                  <span
-                    className="text-xs"
-                    style={{ color: "var(--text-muted)" }}
-                  >
-                    {reason.statLabel}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
+          {row1.map((card, i) => (
+            <FeatureCard key={card.title} card={card} index={i} />
           ))}
         </motion.div>
+
+        {/* ── Row 2 — 2 cards centered ── */}
+        <div className="flex justify-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            style={{ maxWidth: "640px", width: "100%" }}
+          >
+            {row2.map((card, i) => (
+              <FeatureCard key={card.title} card={card} index={i + row1.length} />
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

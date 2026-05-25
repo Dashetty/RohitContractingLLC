@@ -90,8 +90,8 @@ export default function CTASection() {
               fontSize: "clamp(15px, 2vw, 20px)",
             }}
           >
-            Partner with Rohit Contracting for your next project. From concept
-            to completion, we deliver excellence.
+            Let us help with your next project. Whether it is a new build or
+            a renovation, our team is here to bring it to life.
           </motion.p>
 
           {/* Buttons */}
@@ -104,7 +104,7 @@ export default function CTASection() {
           >
             <a
               href="#contact"
-              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-accent hover:bg-accent-dark text-accent-foreground font-semibold rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 hover:scale-105 active:scale-95"
+              className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-accent hover:bg-accent-dark text-accent-foreground font-semibold rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 hover:scale-105 active:scale-95"
               style={{ fontSize: "clamp(14px, 1.6vw, 18px)" }}
             >
               Contact Us
@@ -115,8 +115,8 @@ export default function CTASection() {
               />
             </a>
             <a
-              href="tel:+971501234567"
-              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 font-semibold rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
+              href="tel:+97143986222"
+              className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 font-semibold rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
               style={{
                 border: "1.5px solid rgba(253,248,245,0.25)",
                 color: "#FDF8F5",
@@ -149,7 +149,7 @@ export default function CTASection() {
             className="flex flex-wrap justify-center gap-x-6 gap-y-2 sm:gap-x-8 mt-12 sm:mt-16 text-xs sm:text-sm"
             style={{ color: "rgba(253,248,245,0.5)" }}
           >
-            {["Free Consultation", "No Obligation Quote", "UAE Licensed", "10+ Years Experience"].map(
+            {["Free Consultation", "No Obligation Quote", "UAE Licensed", "5+ Years Experience"].map(
               (text) => (
                 <motion.span
                   key={text}

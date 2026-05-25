@@ -484,7 +484,7 @@ export default function ProjectsSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1C1A17]/75 via-[#1C1A17]/10 to-transparent" />
 
-                <div className="absolute left-4 bottom-4 flex gap-2">
+                <div className="absolute left-4 bottom-4 flex gap-2 flex-wrap">
                   {selected.images.map((image, index) => (
                     <button
                       key={image}

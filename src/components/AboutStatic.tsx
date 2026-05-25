@@ -16,15 +16,16 @@ export default function AboutStatic() {
               className="text-4xl sm:text-5xl font-bold text-[#1C1A17] leading-[1.1] mb-8"
               style={{ fontFamily: "var(--font-cormorant), serif" }}
             >
-              Building the Future of <span className="italic text-accent">Dubai</span> with Precision & Integrity
+              More Than Just <span className="italic text-accent">Construction</span>
             </h2>
 
             <div className="space-y-6 text-lg text-[#5C5047] leading-relaxed">
               <p>
-                Founded in the heart of Dubai, Rohit Contracting L.L.C has grown into a trusted name in the UAE construction industry. We specialize in delivering high-end villa construction and comprehensive material supply solutions that meet the highest standards of quality.
-              </p>
-              <p>
-                Our philosophy is simple: we combine traditional craftsmanship with modern engineering to create spaces that inspire. From initial groundworks to final turnkey delivery, our dedicated team ensures every project is executed with absolute precision.
+                Based in Dubai Festival City, Rohit Contracting L.L.C brings together
+                professionals who genuinely care about their work, from villa groundworks
+                to full-scale commercial projects. We handle everything end-to-end,
+                with an unwavering focus on quality, safety, and making sure our clients
+                are happy with the result.
               </p>
             </div>
           </div>

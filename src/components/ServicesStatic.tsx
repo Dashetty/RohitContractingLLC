@@ -42,7 +42,6 @@ const services = [
 export default function ServicesStatic() {
   return (
     <section 
-      id="services" 
       className="static-fallback relative overflow-hidden bg-[#F0E6D6]"
       style={{ padding: "var(--section-padding) 0" }}
     >
@@ -53,12 +52,12 @@ export default function ServicesStatic() {
             <span className="text-accent text-sm font-medium tracking-wide">Our Services</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6 text-[#1C1A17]" style={{ fontFamily: "var(--font-cormorant), serif" }}>
-            Comprehensive <span className="text-accent">Construction Solutions</span>
+            Construction & <span className="text-accent">Contracting Services</span>
           </h2>
           <p className="text-lg leading-relaxed text-[#5C5047]">
-            End-to-end contracting, material supply, and trusted partnerships
-            across Dubai — from new construction and MEP works to renovation
-            and project management.
+            Contracting, material supply, and trusted partnerships across Dubai.
+            From new construction and MEP works to renovations and full project
+            management.
           </p>
         </div>
 

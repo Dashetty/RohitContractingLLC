@@ -30,7 +30,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rohitcontracting.com"),
   title: {
-    default: "Rohit Contracting L.L.C — Premier Dubai Construction & Materials",
+    default: "Rohit Contracting L.L.C | Premier Dubai Construction & Materials",
     template: "%s | Rohit Contracting L.L.C"
   },
   description:
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Rohit Contracting L.L.C — Building Excellence Across Dubai",
+    title: "Rohit Contracting L.L.C | Building Excellence Across Dubai",
     description:
       "Premier villa construction, turnkey contracting, and building material supply in Dubai. Delivering excellence through precision and reliability.",
     url: "https://rohitcontracting.com",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Rohit Contracting L.L.C — Dubai Construction Excellence",
+        alt: "Rohit Contracting L.L.C | Dubai Construction Excellence",
       },
     ],
     locale: "en_AE",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rohit Contracting L.L.C — Dubai Construction Excellence",
+    title: "Rohit Contracting L.L.C | Dubai Construction Excellence",
     description: "Premier villa construction and building material supply across Dubai and the UAE.",
     images: ["/og-image.png"],
   },
@@ -114,7 +114,7 @@ export default function RootLayout({
                 "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in villa construction, turnkey contracting, and building material supply.",
               "@id": "https://rohitcontracting.com",
               "url": "https://rohitcontracting.com",
-              "telephone": "+97142514336",
+              "telephone": "+97143986222",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Sky Business Center, Floor 1–109 Office, Nadd Al Hamar Road",
@@ -138,7 +138,7 @@ export default function RootLayout({
                   "Friday",
                   "Saturday"
                 ],
-                "opens": "08:00",
+                "opens": "07:00",
                 "closes": "18:00"
               },
               "sameAs": [
