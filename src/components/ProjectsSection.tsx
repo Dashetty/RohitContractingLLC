@@ -240,17 +240,17 @@ function ProjectCard({ project, index, onSelect }: { project: CompletedProject; 
       onMouseLeave={() => setIsHovered(false)}
     >
       <div 
-        className="relative overflow-hidden rounded-2xl h-full min-h-[380px] md:min-h-[420px]"
+        className="relative overflow-hidden rounded-2xl h-full min-h-[420px] md:min-h-[460px]"
         style={{
           background: colors.cardBeige,
           border: `1px solid ${colors.borderEarth}`,
         }}
       >
         {/* Image Container */}
-        <div className={`relative ${project.featured ? 'h-[70%]' : 'h-[65%]'} overflow-hidden`}>
+        <div className={`relative ${project.featured ? 'h-[58%]' : 'h-[55%]'} overflow-hidden`}>
           <Image
             src={project.images[0]}
-            alt={`${project.villaNo} - ${project.location}`}
+            alt={project.location}
             fill
             sizes={project.featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -290,16 +290,9 @@ function ProjectCard({ project, index, onSelect }: { project: CompletedProject; 
         </div>
 
         {/* Content */}
-        <div className={`relative ${project.featured ? 'h-[30%]' : 'h-[35%]'} p-6 flex flex-col justify-between`}>
+        <div className={`relative ${project.featured ? 'h-[42%]' : 'h-[45%]'} p-6 flex flex-col justify-between`}>
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded-md" style={{ 
-                background: `${colors.accent}15`, 
-                color: colors.accent,
-                border: `1px solid ${colors.accent}30`
-              }}>
-                {project.villaNo}
-              </span>
               {project.year && (
                 <span className="text-xs font-medium" style={{ color: colors.textMuted }}>
                   {project.year}
@@ -307,7 +300,7 @@ function ProjectCard({ project, index, onSelect }: { project: CompletedProject; 
               )}
             </div>
             
-            <h3 className="text-xl font-bold mb-1.5 group-hover:text-[#D85A30] transition-colors duration-300" style={{ color: colors.textHeading, fontFamily: "var(--font-serif), Georgia, serif" }}>
+            <h3 className="text-xl font-bold mb-1.5 group-hover:text-[#D85A30] transition-colors duration-300" style={{ color: colors.textHeading }}>
               {project.title}
             </h3>
             
@@ -400,7 +393,7 @@ function OngoingCard({ project, index }: { project: typeof ongoingProjects[0]; i
 
         {/* Content */}
         <div className="relative mb-6">
-          <h3 className="text-lg font-bold leading-snug mb-3" style={{ color: colors.textHeading, fontFamily: "var(--font-serif), Georgia, serif" }}>
+          <h3 className="text-lg font-bold leading-snug mb-3" style={{ color: colors.textHeading }}>
             {project.project}
           </h3>
           
@@ -509,7 +502,7 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
             >
               <Image
                 src={project.images[activeImage]}
-                alt={`${project.villaNo} - ${project.location}`}
+                alt={project.location}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 60vw"
@@ -584,14 +577,7 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
           </div>
 
           <div className="mb-6">
-            <span className="inline-block px-3 py-1 rounded-lg text-xs font-bold mb-4" style={{ 
-              background: `${colors.accent}20`, 
-              color: colors.accent,
-              border: `1px solid ${colors.accent}40`
-            }}>
-              {project.villaNo}
-            </span>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-3" style={{ fontFamily: "var(--font-serif), Georgia, serif" }}>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
               {project.title}
             </h3>
             <p className="text-base leading-relaxed" style={{ color: colors.textMuted }}>
@@ -646,8 +632,8 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
 
 function StatsBar() {
   const stats = [
-    { label: "Projects Completed", value: "7", icon: Building2 },
-    { label: "Active Sites", value: "8", icon: HardHat },
+    { label: "Completed", value: "10+", icon: Building2 },
+    { label: "Running / Active", value: "15+", icon: HardHat },
     { label: "Areas Covered", value: "6", icon: MapPin },
   ];
 
@@ -669,8 +655,15 @@ function StatsBar() {
             <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: `${colors.accent}12` }}>
               <stat.icon size={20} style={{ color: colors.accent }} />
             </div>
-            <div className="text-3xl font-bold mb-1" style={{ color: colors.textHeading, fontFamily: "var(--font-serif), Georgia, serif" }}>
-              {stat.value}
+            <div className="text-3xl font-bold mb-1" style={{ color: colors.textHeading }}>
+              {stat.value.endsWith('+') ? (
+                <>
+                  {stat.value.slice(0, -1)}
+                  <span style={{ verticalAlign: 'middle' }}>+</span>
+                </>
+              ) : (
+                stat.value
+              )}
             </div>
             <div className="text-xs font-medium uppercase tracking-wider" style={{ color: colors.textMuted }}>
               {stat.label}

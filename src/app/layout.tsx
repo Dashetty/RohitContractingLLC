@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Cormorant_Garamond, Geist } from "next/font/google";
+import { Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -23,15 +21,13 @@ const cormorantGaramond = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rohitcontracting.com"),
   title: {
-    default: "Rohit Contracting L.L.C | Premier Dubai Construction & Materials",
+    default: "Rohit Contracting L.L.C | Premier Villa Construction in Dubai",
     template: "%s | Rohit Contracting L.L.C"
-  },
-  description:
-    "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in high-end villa construction, turnkey contracting, and building material supply across the UAE.",
+  },    description:
+    "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in high-end villa construction and turnkey contracting across Dubai.",
   keywords: [
     "villa construction dubai",
     "turnkey contracting dubai",
-    "building materials supplier uae",
     "luxury home builders dubai",
     "construction management dubai",
     "civil works dubai",
@@ -49,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rohit Contracting L.L.C | Building Excellence Across Dubai",
     description:
-      "Premier villa construction, turnkey contracting, and building material supply in Dubai. Delivering excellence through precision and reliability.",
+      "Premier villa construction and turnkey contracting in Dubai. Delivering excellence through precision and reliability.",
     url: "https://rohitcontracting.com",
     siteName: "Rohit Contracting L.L.C",
     images: [
@@ -66,13 +62,28 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Rohit Contracting L.L.C | Dubai Construction Excellence",
-    description: "Premier villa construction and building material supply across Dubai and the UAE.",
+    description: "Premier villa construction and turnkey contracting in Dubai.",
     images: ["/og-image.png"],
   },
   icons: {
-    icon: [{ url: "/projects/logoorevamp.png", type: "image/png" }],
-    apple: "/projects/logoorevamp.png",
-    shortcut: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    other: [
+      {
+        rel: "android-chrome-192x192",
+        url: "/favicon/android-chrome-192x192.png",
+        sizes: "192x192",
+      },
+      {
+        rel: "android-chrome-512x512",
+        url: "/favicon/android-chrome-512x512.png",
+        sizes: "512x512",
+      },
+    ],
   },
   robots: {
     index: true,
@@ -96,7 +107,7 @@ export default function RootLayout({
     <html
       lang="en-AE"
       suppressHydrationWarning
-      className={cn(plusJakartaSans.variable, cormorantGaramond.variable, "font-sans", geist.variable)}
+      className={cn(plusJakartaSans.variable, cormorantGaramond.variable, "font-sans")}
     >
       <body className="bg-background text-foreground antialiased selection:bg-accent/30 selection:text-accent-foreground">
         {/* JSON-LD LocalBusiness structured data for SEO */}
@@ -109,13 +120,13 @@ export default function RootLayout({
               "name": "Rohit Contracting L.L.C",
               "image": "https://rohitcontracting.com/logo.png",
               "description":
-                "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in villa construction, turnkey contracting, and building material supply.",
+                "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in villa construction and turnkey contracting.",
               "@id": "https://rohitcontracting.com",
               "url": "https://rohitcontracting.com",
-              "telephone": "+97143986222",
+              "telephone": "+971559239581",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Sky Business Center, Floor 1–109 Office, Nadd Al Hamar Road",
+                "streetAddress": "Sky Business Centre, #109 Office, Nad Al Hamar Road, Al Kheeran",
                 "addressLocality": "Dubai Festival City",
                 "addressRegion": "Dubai",
                 "postalCode": "00000",

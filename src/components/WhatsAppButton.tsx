@@ -40,7 +40,7 @@ export default function WhatsAppButton() {
                 Get instant responses on WhatsApp
               </p>
               <a
-                href="https://wa.me/971559229581?text=Hello%2C%20I'm%20interested%20in%20Rohit%20Contracting's%20services."
+                href="https://wa.me/971559239581?text=Hello%2C%20I'm%20interested%20in%20Rohit%20Contracting's%20services."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-2.5 bg-[var(--color-chart-2)] hover:brightness-90 text-white text-sm font-semibold rounded-xl transition-all duration-300"

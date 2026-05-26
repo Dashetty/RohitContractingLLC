@@ -43,7 +43,6 @@ A premium construction & building materials company website for **Rohit Contract
 │       ├── ServicesSection.tsx # 8 premium service cards with stagger animation
 │       ├── ProjectsSection.tsx # Masonry gallery with filter tabs and modal
 │       ├── WhyChooseUs.tsx    # Dark section with animated counters + 8 reasons
-│       ├── MaterialsSection.tsx # 8 building material cards with quality badges
 │       ├── CTASection.tsx     # Bold conversion section
 │       ├── ContactSection.tsx # 5-column layout: info cards + form + WhatsApp CTA
 │       └── Footer.tsx         # 6-column footer with social, links, scroll-to-top
@@ -276,9 +275,6 @@ Selected completed villas in: Al Barsha South 2, Al Barsha Second, Nad Al Sheba 
 
 ### Why Choose Us (8 reasons)
 Fast Delivery, Quality Assurance, UAE Compliance, Professional Team, Reliable Procurement, Cost Efficiency, Trusted Partner, Safety Standards
-
-### Materials (8)
-Cement, Steel, Pipes & Fittings, Electrical Supplies, Wood & Plywood, Construction Hardware, Industrial Equipment, Specialty Materials
 
 ### Contact Info
 - Location: Dubai Festival City, Al Kheeran 1, Dubai, UAE
@@ -528,11 +524,19 @@ npm run lint
 ### Remaining
 - ✅ **Projects Section** — `--bg-cream` bg, solid warm cards with subtle color variations (cream/beige/earth cycle), warm shimmer, glass removed from toggle, cards, badges, and modal. Blueprint-shimmer renamed to warm-shimmer with warm tones. `project-*` CSS classes removed.
 - ⏳ WhyChooseUs — `--bg-earth`, existing cards already solid (verify)
-- ⏳ Materials — `--bg-cream`, solid cards
 - ⏳ CTA — `--bg-dark-cta` (already dark, minimal changes)
 - ⏳ Footer — already `#EDE0CE`, verify alignment
 - ⏳ Navbar scrolled state — update to `rgba(250,247,242,0.92)`
 - ⏳ Hardcoded hex cleanup — replace `#FDF8F5`, `#EDE0CE`, etc.
+
+## ⚠️ Client Scope Reminder (2026-05-26)
+
+**Rohit Contracting L.L.C does NOT do materials supply.** They only do **Villa Construction across Dubai** (not the entire UAE). When writing content:
+- Do NOT mention "materials", "material supply", "building materials", "industrial procurement", etc.
+- Do NOT mention "UAE" as service area — use "Dubai" only
+- The company builds villas. That's it. Services include: New Construction, Renovation & Fit-Out, Residential Villas, Civil & Structural, MEP Works, Project Management
+
+---
 
 ## 🧪 Build Status
 - ✅ Build passes with ZERO errors

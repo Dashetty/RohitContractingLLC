@@ -13,10 +13,10 @@ export default function ContactStatic() {
             <span className="w-2 h-2 bg-accent rounded-full" />
             <span className="text-accent text-sm font-medium tracking-wide">Contact Us</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6 text-[#1C1A17]" style={{ fontFamily: "var(--font-cormorant), serif" }}>
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--text-heading)" }}>
             Get In <span className="text-accent">Touch</span>
           </h2>
-          <p className="text-lg leading-relaxed text-[#5C5047] max-w-xl mx-auto">
+          <p className="text-lg leading-relaxed max-w-xl mx-auto" style={{ color: "var(--text-body)" }}>
             Ready to start your project? Reach out to our team
           </p>
         </div>
@@ -33,14 +33,31 @@ export default function ContactStatic() {
                 <div>
                   <h3 className="font-semibold mb-1 text-[#1C1A17]">Our Location</h3>
                   <p className="text-sm leading-relaxed text-[#5C5047]">
-                    Sky Business Center, Floor 1–109 Office,
+                    Sky Business Centre, #109 Office,
                     <br />
-                    Nadd Al Hamar Road, Dubai Festival City (Al Kheeran 1),
+                    Nad Al Hamar Road, Al Kheeran, Dubai Festival City,
                     <br />
-                    Dubai, United Arab Emirates
+                    Dubai
                   </p>
                 </div>
               </div>
+              {/* Google Maps embed — clickable to open in Maps app */}
+              <a
+                href="https://maps.app.goo.gl/cYSoZG6jWdF1d41K7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 rounded-xl overflow-hidden block"
+                style={{ border: "1px solid var(--border-warm, #D8C7B5)" }}
+              >
+                <iframe
+                  src="https://maps.google.com/maps?q=Sky+Business+Centre+%23109+Office+Nad+Al+Hamar+Road+Al+Kheeran+Dubai+Festival+City+Dubai&output=embed"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0, display: "block", pointerEvents: "none" }}
+                  loading="lazy"
+                  title="Rohit Contracting Location - Dubai Festival City"
+                />
+              </a>
             </div>
 
             {/* Phone Card */}
@@ -51,8 +68,8 @@ export default function ContactStatic() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1 text-[#1C1A17]">Phone</h3>
-                  <a href="tel:+97143986222" className="text-sm text-accent">
-                    +971 4 398 6222
+                  <a href="tel:+971559239581" className="text-sm text-accent">
+                    +971 55 923 9581
                   </a>
                   <p className="text-xs mt-1 text-[#7A6250]">Mon–Sat, 7am–6pm</p>
                 </div>
@@ -93,7 +110,7 @@ export default function ContactStatic() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/971559229581?text=Hello%2C%20I'm%20interested%20in%20Rohit%20Contracting's%20services."
+              href="https://wa.me/971559239581?text=Hello%2C%20I'm%20interested%20in%20Rohit%20Contracting's%20services."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-2xl p-5 bg-[#FDF8F3] border border-[#D8C7B5] transition-all hover:border-[#D85A304D]"

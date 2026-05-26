@@ -104,7 +104,7 @@ function StatItem({ label, value, Icon }: { label: string; value: string; Icon: 
       <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: "rgba(216, 90, 48, 0.07)" }}>
         <Icon size={20} className="text-accent" />
       </div>
-      <div className="text-3xl font-bold mb-1 text-[#2C2420]" style={{ fontFamily: "Georgia, serif" }}>{value}</div>
+      <div className="text-3xl font-bold mb-1 text-[#2C2420]" style={{ fontFamily: "var(--font-serif)" }}>{value}</div>
       <div className="text-xs font-medium uppercase tracking-wider text-[#8B7D6B]">{label}</div>
     </div>
   );
@@ -122,7 +122,7 @@ export default function ProjectsStatic() {
             <span className="w-2 h-2 bg-accent rounded-full" />
             <span className="text-accent text-sm font-medium tracking-wide">Portfolio</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6 text-[#2C2420]" style={{ fontFamily: "Georgia, serif" }}>
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--text-heading)" }}>
             Featured <span className="text-accent">Projects</span>
           </h2>
           <p className="text-lg leading-relaxed max-w-2xl mx-auto text-[#5C5047]">
@@ -188,7 +188,7 @@ export default function ProjectsStatic() {
                   <span className="inline-block text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded-md mb-2 bg-[#D85A30]/10 text-accent border border-[#D85A30]/20">
                     {project.villaNo}
                   </span>
-                  <h3 className="text-xl font-bold text-[#2C2420] mb-1" style={{ fontFamily: "Georgia, serif" }}>
+                  <h3 className="text-xl font-bold text-[#2C2420] mb-1" style={{ fontFamily: "var(--font-serif)" }}>
                     {project.title}
                   </h3>
                   <p className="text-sm text-[#5C5047] line-clamp-2">{project.description}</p>

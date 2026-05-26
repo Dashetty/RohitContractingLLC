@@ -136,24 +136,28 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
+            {/* Brand */}
             <a href="#home" className="flex items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/projects/logoorevamp.png"
-                alt="Rohit Contracting L.L.C"
-                width={110}
-                height={78}
-                style={{
-                  height: 48,
-                  width: "auto",
-                  objectFit: "contain",
-                  filter: scrolled
-                    ? "brightness(0) saturate(100%)"
-                    : "brightness(0) invert(1)",
-                  transition: "filter 0.4s ease",
-                }}
-              />
+              <div className="flex flex-col">
+                <span
+                  className="text-lg sm:text-xl font-bold tracking-[0.1em] leading-none"
+                  style={{
+                    color: scrolled ? "var(--text-heading)" : "#F6EFE6",
+                    transition: "color 0.4s ease",
+                  }}
+                >
+                  ROHIT
+                </span>
+                <span
+                  className="text-[11px] sm:text-xs tracking-[0.15em] font-semibold"
+                  style={{
+                    color: scrolled ? "#8B7D6B" : "rgba(246,239,230,0.75)",
+                    transition: "color 0.4s ease",
+                  }}
+                >
+                  CONTRACTING L.L.C
+                </span>
+              </div>
             </a>
 
             {/* Desktop Nav */}

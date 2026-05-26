@@ -51,13 +51,12 @@ export default function ServicesStatic() {
             <span className="w-2 h-2 bg-accent rounded-full" />
             <span className="text-accent text-sm font-medium tracking-wide">Our Services</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6 text-[#1C1A17]" style={{ fontFamily: "var(--font-cormorant), serif" }}>
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--text-heading)" }}>
             Construction & <span className="text-accent">Contracting Services</span>
           </h2>
-          <p className="text-lg leading-relaxed text-[#5C5047]">
-            Contracting, material supply, and trusted partnerships across Dubai.
-            From new construction and MEP works to renovations and full project
-            management.
+          <p className="text-lg leading-relaxed" style={{ color: "var(--text-body)" }}>
+            Contracting and trusted partnerships across Dubai — delivering premium villa
+            construction from groundworks to final handover.
           </p>
         </div>
 
@@ -70,7 +69,7 @@ export default function ServicesStatic() {
               <div className="w-14 h-14 rounded-xl bg-[#D85A3014] flex items-center justify-center mb-5">
                 <service.icon className="text-accent" size="26" />
               </div>
-              <h3 className="text-lg font-bold mb-3 text-[#1C1A17]">{service.title}</h3>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "var(--text-heading)" }}>{service.title}</h3>
               <p className="text-sm leading-relaxed text-[#5C5047]">{service.description}</p>
             </div>
           ))}
