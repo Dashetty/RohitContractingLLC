@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   Building2,

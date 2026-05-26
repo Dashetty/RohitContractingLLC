@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUp, Phone, Mail, MessageCircle, MapPin, ExternalLink, CheckCircle2 } from "lucide-react";
 
@@ -65,9 +66,11 @@ export default function Footer() {
               <a href="#home" className="inline-block group">
                 <div className="relative">
                   {/* Logo with warm tint instead of harsh black */}
-                  <img
+                  <Image
                     src="/projects/logoorevamp.png"
                     alt="Rohit Contracting L.L.C"
+                    width={240}
+                    height={72}
                     className="h-[60px] sm:h-[72px] w-auto transition-all duration-500 group-hover:opacity-90"
                     style={{
                       objectFit: "contain",
@@ -224,7 +227,7 @@ export default function Footer() {
 
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/rohit-contracting-l-l-c"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"

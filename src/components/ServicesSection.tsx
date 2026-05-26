@@ -62,7 +62,7 @@ const cardVariants = {
   },
 };
 
-function ServiceCard({ service, index }: { service: typeof services[number]; index: number }) {
+function ServiceCard({ service }: { service: typeof services[number] }) {
   return (
     <motion.div
       variants={cardVariants}
@@ -150,8 +150,8 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-5"
         >
-          {row1.map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} />
+          {row1.map((service) => (
+            <ServiceCard key={service.title} service={service} />
           ))}
         </motion.div>
 
@@ -165,8 +165,8 @@ export default function ServicesSection() {
             className="grid grid-cols-1 sm:grid-cols-2 gap-5"
             style={{ maxWidth: "640px", width: "100%" }}
           >
-            {row2.map((service, i) => (
-              <ServiceCard key={service.title} service={service} index={i + row1.length} />
+            {row2.map((service) => (
+              <ServiceCard key={service.title} service={service} />
             ))}
           </motion.div>
         </div>

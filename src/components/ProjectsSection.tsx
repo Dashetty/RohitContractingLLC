@@ -250,7 +250,7 @@ function ProjectCard({ project, index, onSelect }: { project: CompletedProject; 
         <div className={`relative ${project.featured ? 'h-[58%]' : 'h-[55%]'} overflow-hidden`}>
           <Image
             src={project.images[0]}
-            alt={project.location}
+            alt={`${project.title} — ${project.villaNo}, ${project.location}`}
             fill
             sizes={project.featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -502,7 +502,7 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
             >
               <Image
                 src={project.images[activeImage]}
-                alt={project.location}
+                alt={`${project.title} — ${project.villaNo}, ${project.location} (Image ${activeImage + 1} of ${project.images.length})`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 60vw"
