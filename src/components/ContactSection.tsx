@@ -117,36 +117,31 @@ export default function ContactSection() {
                     className="text-sm leading-relaxed"
                     style={{ color: "var(--text-body)" }}
                   >
-                    Sky Business Center, Floor 1–109 Office,
+                    Sky Business Centre, #109 Office,
                     <br />
-                    Nadd Al Hamar Road, Dubai Festival City (Al Kheeran 1),
+                    Nad Al Hamar Road, Al Kheeran, Dubai Festival City,
                     <br />
-                    Dubai, United Arab Emirates
+                    Dubai
                   </p>
                 </div>
               </div>
-              {/* Mini map placeholder */}
-              <div
-                className="mt-4 h-40 rounded-xl flex items-center justify-center"
-                style={{
-                  background: "var(--card-beige)",
-                  border: "1px solid var(--border-warm)",
-                }}
+              {/* Google Maps embed — clickable to open in Maps app */}
+              <a
+                href="https://maps.app.goo.gl/cYSoZG6jWdF1d41K7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 rounded-xl overflow-hidden block"
+                style={{ border: "1px solid var(--border-warm)" }}
               >
-                <div className="text-center">
-                  <MapPin
-                    className="mx-auto mb-2"
-                    size="24"
-                    style={{ color: "rgba(216,90,48,0.4)" }}
-                  />
-                  <div
-                    className="text-xs"
-                    style={{ color: "var(--text-muted)" }}
-                  >
-                    Dubai Festival City
-                  </div>
-                </div>
-              </div>
+                <iframe
+                  src="https://maps.google.com/maps?q=Sky+Business+Centre+%23109+Office+Nad+Al+Hamar+Road+Al+Kheeran+Dubai+Festival+City+Dubai&output=embed"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0, display: "block", pointerEvents: "none" }}
+                  loading="lazy"
+                  title="Rohit Contracting Location - Dubai Festival City"
+                />
+              </a>
             </div>
 
             {/* Phone Card */}
@@ -173,10 +168,10 @@ export default function ContactSection() {
                     Phone
                   </h3>
                   <a
-                    href="tel:+97143986222"
+                    href="tel:+971559239581"
                     className="text-sm text-accent hover:text-accent-light transition-colors"
                   >
-                    +971 4 398 6222
+                    +971 55 923 9581
                   </a>
                   <p
                     className="text-xs mt-1"
@@ -268,7 +263,7 @@ export default function ContactSection() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/971559229581?text=Hello%2C%20I'm%20interested%20in%20Rohit%20Contracting's%20services."
+              href="https://wa.me/971559239581?text=Hello%2C%20I'm%20interested%20in%20Rohit%20Contracting's%20services."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-2xl p-5 transition-all duration-300 group"

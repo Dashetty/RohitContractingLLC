@@ -107,7 +107,7 @@ export default function AboutSection() {
                 </div>
                 <div className="text-2xl font-bold text-accent">5+</div>
               </div>
-              <div className="text-sm" style={{ color: "var(--text-body)" }}>Years of Excellence in UAE Construction</div>
+              <div className="text-sm" style={{ color: "var(--text-body)" }}>Years of Excellence in Dubai Construction</div>
             </motion.div>
 
             {/* Decorative element */}
@@ -124,7 +124,7 @@ export default function AboutSection() {
             className="space-y-8"
           >
             {/* Heading */}
-            <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight" style={{ color: "var(--text-heading)" }}>
+            <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--text-heading)" }}>
               More Than Just{" "}
               <span className="text-gradient-warm">Construction</span>
             </h2>

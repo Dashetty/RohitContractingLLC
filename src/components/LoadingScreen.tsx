@@ -38,7 +38,7 @@ export default function LoadingScreen() {
           src="/projects/logoorevamp.png"
           alt="Rohit Contracting L.L.C"
           style={{
-            height: 100,
+            height: "clamp(120px, 25vw, 200px)",
             width: "auto",
             objectFit: "contain",
             filter: "brightness(0) saturate(100%)",

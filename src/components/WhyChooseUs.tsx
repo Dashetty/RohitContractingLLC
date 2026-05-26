@@ -36,8 +36,8 @@ const featureCards: FeatureCard[] = [
   },
   {
     icon: Award,
-    title: "UAE Compliance",
-    desc: "Full adherence to Dubai Municipality, DMCC, and UAE regulatory standards.",
+    title: "Dubai Compliance",
+    desc: "Full adherence to Dubai Municipality, DMCC, and Dubai regulatory standards.",
   },
   {
     icon: CheckCircle2,
@@ -49,7 +49,7 @@ const featureCards: FeatureCard[] = [
 /* ── Stats ── */
 const stats = [
   { value: 5, suffix: "+", label: "Years Experience" },
-  { value: 7, suffix: "", label: "Projects Completed" },
+  { value: 10, suffix: "+", label: "Projects Completed" },
   { value: 50, suffix: "+", label: "Expert Professionals" },
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
@@ -151,7 +151,7 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08 }}
-      className="group relative rounded-2xl p-6 text-left transition-all duration-300"
+      className="group relative rounded-2xl p-6 text-center transition-all duration-300"
       style={{
         background: "var(--card-earth)",
         border: "1px solid var(--border-earth)",
@@ -171,7 +171,7 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
       <div className="relative z-10">
         {/* Icon */}
         <div
-          className="flex items-center justify-center mb-5 mx-auto sm:mx-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
+          className="flex items-center justify-center mb-5 mx-auto transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
           style={{
             width: "52px",
             height: "52px",
@@ -190,7 +190,7 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
 
         {/* Title — Plus Jakarta Sans, not Cormorant */}
         <h3
-          className="font-semibold text-lg leading-snug mb-3 group-hover:text-accent transition-colors"
+          className="font-bold text-lg leading-snug mb-3 group-hover:text-accent transition-colors"
           style={{ color: "var(--text-heading)" }}
         >
           {card.title}

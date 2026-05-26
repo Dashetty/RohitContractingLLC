@@ -27,8 +27,8 @@ export default function HeroSection() {
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setShowHint(true), 900);
-    const t2 = setTimeout(() => setShowHint(false), 4200);
+    const t1 = setTimeout(() => setShowHint(true), 2000);
+    const t2 = setTimeout(() => setShowHint(false), 6000);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -43,10 +43,9 @@ export default function HeroSection() {
     >
       {/* Background image — cinematic inhale: zoomed out → settles in */}
       <motion.div
-        className="absolute inset-0"
-        initial={{ scale: 1.12 }}
+        className="absolute inset-0"        initial={{ scale: 1.15 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+        transition={{ duration: 2.5, delay: 0, ease: "easeOut" }}
         style={{
           transformOrigin: "center center",
         }}
@@ -86,14 +85,35 @@ export default function HeroSection() {
       {/* Content — centered, fades on scroll */}
       <div className="relative z-20 h-full flex items-center justify-center">
         <motion.div
-          className="w-full max-w-3xl text-center px-6"
+          className="w-full max-w-3xl text-center px-6 -mt-20 lg:-mt-32"
           style={{ opacity: smoothOpacity, willChange: "opacity" }}
         >
+          {/* Logo above badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+            className="mb-3 sm:mb-4"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/projects/logoorevamp.png"
+              alt="Rohit Contracting L.L.C"
+              style={{
+                height: "clamp(60px, 8vw, 90px)",
+                width: "auto",
+                objectFit: "contain",
+                filter: "brightness(0) invert(1)",
+                margin: "0 auto",
+              }}
+            />
+          </motion.div>
+
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 1.2, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 1.1, ease: "easeOut" }}
           >
             <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-4 sm:px-6 py-2 text-sm sm:text-[15px] flex-wrap justify-center">
               <Shield size={14} className="text-accent" />
@@ -105,19 +125,14 @@ export default function HeroSection() {
                   letterSpacing: "0.06em",
                 }}
               >
-                Premier Dubai Construction & Materials
+                Foundation To Completion
               </span>
             </div>
           </motion.div>
 
-          <div className="h-6" />
+          <div className="h-7 sm:h-10 md:h-14" />
 
-          {/* Heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 1.3, ease: "easeOut" }}
-          >
+          {/* Heading — staggered word animation with blur-to-clear */}
             <h1
               className="leading-[1.02] tracking-tight font-semibold"
               style={{
@@ -127,9 +142,16 @@ export default function HeroSection() {
                 textShadow: "0 3px 28px rgba(0,0,0,0.6)",
               }}
             >
-              Building{" "}
-              <span
-                className="italic"
+              <motion.span
+                className="inline"
+                initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.55, delay: 1.7, ease: "easeOut" }}
+              >
+                Building{" "}
+              </motion.span>
+              <motion.span
+                className="italic inline"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
                   fontWeight: 600,
@@ -137,12 +159,22 @@ export default function HeroSection() {
                   letterSpacing: "0.01em",
                   textShadow: "0 2px 16px rgba(15,10,8,0.5), 0 0 40px rgba(15,10,8,0.2)",
                 }}
+                initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.55, delay: 2.1, ease: "easeOut" }}
               >
-                Excellence
-              </span>{" "}
-              Across{" "}
-              <span
-                className="italic"
+                Excellence{" "}
+              </motion.span>
+              <motion.span
+                className="inline"
+                initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.55, delay: 2.5, ease: "easeOut" }}
+              >
+                Across{" "}
+              </motion.span>
+              <motion.span
+                className="italic inline"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
                   fontWeight: 600,
@@ -150,19 +182,21 @@ export default function HeroSection() {
                   letterSpacing: "0.01em",
                   textShadow: "0 2px 16px rgba(15,10,8,0.5), 0 0 40px rgba(15,10,8,0.2)",
                 }}
+                initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.55, delay: 2.9, ease: "easeOut" }}
               >
                 Dubai
-              </span>
+              </motion.span>
             </h1>
-          </motion.div>
 
-          <div className="h-4" />
+          <div className="h-3 sm:h-4" />
 
           {/* Subtext */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 1.4, ease: "easeOut" }}
+            transition={{ duration: 0.55, delay: 3.3, ease: "easeOut" }}
           >
             <p
               className="mx-auto"
@@ -174,28 +208,28 @@ export default function HeroSection() {
                 textShadow: "0 1px 8px rgba(15,10,8,0.55), 0 0 24px rgba(15,10,8,0.15)",
               }}
             >
-              Luxury villa construction, turnkey contracting, and material supply across Dubai and the UAE.
+              Luxury villa construction and turnkey contracting across Dubai.
             </p>
           </motion.div>
 
-          <div className="h-8" />
+          <div className="h-6 sm:h-8" />
 
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 1.5, ease: "easeOut" }}
+            transition={{ duration: 0.55, delay: 3.7, ease: "easeOut" }}
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-accent hover:bg-accent-dark text-[#FDF8F5] px-8 py-3.5 rounded-xl font-semibold text-[15px] transition-all hover:shadow-lg hover:shadow-accent/20 hover:scale-105 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-accent hover:bg-accent-dark text-white px-8 py-3.5 rounded-xl font-semibold text-[15px] transition-all hover:shadow-lg hover:shadow-accent/20 hover:scale-105 active:scale-95"
               >
                 Request Quote
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border-[1.5px] border-white/40 text-[#FDF8F5] px-8 py-3.5 rounded-xl backdrop-blur-md text-[15px] transition-all hover:bg-white/10 hover:border-white/60 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border-[1.5px] border-white/40 text-white px-8 py-3.5 rounded-xl backdrop-blur-md text-[15px] transition-all hover:bg-white/10 hover:border-white/60 active:scale-95"
               >
                 Explore Services
               </a>

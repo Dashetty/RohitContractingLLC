@@ -12,9 +12,9 @@ export default function AboutStatic() {
               <span className="text-accent text-sm font-medium tracking-wide">Our Legacy</span>
             </div>
 
-            <h2 
-              className="text-4xl sm:text-5xl font-bold text-[#1C1A17] leading-[1.1] mb-8"
-              style={{ fontFamily: "var(--font-cormorant), serif" }}
+            <h2
+              className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6"
+              style={{ color: "var(--text-heading)" }}
             >
               More Than Just <span className="italic text-accent">Construction</span>
             </h2>

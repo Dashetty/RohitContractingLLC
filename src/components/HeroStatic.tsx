@@ -17,15 +17,30 @@ export default function HeroStatic() {
         />
       </div>
       
-      <div className="relative z-20 w-full max-w-3xl text-center px-6">
+      <div className="relative z-20 w-full max-w-3xl text-center px-6 -mt-20 lg:-mt-32">
+        {/* Logo above badge */}
+        <div className="mb-3 sm:mb-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/projects/logoorevamp.png"
+            alt="Rohit Contracting L.L.C"
+            style={{
+              height: "clamp(60px, 8vw, 90px)",
+              width: "auto",
+              objectFit: "contain",
+              filter: "brightness(0) invert(1)",
+              margin: "0 auto",
+            }}
+          />
+        </div>
         <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-6 py-2 text-[15px]">
           <Shield size={14} className="text-accent" />
           <span className="leading-none text-white opacity-90" style={{ fontFamily: "var(--font-cormorant), serif", letterSpacing: "0.06em" }}>
-            Premier Dubai Construction & Materials
+            Foundation To Completion
           </span>
         </div>
 
-        <div className="h-6" />
+        <div className="h-7" />
 
         <h1 
           className="leading-[1.02] tracking-tight font-semibold"
@@ -40,16 +55,16 @@ export default function HeroStatic() {
           >Dubai</span>
         </h1>
 
-        <div className="h-4" />
+        <div className="h-3" />
 
         <p 
           className="mx-auto text-white/80"
           style={{ maxWidth: "540px", lineHeight: 1.6, fontSize: "clamp(15px, 1.5vw, 19px)" }}
         >
-          Luxury villa construction, turnkey contracting, and material supply across Dubai and the UAE.
+          Luxury villa construction and turnkey contracting across Dubai.
         </p>
 
-        <div className="h-8" />
+        <div className="h-6 sm:h-8" />
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <div className="bg-accent text-white px-8 py-3.5 rounded-xl font-semibold text-[15px] w-full sm:w-auto">
