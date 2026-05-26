@@ -27,27 +27,18 @@ export default function Footer() {
               ═══════════════════════════════════════════════════ */}
           <div className="col-span-5 lg:col-span-4 space-y-5">
             {/* Logo */}
-            <a href="#home" className="flex items-center gap-2">
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center font-bold text-lg shrink-0"
+            <a href="#home" className="inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/projects/logoorevamp.png"
+                alt="Rohit Contracting L.L.C"
                 style={{
-                  background: "var(--color-accent)",
-                  color: "#FDF8F5",
+                  height: 56,
+                  width: "auto",
+                  objectFit: "contain",
+                  filter: "brightness(0) saturate(100%)",
                 }}
-              >
-                RC
-              </div>
-              <div className="flex flex-col">
-                <span
-                  className="text-lg font-bold tracking-tight"
-                  style={{ color: "var(--text-heading)" }}
-                >
-                  Rohit
-                </span>
-                <span className="text-[10px] font-medium tracking-[0.2em] uppercase -mt-1" style={{ color: "var(--color-accent)" }}>
-                  Contracting
-                </span>
-              </div>
+              />
             </a>
 
             {/* Description */}

@@ -137,25 +137,23 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a
-              href="#home"
-              className="flex items-center gap-2"
-            >
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center font-bold text-white text-lg transition-all duration-300">
-                RC
-              </div>
-              <div className="flex flex-col">
-                <span
-                  className={`text-lg font-bold tracking-tight transition-colors duration-500 ${
-                    scrolled ? "text-foreground" : "text-white"
-                  }`}
-                >
-                  Rohit
-                </span>
-                <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-accent -mt-1">
-                  Contracting
-                </span>
-              </div>
+            <a href="#home" className="flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/projects/logoorevamp.png"
+                alt="Rohit Contracting L.L.C"
+                width={110}
+                height={78}
+                style={{
+                  height: 48,
+                  width: "auto",
+                  objectFit: "contain",
+                  filter: scrolled
+                    ? "brightness(0) saturate(100%)"
+                    : "brightness(0) invert(1)",
+                  transition: "filter 0.4s ease",
+                }}
+              />
             </a>
 
             {/* Desktop Nav */}

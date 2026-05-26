@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, type ComponentType, type CSSProperties } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef, type ComponentType, type CSSProperties } from "react";
+import { motion } from "framer-motion";
 import {
   Zap,
   HeartHandshake,
@@ -10,9 +10,6 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
-
-/* ── Animated word swap ── */
-const words = ["Trust", "Excellence"];
 
 /* ── Feature cards data ── */
 interface FeatureCard {
@@ -57,32 +54,65 @@ const stats = [
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
 
-/* ── Sub-component: animated heading ── */
-function AnimatedHeading() {
-  const [wordIndex, setWordIndex] = useState(0);
+function TypewriterHeading() {
+  const [displayed, setDisplayed] = useState("");
+  const [cursorOn, setCursorOn] = useState(true);
   const ref = useRef<HTMLHeadingElement>(null);
-  const [inView, setInView] = useState(false);
+  const started = useRef(false);
 
+  // Cursor blink
+  useEffect(() => {
+    const id = setInterval(() => setCursorOn((v) => !v), 530);
+    return () => clearInterval(id);
+  }, []);
+
+  // Start typing only when section enters viewport
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.5 }
+      ([entry]) => {
+        if (!entry.isIntersecting || started.current) return;
+        started.current = true;
+
+        const words = ["Trust", "Excellence"];
+        let wi = 0;
+        let ci = 0;
+        let deleting = false;
+        let timer: ReturnType<typeof setTimeout>;
+
+        function tick() {
+          const word = words[wi];
+          if (!deleting) {
+            ci++;
+            setDisplayed(word.slice(0, ci));
+            if (ci === word.length) {
+              // pause, then start deleting (loop forever)
+              timer = setTimeout(() => { deleting = true; tick(); }, 1500);
+              return;
+            }
+          } else {
+            ci--;
+            setDisplayed(word.slice(0, ci));
+            if (ci === 0) {
+              wi = (wi + 1) % words.length;
+              deleting = false;
+            }
+          }
+          timer = setTimeout(tick, deleting ? 40 : 70);
+        }
+
+        timer = setTimeout(tick, 200);
+        // eslint-disable-next-line consistent-return
+        return () => clearTimeout(timer);
+      },
+      { threshold: 0.4 }
     );
+
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    if (!inView) return;
-    const timer = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % words.length);
-    }, 3800);
-    return () => clearInterval(timer);
-  }, [inView]);
-
-  const currentWord = words[wordIndex];
 
   return (
     <h2
@@ -91,26 +121,23 @@ function AnimatedHeading() {
       style={{ color: "var(--text-heading)" }}
     >
       Built on{" "}
-      <span className="inline-block relative">
-        {/* Invisible spacer — renders the longer word to keep container width stable */}
-        <span aria-hidden="true" className="invisible">
-          {words.reduce((a, b) => a.length >= b.length ? a : b)}
-        </span>
-        {/* Animated overlay — baseline-aligned with "Built on", container stays fixed via invisible spacer */}
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={currentWord}
-            className="absolute inset-0"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 12 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif", color: "var(--color-accent)" }}
-          >
-            {currentWord}
-          </motion.span>
-        </AnimatePresence>
+      <span
+        className="italic"
+        style={{ color: "var(--color-accent)", fontFamily: "var(--font-cormorant), Georgia, serif" }}
+      >
+        {displayed}
       </span>
+      <span
+        className="inline-block rounded-sm ml-0.5"
+        style={{
+          width: 3,
+          height: "0.8em",
+          verticalAlign: "middle",
+          background: "var(--color-accent)",
+          opacity: cursorOn ? 1 : 0,
+          transition: "opacity 0.1s",
+        }}
+      />
     </h2>
   );
 }
@@ -217,8 +244,8 @@ export default function WhyChooseUs() {
             </span>
           </div>
 
-          {/* Animated heading */}
-          <AnimatedHeading />
+          {/* Typewriter heading */}
+          <TypewriterHeading />
 
           {/* Subheading */}
           <p

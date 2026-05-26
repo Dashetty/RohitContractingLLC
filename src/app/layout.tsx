@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
+import { Plus_Jakarta_Sans, Cormorant_Garamond, Geist } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -66,6 +69,11 @@ export const metadata: Metadata = {
     description: "Premier villa construction and building material supply across Dubai and the UAE.",
     images: ["/og-image.png"],
   },
+  icons: {
+    icon: [{ url: "/projects/logoorevamp.png", type: "image/png" }],
+    apple: "/projects/logoorevamp.png",
+    shortcut: "/favicon.ico",
+  },
   robots: {
     index: true,
     follow: true,
@@ -88,7 +96,7 @@ export default function RootLayout({
     <html
       lang="en-AE"
       suppressHydrationWarning
-      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable}`}
+      className={cn(plusJakartaSans.variable, cormorantGaramond.variable, "font-sans", geist.variable)}
     >
       <body className="bg-background text-foreground antialiased selection:bg-accent/30 selection:text-accent-foreground">
         {/* JSON-LD LocalBusiness structured data for SEO */}
