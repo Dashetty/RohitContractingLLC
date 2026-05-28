@@ -68,17 +68,17 @@ function ServiceCard({ service }: { service: typeof services[number] }) {
       variants={cardVariants}
       className="group relative rounded-2xl p-6 text-center transition-all duration-500 overflow-hidden"
       style={{
-        background: "var(--card-beige)",
-        border: "1px solid var(--border-earth)",
-        boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
+        background: "var(--color-surface-card)",
+        border: "1px solid var(--color-border-earth)",
+        boxShadow: "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
-        e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
+        e.currentTarget.style.borderColor = "color-mix(in oklch, var(--color-accent-brand) calc(0.3 * 100%), transparent)";
+        e.currentTarget.style.boxShadow = "0 8px 28px color-mix(in oklch, var(--color-shadow-warm) calc(0.12 * 100%), transparent)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--border-earth)";
-        e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
+        e.currentTarget.style.borderColor = "var(--color-border-earth)";
+        e.currentTarget.style.boxShadow = "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)";
       }}
     >
       <div className="relative z-10">
@@ -91,12 +91,12 @@ function ServiceCard({ service }: { service: typeof services[number] }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-lg font-bold mb-3 group-hover:text-accent transition-colors" style={{ color: "var(--text-heading)" }}>
+        <h3 className="text-lg font-bold mb-3 group-hover:text-accent transition-colors" style={{ color: "var(--color-heading)" }}>
           {service.title}
         </h3>
 
         {/* Description */}
-        <p className="text-sm leading-relaxed" style={{ color: "var(--text-body)" }}>
+        <p className="text-sm leading-relaxed" style={{ color: "var(--color-warm-text)" }}>
           {service.description}
         </p>
       </div>
@@ -106,7 +106,7 @@ function ServiceCard({ service }: { service: typeof services[number] }) {
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 sm:py-32" style={{ background: "var(--bg-beige)" }}>
+    <section id="services" className="relative py-24 sm:py-32" style={{ background: "var(--color-surface-beige)" }}>
       {/* Background */}
       <div className="absolute inset-0 grid-pattern opacity-[0.05]" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/3 rounded-full blur-3xl" />
@@ -123,8 +123,8 @@ export default function ServicesSection() {
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
             style={{
-              background: "rgba(216, 90, 48, 0.08)",
-              border: "1px solid rgba(216, 90, 48, 0.18)",
+              background: "color-mix(in oklch, var(--color-accent-brand) calc(0.08 * 100%), transparent)",
+              border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.18 * 100%), transparent)",
             }}
           >
             <span className="w-2 h-2 bg-accent rounded-full" />
@@ -136,7 +136,7 @@ export default function ServicesSection() {
             Construction &{" "}
             <span className="text-gradient-warm">Contracting Services</span>
           </h2>
-            <p className="text-lg leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--text-body)" }}>
+            <p className="text-lg leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--color-warm-text)" }}>
             Comprehensive construction and contracting services across Dubai, from new builds and
             renovations to MEP, civil works, and project management.
           </p>

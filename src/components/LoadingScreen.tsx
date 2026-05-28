@@ -49,15 +49,15 @@ export default function LoadingScreen() {
       {/* Loading bar */}
       <div
         className="mt-10 rounded-full overflow-hidden"
-        style={{ width: 160, height: 2, background: "rgba(216,90,48,0.15)" }}
+        style={{ width: 160, height: 2, background: "color-mix(in oklch, var(--color-accent-brand) calc(0.15 * 100%), transparent)" }}
       >
         <div
           className="h-full rounded-full loading-bar-animate"
-          style={{ background: "#D85A30" }}
+          style={{ background: "var(--color-accent-brand)" }}
         />
       </div>
 
-      <p className="mt-4 text-xs tracking-widest uppercase" style={{ color: "rgba(92,80,71,0.35)" }}>
+      <p className="mt-4 text-xs tracking-widest uppercase" style={{ color: "color-mix(in oklch, var(--color-shadow-warm) calc(0.35 * 100%), transparent)" }}>
         Loading
       </p>
     </div>

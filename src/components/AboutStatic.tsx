@@ -14,7 +14,7 @@ export default function AboutStatic() {
 
             <h2
               className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6"
-              style={{ color: "var(--text-heading)" }}
+              style={{ color: "var(--color-heading)" }}
             >
               More Than Just <span className="italic text-accent">Construction</span>
             </h2>

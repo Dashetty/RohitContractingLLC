@@ -99,6 +99,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    "theme-color": "#FAF7F2",
+  },
 };
 
 export default function RootLayout({

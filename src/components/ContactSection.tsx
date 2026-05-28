@@ -30,12 +30,12 @@ export default function ContactSection() {
 
   const cardStyle = (id: string) =>
     ({
-      background: "var(--card-cream)",
-      border: hoveredCard === id ? "1px solid rgba(216,90,48,0.3)" : "1px solid var(--border-earth)",
+      background: "var(--color-surface-card)",
+      border: hoveredCard === id ? "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.3 * 100%), transparent)" : "1px solid var(--color-border-earth)",
       boxShadow:
         hoveredCard === id
-          ? "0 4px 20px rgba(92,80,71,0.12)"
-          : "0 2px 12px rgba(92,80,71,0.08)",
+          ? "0 4px 20px color-mix(in oklch, var(--color-shadow-warm) calc(0.12 * 100%), transparent)"
+          : "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)",
       transition: "all 0.3s ease",
     } as React.CSSProperties);
 
@@ -43,7 +43,7 @@ export default function ContactSection() {
     <section
       id="contact"
       className="relative py-24 sm:py-32 overflow-hidden"
-      style={{ background: "var(--bg-beige)" }}
+      style={{ background: "var(--color-surface-beige)" }}
     >
       <div className="absolute inset-0">
         <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
@@ -61,8 +61,8 @@ export default function ContactSection() {
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
             style={{
-              background: "rgba(216,90,48,0.08)",
-              border: "1px solid rgba(216,90,48,0.18)",
+              background: "color-mix(in oklch, var(--color-accent-brand) calc(0.08 * 100%), transparent)",
+              border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.18 * 100%), transparent)",
             }}
           >
             <span className="w-2 h-2 bg-accent rounded-full" />
@@ -76,7 +76,7 @@ export default function ContactSection() {
           </h2>
           <p
             className="text-lg leading-relaxed"
-            style={{ color: "var(--text-body)" }}
+            style={{ color: "var(--color-warm-text)" }}
           >
             Ready to start your project? Reach out to our team
           </p>
@@ -100,8 +100,8 @@ export default function ContactSection() {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{
-                    background: "rgba(216,90,48,0.1)",
-                    border: "1px solid rgba(216,90,48,0.15)",
+                    background: "color-mix(in oklch, var(--color-accent-brand) calc(0.1 * 100%), transparent)",
+                    border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.15 * 100%), transparent)",
                   }}
                 >
                   <MapPin className="text-accent" size="22" />
@@ -109,13 +109,13 @@ export default function ContactSection() {
                 <div>
                   <h3
                     className="font-semibold mb-1"
-                    style={{ color: "var(--text-heading)" }}
+                    style={{ color: "var(--color-heading)" }}
                   >
                     Our Location
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: "var(--text-body)" }}
+                    style={{ color: "var(--color-warm-text)" }}
                   >
                     Sky Business Centre, #109 Office,
                     <br />
@@ -131,7 +131,7 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 rounded-xl overflow-hidden block"
-                style={{ border: "1px solid var(--border-warm)" }}
+                style={{ border: "1px solid var(--color-border-warm)" }}
               >
                 <iframe
                   src="https://maps.google.com/maps?q=Sky+Business+Centre+%23109+Office+Nad+Al+Hamar+Road+Al+Kheeran+Dubai+Festival+City+Dubai&output=embed"
@@ -140,6 +140,7 @@ export default function ContactSection() {
                   style={{ border: 0, display: "block", pointerEvents: "none" }}
                   loading="lazy"
                   title="Rohit Contracting Location - Dubai Festival City"
+                  sandbox="allow-scripts allow-same-origin"
                 />
               </a>
             </div>
@@ -154,8 +155,8 @@ export default function ContactSection() {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{
-                    background: "rgba(216,90,48,0.1)",
-                    border: "1px solid rgba(216,90,48,0.15)",
+                    background: "color-mix(in oklch, var(--color-accent-brand) calc(0.1 * 100%), transparent)",
+                    border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.15 * 100%), transparent)",
                   }}
                 >
                   <Phone className="text-accent" size="22" />
@@ -163,7 +164,7 @@ export default function ContactSection() {
                 <div>
                   <h3
                     className="font-semibold mb-1"
-                    style={{ color: "var(--text-heading)" }}
+                    style={{ color: "var(--color-heading)" }}
                   >
                     Phone
                   </h3>
@@ -175,7 +176,7 @@ export default function ContactSection() {
                   </a>
                   <p
                     className="text-xs mt-1"
-                    style={{ color: "var(--text-muted)" }}
+                    style={{ color: "var(--color-warm-muted)" }}
                   >
                     Mon–Sat, 7am–6pm
                   </p>
@@ -193,8 +194,8 @@ export default function ContactSection() {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{
-                    background: "rgba(216,90,48,0.1)",
-                    border: "1px solid rgba(216,90,48,0.15)",
+                    background: "color-mix(in oklch, var(--color-accent-brand) calc(0.1 * 100%), transparent)",
+                    border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.15 * 100%), transparent)",
                   }}
                 >
                   <Mail className="text-accent" size="22" />
@@ -202,7 +203,7 @@ export default function ContactSection() {
                 <div>
                   <h3
                     className="font-semibold mb-1"
-                    style={{ color: "var(--text-heading)" }}
+                    style={{ color: "var(--color-heading)" }}
                   >
                     Email
                   </h3>
@@ -214,7 +215,7 @@ export default function ContactSection() {
                   </a>
                   <p
                     className="text-xs mt-1"
-                    style={{ color: "var(--text-muted)" }}
+                    style={{ color: "var(--color-warm-muted)" }}
                   >
                     We reply within 2 hours
                   </p>
@@ -232,8 +233,8 @@ export default function ContactSection() {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{
-                    background: "rgba(216,90,48,0.1)",
-                    border: "1px solid rgba(216,90,48,0.15)",
+                    background: "color-mix(in oklch, var(--color-accent-brand) calc(0.1 * 100%), transparent)",
+                    border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.15 * 100%), transparent)",
                   }}
                 >
                   <Clock className="text-accent" size="22" />
@@ -241,19 +242,19 @@ export default function ContactSection() {
                 <div>
                   <h3
                     className="font-semibold mb-1"
-                    style={{ color: "var(--text-heading)" }}
+                    style={{ color: "var(--color-heading)" }}
                   >
                     Business Hours
                   </h3>
                   <p
                     className="text-sm"
-                    style={{ color: "var(--text-body)" }}
+                    style={{ color: "var(--color-warm-text)" }}
                   >
                     Monday – Saturday: 7:00 AM – 6:00 PM
                   </p>
                   <p
                     className="text-xs mt-1"
-                    style={{ color: "var(--text-muted)" }}
+                    style={{ color: "var(--color-warm-muted)" }}
                   >
                     Sunday: Closed
                   </p>
@@ -268,17 +269,17 @@ export default function ContactSection() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-2xl p-5 transition-all duration-300 group"
               style={{
-                background: "var(--card-cream)",
-                border: "1px solid var(--border-earth)",
-                boxShadow: "0 2px 12px rgba(92,80,71,0.08)",
+                background: "var(--color-surface-card)",
+                border: "1px solid var(--color-border-earth)",
+                boxShadow: "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(216,90,48,0.3)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(92,80,71,0.12)";
+                e.currentTarget.style.borderColor = "color-mix(in oklch, var(--color-accent-brand) calc(0.3 * 100%), transparent)";
+                e.currentTarget.style.boxShadow = "0 4px 20px color-mix(in oklch, var(--color-shadow-warm) calc(0.12 * 100%), transparent)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-earth)";
-                e.currentTarget.style.boxShadow = "0 2px 12px rgba(92,80,71,0.08)";
+                e.currentTarget.style.borderColor = "var(--color-border-earth)";
+                e.currentTarget.style.boxShadow = "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)";
               }}
             >
               <div
@@ -293,13 +294,13 @@ export default function ContactSection() {
               <div className="flex-1">
                 <div
                   className="font-semibold"
-                  style={{ color: "var(--text-heading)" }}
+                  style={{ color: "var(--color-heading)" }}
                 >
                   Chat on WhatsApp
                 </div>
                 <div
                   className="text-sm"
-                  style={{ color: "var(--text-muted)" }}
+                  style={{ color: "var(--color-warm-muted)" }}
                 >
                   Quick response via WhatsApp
                 </div>
@@ -322,20 +323,20 @@ export default function ContactSection() {
               onSubmit={handleSubmit}
               className="rounded-2xl p-8 sm:p-10 space-y-6"
               style={{
-                background: "var(--card-cream)",
-                border: "1px solid var(--border-earth)",
-                boxShadow: "0 2px 12px rgba(92,80,71,0.08)",
+                background: "var(--color-surface-card)",
+                border: "1px solid var(--color-border-earth)",
+                boxShadow: "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)",
               }}
             >
               <h3
                 className="text-2xl font-bold mb-2"
-                style={{ color: "var(--text-heading)" }}
+                style={{ color: "var(--color-heading)" }}
               >
                 Send us a Message
               </h3>
               <p
                 className="text-sm mb-6"
-                style={{ color: "var(--text-muted)" }}
+                style={{ color: "var(--color-warm-muted)" }}
               >
                 Fill in the form and our team will get back to you shortly
               </p>
@@ -344,7 +345,7 @@ export default function ContactSection() {
                 <div className="group">
                   <label
                     className="block text-sm font-medium mb-2"
-                    style={{ color: "var(--text-body)" }}
+                    style={{ color: "var(--color-warm-text)" }}
                   >
                     Full Name
                   </label>
@@ -354,20 +355,20 @@ export default function ContactSection() {
                     onChange={(e) =>
                       setFormState({ ...formState, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--text-muted)]"
+                    className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
                     style={{
-                      background: "rgba(92,80,71,0.05)",
-                      border: "1px solid var(--border-warm)",
-                      color: "var(--text-heading)",
+                      background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                      border: "1px solid var(--color-border-warm)",
+                      color: "var(--color-heading)",
                     }}
                     placeholder="Your name"
                     onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "var(--color-accent, #D85A30)";
-                      e.currentTarget.style.background = "rgba(216,90,48,0.05)";
+                      e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
+                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
                     }}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "var(--border-warm)";
-                      e.currentTarget.style.background = "rgba(92,80,71,0.05)";
+                      e.currentTarget.style.borderColor = "var(--color-border-warm)";
+                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
                     }}
                     required
                   />
@@ -375,7 +376,7 @@ export default function ContactSection() {
                 <div className="group">
                   <label
                     className="block text-sm font-medium mb-2"
-                    style={{ color: "var(--text-body)" }}
+                    style={{ color: "var(--color-warm-text)" }}
                   >
                     Email Address
                   </label>
@@ -385,20 +386,20 @@ export default function ContactSection() {
                     onChange={(e) =>
                       setFormState({ ...formState, email: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--text-muted)]"
+                    className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
                     style={{
-                      background: "rgba(92,80,71,0.05)",
-                      border: "1px solid var(--border-warm)",
-                      color: "var(--text-heading)",
+                      background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                      border: "1px solid var(--color-border-warm)",
+                      color: "var(--color-heading)",
                     }}
                     placeholder="your@email.com"
                     onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "var(--color-accent, #D85A30)";
-                      e.currentTarget.style.background = "rgba(216,90,48,0.05)";
+                      e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
+                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
                     }}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "var(--border-warm)";
-                      e.currentTarget.style.background = "rgba(92,80,71,0.05)";
+                      e.currentTarget.style.borderColor = "var(--color-border-warm)";
+                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
                     }}
                     required
                   />
@@ -408,7 +409,7 @@ export default function ContactSection() {
               <div>
                 <label
                   className="block text-sm font-medium mb-2"
-                  style={{ color: "var(--text-body)" }}
+                  style={{ color: "var(--color-warm-text)" }}
                 >
                   Phone Number
                 </label>
@@ -418,20 +419,20 @@ export default function ContactSection() {
                   onChange={(e) =>
                     setFormState({ ...formState, phone: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--text-muted)]"
+                  className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
                   style={{
-                    background: "rgba(92,80,71,0.05)",
-                    border: "1px solid var(--border-warm)",
-                    color: "var(--text-heading)",
+                    background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                    border: "1px solid var(--color-border-warm)",
+                    color: "var(--color-heading)",
                   }}
                   placeholder="+971 XX XXX XXXX"
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-accent, #D85A30)";
-                    e.currentTarget.style.background = "rgba(216,90,48,0.05)";
+                    e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
+                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border-warm)";
-                    e.currentTarget.style.background = "rgba(92,80,71,0.05)";
+                    e.currentTarget.style.borderColor = "var(--color-border-warm)";
+                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
                   }}
                 />
               </div>
@@ -439,7 +440,7 @@ export default function ContactSection() {
               <div>
                 <label
                   className="block text-sm font-medium mb-2"
-                  style={{ color: "var(--text-body)" }}
+                  style={{ color: "var(--color-warm-text)" }}
                 >
                   Message
                 </label>
@@ -449,20 +450,20 @@ export default function ContactSection() {
                     setFormState({ ...formState, message: e.target.value })
                   }
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none resize-none placeholder-[var(--text-muted)]"
+                  className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none resize-none placeholder-[var(--color-warm-muted)]"
                   style={{
-                    background: "rgba(92,80,71,0.05)",
-                    border: "1px solid var(--border-warm)",
-                    color: "var(--text-heading)",
+                    background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                    border: "1px solid var(--color-border-warm)",
+                    color: "var(--color-heading)",
                   }}
                   placeholder="Tell us about your project..."
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-accent, #D85A30)";
-                    e.currentTarget.style.background = "rgba(216,90,48,0.05)";
+                    e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
+                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border-warm)";
-                    e.currentTarget.style.background = "rgba(92,80,71,0.05)";
+                    e.currentTarget.style.borderColor = "var(--color-border-warm)";
+                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
                   }}
                   required
                 />

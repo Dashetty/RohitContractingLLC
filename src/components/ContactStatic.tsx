@@ -13,10 +13,10 @@ export default function ContactStatic() {
             <span className="w-2 h-2 bg-accent rounded-full" />
             <span className="text-accent text-sm font-medium tracking-wide">Contact Us</span>
           </div>
-          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--text-heading)" }}>
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--color-heading)" }}>
             Get In <span className="text-accent">Touch</span>
           </h2>
-          <p className="text-lg leading-relaxed max-w-xl mx-auto" style={{ color: "var(--text-body)" }}>
+          <p className="text-lg leading-relaxed max-w-xl mx-auto" style={{ color: "var(--color-warm-text)" }}>
             Ready to start your project? Reach out to our team
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function ContactStatic() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 rounded-xl overflow-hidden block"
-                style={{ border: "1px solid var(--border-warm, #D8C7B5)" }}
+                style={{ border: "1px solid var(--color-border-warm)" }}
               >
                 <iframe
                   src="https://maps.google.com/maps?q=Sky+Business+Centre+%23109+Office+Nad+Al+Hamar+Road+Al+Kheeran+Dubai+Festival+City+Dubai&output=embed"

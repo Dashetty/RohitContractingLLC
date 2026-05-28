@@ -61,9 +61,9 @@ function TimelineCard({
       <div
         className={`relative w-full rounded-2xl p-5 text-center ${isTop ? "mb-8" : "mt-8 order-3"}`}
         style={{
-          background: "var(--card-cream)",
-          border: "1.5px solid var(--border-earth)",
-          boxShadow: "0 4px 20px -6px rgba(92, 80, 71, 0.1), 0 1px 4px rgba(92, 80, 71, 0.04)",
+          background: "var(--color-surface-card)",
+          border: "1.5px solid var(--color-border-earth)",
+          boxShadow: "0 4px 20px -6px color-mix(in oklch, var(--color-shadow-warm) calc(0.1 * 100%), transparent), 0 1px 4px color-mix(in oklch, var(--color-shadow-warm) calc(0.04 * 100%), transparent)",
         }}
       >
         {/* Year + Icon */}
@@ -82,20 +82,20 @@ function TimelineCard({
 
         <h4
           className="text-lg font-bold mb-2 leading-snug"
-          style={{ color: "var(--text-heading)" }}
+          style={{ color: "var(--color-heading)" }}
         >
           {milestone.title}
         </h4>
 
-        <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--text-body)" }}>
+        <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--color-warm-text)" }}>
           {milestone.description}
         </p>
 
         <p
           className="text-xs leading-relaxed pt-2"
           style={{
-            color: "var(--text-muted)",
-            borderTop: "1px solid color-mix(in srgb, var(--border-earth) 55%, transparent)",
+            color: "var(--color-warm-muted)",
+            borderTop: "1px solid color-mix(in srgb, var(--color-border-earth) 55%, transparent)",
           }}
         >
           {milestone.detail}
@@ -107,7 +107,7 @@ function TimelineCard({
         className={`relative w-px flex-shrink-0 order-2`}
         style={{
           height: 48,
-          background: `linear-gradient(to ${isTop ? "bottom" : "top"}, var(--border-earth), color-mix(in srgb, var(--color-accent) 40%, transparent))`,
+          background: `linear-gradient(to ${isTop ? "bottom" : "top"}, var(--color-border-earth), color-mix(in srgb, var(--color-accent) 40%, transparent))`,
         }}
       >
         <div
@@ -150,12 +150,12 @@ export default function HorizontalTimeline() {
 
         <h2
           className="text-4xl sm:text-5xl font-bold leading-tight mb-6 heading-serif"
-          style={{ color: "var(--text-heading)" }}
+          style={{ color: "var(--color-heading)" }}
         >
           Key <span className="text-gradient-warm">Milestones</span>
         </h2>
 
-        <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--text-body)" }}>
+        <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--color-warm-text)" }}>
           From our founding in 2022 to a growing portfolio of villa projects — each milestone reflects our commitment to quality and trust.
         </p>
       </motion.div>
@@ -170,7 +170,7 @@ export default function HorizontalTimeline() {
             {/* Centre rule */}
             <div
               className="absolute left-[10%] right-[10%] h-px top-1/2 -translate-y-1/2 pointer-events-none"
-              style={{ background: "var(--border-earth)" }}
+              style={{ background: "var(--color-border-earth)" }}
             />
 
             <div className="flex-1" />
@@ -208,9 +208,9 @@ export default function HorizontalTimeline() {
               }}
               className="rounded-2xl overflow-hidden cursor-pointer"
               style={{
-                background: isActive ? "var(--card-cream)" : "var(--card-beige)",
-                border: `1.5px solid ${isActive ? "color-mix(in srgb, var(--color-accent) 45%, transparent)" : "var(--border-earth)"}`,
-                boxShadow: isActive ? "0 6px 20px -4px rgba(92,80,71,0.12)" : "0 1px 4px rgba(92,80,71,0.04)",
+                background: isActive ? "var(--color-surface-card)" : "var(--color-surface-card)",
+                border: `1.5px solid ${isActive ? "color-mix(in srgb, var(--color-accent) 45%, transparent)" : "var(--color-border-earth)"}`,
+                boxShadow: isActive ? "0 6px 20px -4px color-mix(in oklch, var(--color-shadow-warm) calc(0.12 * 100%), transparent)" : "0 1px 4px color-mix(in oklch, var(--color-shadow-warm) calc(0.04 * 100%), transparent)",
                 transition: "background 0.25s, border-color 0.25s, box-shadow 0.25s",
               }}
             >
@@ -221,12 +221,12 @@ export default function HorizontalTimeline() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5 mb-0.5">
                     <span className="text-xs font-bold tracking-wider text-accent">{milestone.year}</span>
-                    <span className="w-1 h-1 rounded-full" style={{ background: "var(--border-earth)" }} />
-                    <span className="text-sm font-bold truncate" style={{ color: "var(--text-heading)" }}>{milestone.title}</span>
+                    <span className="w-1 h-1 rounded-full" style={{ background: "var(--color-border-earth)" }} />
+                    <span className="text-sm font-bold truncate" style={{ color: "var(--color-heading)" }}>{milestone.title}</span>
                   </div>
-                  <p className="text-sm leading-snug" style={{ color: "var(--text-body)" }}>{milestone.description}</p>
+                  <p className="text-sm leading-snug" style={{ color: "var(--color-warm-text)" }}>{milestone.description}</p>
                 </div>
-                <motion.div animate={{ rotate: isActive ? 90 : 0 }} transition={{ duration: 0.2 }} style={{ color: "var(--text-muted)" }}>
+                <motion.div animate={{ rotate: isActive ? 90 : 0 }} transition={{ duration: 0.2 }} style={{ color: "var(--color-warm-muted)" }}>
                   <ChevronRight size={16} />
                 </motion.div>
               </div>
@@ -241,7 +241,7 @@ export default function HorizontalTimeline() {
                   >
                     <div
                       className="px-4 pb-4 text-sm leading-relaxed"
-                      style={{ color: "var(--text-muted)", borderTop: "1px solid color-mix(in srgb, var(--border-earth) 40%, transparent)", paddingTop: 12 }}
+                      style={{ color: "var(--color-warm-muted)", borderTop: "1px solid color-mix(in srgb, var(--color-border-earth) 40%, transparent)", paddingTop: 12 }}
                     >
                       {milestone.detail}
                     </div>
@@ -263,11 +263,11 @@ export default function HorizontalTimeline() {
       >
         <div
           className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl"
-          style={{ background: "var(--card-beige)", border: "1px solid var(--border-earth)" }}
+          style={{ background: "var(--color-surface-card)", border: "1px solid var(--color-border-earth)" }}
         >
           <TrendingUp size={17} className="text-accent shrink-0" />
-          <span className="text-sm font-medium" style={{ color: "var(--text-body)" }}>
-            <strong style={{ color: "var(--text-heading)" }}>5+ years</strong> of continuous growth and delivery
+          <span className="text-sm font-medium" style={{ color: "var(--color-warm-text)" }}>
+            <strong style={{ color: "var(--color-heading)" }}>5+ years</strong> of continuous growth and delivery
           </span>
         </div>
       </motion.div>

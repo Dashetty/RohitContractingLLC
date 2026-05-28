@@ -8,7 +8,6 @@ import {
   MapPin,
   ArrowUpRight,
   X,
-  FileText,
   ChevronLeft,
   ChevronRight,
   Maximize2,
@@ -43,7 +42,6 @@ const completedProjects = [
     year: "2024",
     description: "Private Villa (G+1+R)",
     images: ["/projects/106/106.jpeg", "/projects/106/106-2.jpeg"],
-    certificate: "/projects/106/106-Completion Doc.pdf",
     featured: true,
   },
   {
@@ -55,7 +53,6 @@ const completedProjects = [
     year: "2024",
     description: "Private Villa (G+1) with Annex",
     images: ["/projects/107/107.jpeg"],
-    certificate: "/projects/107/107-Completion Doc.pdf",
     featured: false,
   },
   {
@@ -67,7 +64,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1) with Service Annex",
     images: ["/projects/102/102.jpeg"],
-    certificate: "/projects/102/102-Completion Doc.pdf",
     featured: false,
   },
   {
@@ -79,7 +75,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1)",
     images: ["/projects/103/103.jpeg", "/projects/103/103-2.jpeg"],
-    certificate: "/projects/103/103-Completion certificate.pdf",
     featured: true,
   },
   {
@@ -91,7 +86,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1)",
     images: ["/projects/104/104.jpeg", "/projects/104/104-2.jpeg", "/projects/104/104-3.jpeg"],
-    certificate: "/projects/104/104 - Completion1925910.pdf",
     featured: false,
   },
   {
@@ -103,7 +97,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1)",
     images: ["/projects/105/105.jpeg"],
-    certificate: "/projects/105/105-COMPLETION DOC.pdf",
     featured: false,
   },
   {
@@ -115,7 +108,6 @@ const completedProjects = [
     year: "2024",
     description: "Private Villa",
     images: ["/projects/113/113.jpeg", "/projects/113/113-2.jpeg"],
-    certificate: "/projects/113/113-completion.pdf",
     featured: true,
   },
 ];
@@ -383,7 +375,7 @@ function OngoingCard({ project, index }: { project: typeof ongoingProjects[0]; i
               Active
             </span>
           </div>
-          <span className="font-mono text-[11px] tracking-wider px-2.5 py-1 rounded-md" style={{ 
+          <span className="font-mono text-[11px] tracking-wider px-2.5 py-1 rounded-lg" style={{ 
             background: colors.cardEarth, 
             color: colors.textMuted 
           }}>
@@ -485,7 +477,7 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: 20 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-3xl flex flex-col md:flex-row"
+        className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl flex flex-col md:flex-row"
         style={{ background: colors.dark, border: `1px solid ${colors.borderEarth}30` }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -610,19 +602,9 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
           </div>
 
           <div className="mt-auto pt-6" style={{ borderTop: `1px solid ${colors.borderEarth}20` }}>
-            <a
-              href={project.certificate}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 w-full justify-center px-6 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-[#D85A30]/20"
-              style={{ 
-                background: colors.accent, 
-                color: 'white',
-              }}
-            >
-              <FileText size={18} />
-              View Completion Certificate
-            </a>
+            <p className="text-xs" style={{ color: colors.textMuted }}>
+              Completion certificate available on request
+            </p>
           </div>
         </div>
       </motion.div>
@@ -724,7 +706,7 @@ export default function ProjectsSection() {
                 )}
                 <span className={`relative z-10 flex items-center gap-2 ${viewMode === tab.id ? 'text-white' : ''}`}>
                   {tab.label}
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${viewMode === tab.id ? 'bg-white/20 text-white' : ''}`} style={viewMode !== tab.id ? { background: colors.cardEarth, color: colors.textMuted } : undefined}>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-lg ${viewMode === tab.id ? 'bg-white/20 text-white' : ''}`} style={viewMode !== tab.id ? { background: colors.cardEarth, color: colors.textMuted } : undefined}>
                     {tab.count}
                   </span>
                 </span>

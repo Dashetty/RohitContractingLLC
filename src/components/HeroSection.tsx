@@ -40,36 +40,32 @@ export default function HeroSection() {
       id="home"
       ref={ref}
       className="relative h-screen w-full overflow-hidden"
-    >
-      {/* Background image — cinematic inhale: zoomed out → settles in */}
+    >      {/* Background image — cinematic inhale: zoomed out → settles in */}
       <motion.div
-        className="absolute inset-0"        initial={{ scale: 1.15 }}
+        className="absolute inset-0"
+        initial={{ scale: 1.15 }}
         animate={{ scale: 1 }}
         transition={{ duration: 2.5, delay: 0, ease: "easeOut" }}
-        style={{
-          transformOrigin: "center center",
-        }}
       >
-        {/* Parallax scroll scale (starts from 1 after zoom-in completes) */}
+        {/* Parallax scroll + filter — applied directly to the image wrapper */}
         <motion.div
-          className="relative"
+          className="absolute inset-0"
           style={{
             scale: useTransform(scrollYProgress, [0, 1], [1, 1.02]),
-            width: "100%",
-            height: "100%",
-            position: "relative",
             filter: "brightness(0.92) saturate(0.85)",
           }}
         >
-          <Image
-            src="/bg.png"
-            alt="Dubai construction site"
-            fill
-            priority
-            className="object-cover"
-            style={{ objectPosition: "center 30%" }}
-            sizes="100vw"
-          />
+          <div className="relative w-full h-full">
+            <Image
+              src="/bg.png"
+              alt="Dubai construction site"
+              fill
+              priority
+              className="object-cover"
+              style={{ objectPosition: "center 30%" }}
+              sizes="100vw"
+            />
+          </div>
         </motion.div>
       </motion.div>
 
@@ -115,14 +111,14 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.1, ease: "easeOut" }}
           >
-            <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-4 sm:px-6 py-2 text-sm sm:text-[15px] flex-wrap justify-center">
+            <div className="badge-pill inline-flex items-center gap-2.5 rounded-full mx-auto px-4 sm:px-6 py-2 text-sm sm:text-[15px] flex-wrap justify-center">
               <Shield size={14} className="text-accent" />
               <span
                 className="leading-none"
                 style={{
-                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontFamily: "var(--font-sans)",
                   color: "var(--color-foreground)",
-                  letterSpacing: "0.06em",
+                  letterSpacing: "0.04em",
                 }}
               >
                 Foundation To Completion
@@ -137,7 +133,7 @@ export default function HeroSection() {
               className="leading-[1.02] tracking-tight font-semibold"
               style={{
                 fontFamily: "var(--font-cormorant), Georgia, serif",
-                color: "#F6EFE6",
+                color: "var(--color-text-on-dark)",
                 fontSize: "clamp(42px, 7vw, 92px)",
                 textShadow: "0 3px 28px rgba(0,0,0,0.6)",
               }}
@@ -155,7 +151,7 @@ export default function HeroSection() {
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
                   fontWeight: 600,
-                  color: "#F0D5AD",
+                  color: "var(--color-hero-gold)",
                   letterSpacing: "0.01em",
                   textShadow: "0 2px 16px rgba(15,10,8,0.5), 0 0 40px rgba(15,10,8,0.2)",
                 }}
@@ -178,7 +174,7 @@ export default function HeroSection() {
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
                   fontWeight: 600,
-                  color: "#E0B88A",
+                  color: "var(--color-hero-gold-deep)",
                   letterSpacing: "0.01em",
                   textShadow: "0 2px 16px rgba(15,10,8,0.5), 0 0 40px rgba(15,10,8,0.2)",
                 }}
