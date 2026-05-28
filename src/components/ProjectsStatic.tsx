@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FileText, MapPin, CheckCircle2, Clock } from "lucide-react";
+import { MapPin, CheckCircle2, Clock } from "lucide-react";
 
 const completedProjects = [
   {
@@ -10,7 +10,6 @@ const completedProjects = [
     year: "2024",
     description: "Private Villa (G+1+R)",
     image: "/projects/106/106.jpeg",
-    certificate: "/projects/106/106-Completion Doc.pdf",
     featured: true,
   },
   {
@@ -21,7 +20,6 @@ const completedProjects = [
     year: "2024",
     description: "Private Villa (G+1) with Annex",
     image: "/projects/107/107.jpeg",
-    certificate: "/projects/107/107-Completion Doc.pdf",
     featured: false,
   },
   {
@@ -32,7 +30,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1) with Service Annex",
     image: "/projects/102/102.jpeg",
-    certificate: "/projects/102/102-Completion Doc.pdf",
     featured: false,
   },
   {
@@ -43,7 +40,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1)",
     image: "/projects/103/103.jpeg",
-    certificate: "/projects/103/103-Completion certificate.pdf",
     featured: true,
   },
   {
@@ -54,7 +50,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1)",
     image: "/projects/104/104.jpeg",
-    certificate: "/projects/104/104 - Completion1925910.pdf",
     featured: false,
   },
   {
@@ -65,7 +60,6 @@ const completedProjects = [
     year: "2023",
     description: "Private Villa (G+1)",
     image: "/projects/105/105.jpeg",
-    certificate: "/projects/105/105-COMPLETION DOC.pdf",
     featured: false,
   },
   {
@@ -76,7 +70,6 @@ const completedProjects = [
     year: "2024",
     description: "Private Villa",
     image: "/projects/113/113.jpeg",
-    certificate: "/projects/113/113-completion.pdf",
     featured: true,
   },
 ];
@@ -101,7 +94,7 @@ const stats = [
 function StatItem({ label, value, Icon }: { label: string; value: string; Icon: React.ComponentType<{ size: number; className?: string }> }) {
   return (
     <div className="text-center">
-      <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: "rgba(216, 90, 48, 0.07)" }}>
+      <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: "color-mix(in oklch, var(--color-accent-brand) calc(0.07 * 100%), transparent)" }}>
         <Icon size={20} className="text-accent" />
       </div>
       <div className="text-3xl font-bold mb-1 text-[#2C2420]" style={{ fontFamily: "var(--font-serif)" }}>{value}</div>
@@ -118,11 +111,11 @@ export default function ProjectsStatic() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ background: "rgba(216, 90, 48, 0.08)", border: "1px solid rgba(216, 90, 48, 0.18)" }}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ background: "color-mix(in oklch, var(--color-accent-brand) calc(0.08 * 100%), transparent)", border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.18 * 100%), transparent)" }}>
             <span className="w-2 h-2 bg-accent rounded-full" />
             <span className="text-accent text-sm font-medium tracking-wide">Portfolio</span>
           </div>
-          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--text-heading)" }}>
+          <h2 className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "var(--color-heading)" }}>
             Featured <span className="text-accent">Projects</span>
           </h2>
           <p className="text-lg leading-relaxed max-w-2xl mx-auto text-[#5C5047]">
@@ -141,7 +134,7 @@ export default function ProjectsStatic() {
 
         {/* Tab Toggle (inactive — always shows completed in static) */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex p-1.5 rounded-2xl gap-1 bg-[#F5EDE4] border border-[#D8C7B5]" style={{ boxShadow: "0 1px 4px rgba(92, 80, 71, 0.06)" }}>
+          <div className="inline-flex p-1.5 rounded-2xl gap-1 bg-[#F5EDE4] border border-[#D8C7B5]" style={{ boxShadow: "0 1px 4px color-mix(in oklch, var(--color-shadow-warm) calc(0.06 * 100%), transparent)" }}>
             <div className="px-6 py-2.5 text-sm font-semibold rounded-xl bg-accent text-white flex items-center gap-2">
               Completed
               <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-white/20 text-white">{completedProjects.length}</span>
@@ -199,15 +192,7 @@ export default function ProjectsStatic() {
                     <MapPin size={14} />
                     <span className="truncate">{project.location}</span>
                   </div>
-                  <a
-                    href={project.certificate}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent"
-                  >
-                    <FileText size={14} />
-                    Certificate
-                  </a>
+
                 </div>
               </div>
             </article>

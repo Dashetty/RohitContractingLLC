@@ -118,7 +118,7 @@ function TypewriterHeading() {
     <h2
       ref={ref}
       className="heading-serif text-4xl sm:text-5xl font-bold leading-tight mb-6 max-w-4xl"
-      style={{ color: "var(--text-heading)" }}
+      style={{ color: "var(--color-heading)" }}
     >
       Built on{" "}
       <span
@@ -153,17 +153,17 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
       transition={{ delay: index * 0.08 }}
       className="group relative rounded-2xl p-6 text-center transition-all duration-300"
       style={{
-        background: "var(--card-earth)",
-        border: "1px solid var(--border-earth)",
-        boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
+        background: "var(--color-surface-card)",
+        border: "1px solid var(--color-border-earth)",
+        boxShadow: "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
-        e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
+        e.currentTarget.style.borderColor = "color-mix(in oklch, var(--color-accent-brand) calc(0.3 * 100%), transparent)";
+        e.currentTarget.style.boxShadow = "0 8px 28px color-mix(in oklch, var(--color-shadow-warm) calc(0.12 * 100%), transparent)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--border-earth)";
-        e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
+        e.currentTarget.style.borderColor = "var(--color-border-earth)";
+        e.currentTarget.style.boxShadow = "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)";
       }}
     >
       <div className="absolute inset-0 grid-pattern opacity-[0.04] rounded-2xl pointer-events-none" />
@@ -171,13 +171,12 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
       <div className="relative z-10">
         {/* Icon */}
         <div
-          className="flex items-center justify-center mb-5 mx-auto transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
+          className="flex items-center justify-center mb-5 mx-auto transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg rounded-xl"
           style={{
             width: "52px",
             height: "52px",
-            background: "rgba(216, 90, 48, 0.08)",
-            borderRadius: "14px",
-            boxShadow: "0 0 0 0 rgba(216, 90, 48, 0.15)",
+            background: "color-mix(in oklch, var(--color-accent-brand) calc(0.08 * 100%), transparent)",
+            boxShadow: "0 0 0 0 color-mix(in oklch, var(--color-accent-brand) calc(0.15 * 100%), transparent)",
             transition: "box-shadow 0.3s, transform 0.3s",
           }}
         >
@@ -191,7 +190,7 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
         {/* Title — Plus Jakarta Sans, not Cormorant */}
         <h3
           className="font-bold text-lg leading-snug mb-3 group-hover:text-accent transition-colors"
-          style={{ color: "var(--text-heading)" }}
+          style={{ color: "var(--color-heading)" }}
         >
           {card.title}
         </h3>
@@ -199,7 +198,7 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }) {
         {/* Description */}
         <p
           className="text-sm leading-relaxed"
-          style={{ color: "var(--text-body)" }}
+          style={{ color: "var(--color-warm-text)" }}
         >
           {card.desc}
         </p>
@@ -217,7 +216,7 @@ export default function WhyChooseUs() {
   return (
     <section
       className="relative overflow-hidden py-24 sm:py-32"
-      style={{ background: "var(--bg-earth)" }}
+      style={{ background: "var(--color-surface-earth)" }}
     >
       <div className="absolute inset-0 industrial-texture opacity-[0.06]" />
       <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
@@ -234,8 +233,8 @@ export default function WhyChooseUs() {
           <div
             className="inline-flex items-center justify-center rounded-full px-4 py-2 mb-6"
             style={{
-              background: "rgba(216, 90, 48, 0.08)",
-              border: "1px solid rgba(216, 90, 48, 0.18)",
+              background: "color-mix(in oklch, var(--color-accent-brand) calc(0.08 * 100%), transparent)",
+              border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.18 * 100%), transparent)",
             }}
           >
             <span className="w-2 h-2 bg-accent rounded-full mr-2" />
@@ -250,7 +249,7 @@ export default function WhyChooseUs() {
           {/* Subheading */}
           <p
             className="text-lg leading-relaxed max-w-2xl mb-16"
-            style={{ color: "var(--text-body)" }}
+            style={{ color: "var(--color-warm-text)" }}
           >
             The reasons our clients trust us with their projects
           </p>
@@ -268,17 +267,17 @@ export default function WhyChooseUs() {
               key={stat.label}
               className="rounded-2xl p-8 text-center transition-all duration-300 hover:-translate-y-0.5"
               style={{
-                background: "var(--card-earth)",
-                border: "1px solid var(--border-earth)",
-                boxShadow: "0 2px 12px rgba(92, 80, 71, 0.08)",
+                background: "var(--color-surface-card)",
+                border: "1px solid var(--color-border-earth)",
+                boxShadow: "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(216, 90, 48, 0.3)";
-                e.currentTarget.style.boxShadow = "0 8px 28px rgba(92, 80, 71, 0.12)";
+                e.currentTarget.style.borderColor = "color-mix(in oklch, var(--color-accent-brand) calc(0.3 * 100%), transparent)";
+                e.currentTarget.style.boxShadow = "0 8px 28px color-mix(in oklch, var(--color-shadow-warm) calc(0.12 * 100%), transparent)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-earth)";
-                e.currentTarget.style.boxShadow = "0 2px 12px rgba(92, 80, 71, 0.08)";
+                e.currentTarget.style.borderColor = "var(--color-border-earth)";
+                e.currentTarget.style.boxShadow = "0 2px 12px color-mix(in oklch, var(--color-shadow-warm) calc(0.08 * 100%), transparent)";
               }}
             >
               <div
@@ -299,7 +298,7 @@ export default function WhyChooseUs() {
                 className="font-medium"
                 style={{
                   fontSize: "clamp(14px, 1.5vw, 16px)",
-                  color: "var(--text-body)",
+                  color: "var(--color-warm-text)",
                 }}
               >
                 {stat.label}

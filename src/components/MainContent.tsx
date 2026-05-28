@@ -9,7 +9,10 @@ import ServicesStatic from "@/components/ServicesStatic";
 import ProjectsStatic from "@/components/ProjectsStatic";
 import ContactStatic from "@/components/ContactStatic";
 
-const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
+const Navbar = dynamic(() => import("@/components/Navbar"), { 
+  ssr: false,
+  loading: () => null
+});
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { 
   ssr: false,
   loading: () => <HeroStatic />
@@ -26,15 +29,30 @@ const ProjectsSection = dynamic(() => import("@/components/ProjectsSection"), {
   ssr: false,
   loading: () => <ProjectsStatic />
 });
-const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: false });
-const CTASection = dynamic(() => import("@/components/CTASection"), { ssr: false });
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { 
+  ssr: false,
+  loading: () => null
+});
+const CTASection = dynamic(() => import("@/components/CTASection"), { 
+  ssr: false,
+  loading: () => null
+});
 const ContactSection = dynamic(() => import("@/components/ContactSection"), { 
   ssr: false,
   loading: () => <ContactStatic />
 });
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-const ScrollProgress = dynamic(() => import("@/components/ScrollProgress"), { ssr: false });
-const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { 
+  ssr: false,
+  loading: () => null
+});
+const ScrollProgress = dynamic(() => import("@/components/ScrollProgress"), { 
+  ssr: false,
+  loading: () => null
+});
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), { 
+  ssr: false,
+  loading: () => null
+});
 
 export default function MainContent() {
   // When the client wrapper mounts, mark the document so server fallbacks

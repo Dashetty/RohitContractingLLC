@@ -4,19 +4,21 @@ import { Shield } from "lucide-react";
 export default function HeroStatic() {
   return (
     <section className="static-fallback relative h-screen w-full overflow-hidden bg-[#1C1A17] flex items-center justify-center">
-      {/* Static Background Image Placeholder */}
+      {/* Background image with clean parent for Next.js fill detection */}
       <div className="absolute inset-0 opacity-40">
-        <Image
-          src="/bg.png"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-          style={{ objectPosition: "center 30%" }}
-          sizes="100vw"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src="/bg.png"
+            alt=""
+            fill
+            priority
+            className="object-cover"
+            style={{ objectPosition: "center 30%" }}
+            sizes="100vw"
+          />
+        </div>
       </div>
-      
+
       <div className="relative z-20 w-full max-w-3xl text-center px-6 -mt-20 lg:-mt-32">
         {/* Logo above badge */}
         <div className="mb-3 sm:mb-4">
@@ -33,9 +35,9 @@ export default function HeroStatic() {
             }}
           />
         </div>
-        <div className="glass-card inline-flex items-center gap-2.5 rounded-full mx-auto px-6 py-2 text-[15px]">
+        <div className="badge-pill inline-flex items-center gap-2.5 rounded-full mx-auto px-6 py-2 text-[15px]">
           <Shield size={14} className="text-accent" />
-          <span className="leading-none text-white opacity-90" style={{ fontFamily: "var(--font-cormorant), serif", letterSpacing: "0.06em" }}>
+          <span className="leading-none text-white opacity-90" style={{ fontFamily: "var(--font-sans)", letterSpacing: "0.04em" }}>
             Foundation To Completion
           </span>
         </div>
@@ -44,14 +46,14 @@ export default function HeroStatic() {
 
         <h1 
           className="leading-[1.02] tracking-tight font-semibold"
-          style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(42px, 7vw, 92px)", color: "#F6EFE6" }}
+          style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(42px, 7vw, 92px)", color: "var(--color-text-on-dark)" }}
         >
           Building <span 
             className="italic"
-            style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, color: "#F0D5AD", letterSpacing: "0.01em" }}
+            style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, color: "var(--color-hero-gold)", letterSpacing: "0.01em" }}
           >Excellence</span> Across <span 
             className="italic"
-            style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, color: "#E0B88A", letterSpacing: "0.01em" }}
+            style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, color: "var(--color-hero-gold-deep)", letterSpacing: "0.01em" }}
           >Dubai</span>
         </h1>
 

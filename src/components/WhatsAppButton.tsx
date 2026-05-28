@@ -32,7 +32,7 @@ export default function WhatsAppButton() {
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             className="fixed bottom-44 sm:bottom-28 right-6 z-50"
           >
-            <div className="glass rounded-2xl p-4 w-64 shadow-2xl">
+            <div className="card-warm rounded-2xl p-4 w-64 shadow-2xl">
               <p className="text-sm text-foreground/80 font-medium mb-2">
                 Chat with us!
               </p>

@@ -129,7 +129,7 @@ export default function Navbar() {
             ? {
                 background: "rgba(250, 247, 242, 0.92)",
                 borderBottom: "1px solid rgba(232, 221, 208, 0.4)",
-                boxShadow: "0 1px 16px rgba(92, 80, 71, 0.06)",
+                boxShadow: "0 1px 16px color-mix(in oklch, var(--color-shadow-warm) calc(0.06 * 100%), transparent)",
               }
             : undefined
         }
@@ -142,7 +142,7 @@ export default function Navbar() {
                 <span
                   className="text-lg sm:text-xl font-bold tracking-[0.1em] leading-none"
                   style={{
-                    color: scrolled ? "var(--text-heading)" : "#F6EFE6",
+                    color: scrolled ? "var(--color-heading)" : "var(--color-text-on-dark)",
                     transition: "color 0.4s ease",
                   }}
                 >
@@ -151,7 +151,7 @@ export default function Navbar() {
                 <span
                   className="text-[11px] sm:text-xs tracking-[0.15em] font-semibold"
                   style={{
-                    color: scrolled ? "#8B7D6B" : "rgba(246,239,230,0.75)",
+                    color: scrolled ? "var(--color-nav-muted)" : "rgba(246,239,230,0.75)",
                     transition: "color 0.4s ease",
                   }}
                 >
@@ -198,7 +198,7 @@ export default function Navbar() {
                       >
                         <path
                           d={squigglePath}
-                          stroke="var(--color-accent, #D85A30)"
+                          stroke="var(--color-accent, var(--color-accent-brand))"
                           strokeWidth="2"
                           strokeLinecap="round"
                           fill="none"
@@ -243,7 +243,7 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 pt-24 overflow-y-auto"
             style={{
-              background: scrolled ? "rgba(250, 247, 242, 0.95)" : "rgba(10,10,10,0.95)",
+              background: scrolled ? "var(--color-surface-cream)" : "rgba(10,10,10,0.95)",
               backdropFilter: scrolled ? undefined : "blur(20px)",
               WebkitBackdropFilter: scrolled ? undefined : "blur(20px)",
             }}

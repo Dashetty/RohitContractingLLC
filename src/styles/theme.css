@@ -72,6 +72,11 @@
   --radius-4xl:                 calc(var(--radius) * 4);
 
   /* ========================================
+     DERIVED TOKENS (resolve at computed-value time)
+     ======================================== */
+  --color-primary-light:        color-mix(in oklch, var(--color-background) 88%, var(--color-foreground) 12%);
+
+  /* ========================================
      SHADOWS
      ======================================== */
   --shadow-2xs:                 0 1px 3px 0px hsl(0 0% 0% / 0.06);
@@ -146,9 +151,32 @@
   --color-heading:              #1C1A17;
   --color-warm-muted:           #8B6347;
   --color-warm-text:            #5C5047;
-  --color-card-border:          #E8DFD0;
   /* Alternate section background */
   --color-dark-surface:         oklch(0.93 0.005 80);
+
+  /* ========================================
+     WARM EDITORIAL SURFACES & BORDERS
+     ======================================== */
+  --color-surface-cream:        #FAF7F2;
+  --color-surface-beige:        #F0E6D6;
+  --color-surface-earth:        #E8DCC8;
+  --color-surface-card:         #FDF8F3;
+  --color-surface-dark:         #2C1F14;
+  --color-border-warm:          #E8DDD0;
+  --color-border-earth:         #D8C7B5;
+
+  /* ========================================
+     PHASE 3 — Text on dark / hero / utility tokens
+     ======================================== */
+  --color-text-on-dark:         #F6EFE6;
+  --color-text-on-dark-soft:    #FDF8F5;
+  --color-hero-gold:            #F0D5AD;
+  --color-hero-gold-deep:       #E0B88A;
+  --color-shadow-warm:          rgba(92, 80, 71, 1);
+  --color-whatsapp:             #25D366;
+  --color-nav-muted:            #8B7D6B;
+  --color-dark-brown:           #1C1A17;
+  --color-cream-text:           #FDF8F3;
 }
 
 /* ========================================

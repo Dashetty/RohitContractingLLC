@@ -7,7 +7,7 @@ export default function CTASection() {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "#1C1A17" }}
+      style={{ background: "var(--color-heading)" }}
     >
       {/* Background textures */}
       <div className="absolute inset-0">
@@ -37,8 +37,8 @@ export default function CTASection() {
               <div
                 className="w-16 sm:w-20 h-16 sm:h-20 mx-auto mb-6 sm:mb-8 rounded-2xl flex items-center justify-center"
                 style={{
-                  background: "rgba(216,90,48,0.15)",
-                  border: "1px solid rgba(216,90,48,0.25)",
+                  background: "color-mix(in oklch, var(--color-accent-brand) calc(0.15 * 100%), transparent)",
+                  border: "1px solid color-mix(in oklch, var(--color-accent-brand) calc(0.25 * 100%), transparent)",
                 }}
               >
                 <Building2
@@ -58,7 +58,7 @@ export default function CTASection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="heading-serif font-bold leading-tight mb-4 sm:mb-6"
             style={{
-              color: "#FDF8F5",
+              color: "var(--color-text-on-dark-soft)",
               fontSize: "clamp(28px, 5.5vw, 64px)",
             }}
           >
@@ -67,7 +67,7 @@ export default function CTASection() {
               className="font-accent-primary animate-shimmer-dark"
               style={{
                 backgroundImage:
-                  "linear-gradient(90deg, #D85A30 0%, #FFD4A8 50%, #D85A30 100%)",
+                  "linear-gradient(90deg, var(--color-accent-brand) 0%, #FFD4A8 50%, var(--color-accent-brand) 100%)",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -119,11 +119,11 @@ export default function CTASection() {
               className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 font-semibold rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
               style={{
                 border: "1.5px solid rgba(253,248,245,0.25)",
-                color: "#FDF8F5",
+                color: "var(--color-text-on-dark-soft)",
                 fontSize: "clamp(14px, 1.6vw, 18px)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--color-accent, #D85A30)";
+                e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
                 e.currentTarget.style.background = "rgba(253,248,245,0.05)";
               }}
               onMouseLeave={(e) => {
@@ -160,7 +160,7 @@ export default function CTASection() {
                   transition={{ duration: 0.4 }}
                   className="flex items-center gap-1.5"
                 >
-                  <span style={{ color: "rgba(216,90,48,0.6)" }}>✓</span>
+                  <span style={{ color: "color-mix(in oklch, var(--color-accent-brand) calc(0.6 * 100%), transparent)" }}>✓</span>
                   {text}
                 </motion.span>
               )
