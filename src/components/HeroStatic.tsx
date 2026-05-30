@@ -8,7 +8,7 @@ export default function HeroStatic() {
       <div className="absolute inset-0 opacity-40">
         <div className="relative w-full h-full">
           <Image
-            src="/bg.png"
+            src="/bg.webp"
             alt=""
             fill
             priority
@@ -22,18 +22,17 @@ export default function HeroStatic() {
       <div className="relative z-20 w-full max-w-3xl text-center px-6 -mt-20 lg:-mt-32">
         {/* Logo above badge */}
         <div className="mb-3 sm:mb-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/projects/logoorevamp.png"
-            alt="Rohit Contracting L.L.C"
-            style={{
-              height: "clamp(60px, 8vw, 90px)",
-              width: "auto",
-              objectFit: "contain",
-              filter: "brightness(0) invert(1)",
-              margin: "0 auto",
-            }}
-          />
+          <div className="relative block mx-auto" style={{ height: "clamp(60px, 8vw, 90px)", aspectRatio: "800 / 565" }}>
+            <Image
+              src="/projects/logoorevamp.webp"
+              alt="Rohit Contracting L.L.C"
+              fill
+              priority
+              sizes="128px"
+              className="object-contain"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+          </div>
         </div>
         <div className="badge-pill inline-flex items-center gap-2.5 rounded-full mx-auto px-6 py-2 text-[15px]">
           <Shield size={14} className="text-accent" />

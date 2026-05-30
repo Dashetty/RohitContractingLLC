@@ -13,7 +13,7 @@ import {
 import HorizontalTimeline from "@/components/timeline-demo";
 
 const aboutImages = [
-  "/projects/AboutSectionLogo.png",
+  "/projects/AboutSectionLogo.webp",
   "/projects/106/106.jpeg",
   "/projects/107/107.jpeg",
   "/projects/102/102.jpeg",
@@ -67,12 +67,13 @@ export default function AboutSection() {
     return () => observer.disconnect();
   }, []);
 
-  // Preload the next image in the background
+  // Preload the next image in the background (reuse a single Image element)
+  const preloadImgRef = useRef<HTMLImageElement | null>(null);
   useEffect(() => {
-    const nextIndex = (currentImage + 1) % aboutImages.length;
-    // Use createElement instead of new Image() to avoid shadowing next/image's Image
-    const img = document.createElement("img");
-    img.src = aboutImages[nextIndex];
+    if (!preloadImgRef.current) {
+      preloadImgRef.current = document.createElement("img");
+    }
+    preloadImgRef.current.src = aboutImages[(currentImage + 1) % aboutImages.length];
   }, [currentImage]);
 
   // Auto-advance carousel — only when in view and not paused

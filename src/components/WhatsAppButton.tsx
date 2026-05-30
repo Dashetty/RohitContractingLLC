@@ -30,7 +30,7 @@ export default function WhatsAppButton() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-44 sm:bottom-28 right-6 z-50"
+            className="fixed bottom-44 right-6 z-50"
           >
             <div className="card-warm rounded-2xl p-4 w-64 shadow-2xl">
               <p className="text-sm text-foreground/80 font-medium mb-2">
@@ -65,7 +65,7 @@ export default function WhatsAppButton() {
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 200, delay: 2 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-24 sm:bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[var(--color-chart-2)] hover:brightness-90 text-white shadow-xl shadow-[color-mix(in_oklch,var(--color-chart-2)_30%,transparent)] hover:shadow-[color-mix(in_oklch,var(--color-chart-2)_50%,transparent)] flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
+        className="fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-[var(--color-chart-2)] hover:brightness-90 text-white shadow-xl shadow-[color-mix(in_oklch,var(--color-chart-2)_30%,transparent)] hover:shadow-[color-mix(in_oklch,var(--color-chart-2)_50%,transparent)] flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
         aria-label="WhatsApp"
       >
         {isOpen ? <X size="24" /> : <WhatsAppIcon size={24} />}

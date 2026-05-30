@@ -7,6 +7,8 @@ import HeroStatic from "@/components/HeroStatic";
 import AboutStatic from "@/components/AboutStatic";
 import ServicesStatic from "@/components/ServicesStatic";
 import ProjectsStatic from "@/components/ProjectsStatic";
+import WhyChooseUsStatic from "@/components/WhyChooseUsStatic";
+import CTAStatic from "@/components/CTAStatic";
 import ContactStatic from "@/components/ContactStatic";
 
 const Navbar = dynamic(() => import("@/components/Navbar"), { 
@@ -31,11 +33,11 @@ const ProjectsSection = dynamic(() => import("@/components/ProjectsSection"), {
 });
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { 
   ssr: false,
-  loading: () => null
+  loading: () => <WhyChooseUsStatic />
 });
 const CTASection = dynamic(() => import("@/components/CTASection"), { 
   ssr: false,
-  loading: () => null
+  loading: () => <CTAStatic />
 });
 const ContactSection = dynamic(() => import("@/components/ContactSection"), { 
   ssr: false,

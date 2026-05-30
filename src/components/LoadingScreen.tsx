@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,17 +34,17 @@ export default function LoadingScreen() {
           transition: "opacity 0.3s ease, transform 0.3s ease",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/projects/logoorevamp.png"
-          alt="Rohit Contracting L.L.C"
-          style={{
-            height: "clamp(120px, 25vw, 200px)",
-            width: "auto",
-            objectFit: "contain",
-            filter: "brightness(0) saturate(100%)",
-          }}
-        />
+        <div className="relative block mx-auto" style={{ height: "clamp(120px, 25vw, 200px)", aspectRatio: "800 / 565" }}>
+          <Image
+            src="/projects/logoorevamp.webp"
+            alt="Rohit Contracting L.L.C"
+            fill
+            priority
+            sizes="200px"
+            className="object-contain"
+            style={{ filter: "brightness(0) saturate(100%)" }}
+          />
+        </div>
       </div>
 
       {/* Loading bar */}

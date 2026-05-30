@@ -39,12 +39,12 @@ export default function HeroSection() {
     <section
       id="home"
       ref={ref}
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-screen w-full overflow-hidden bg-[#1C1A17]"
     >      {/* Background image — cinematic inhale: zoomed out → settles in */}
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.15 }}
-        animate={{ scale: 1 }}
+        animate={{ scale: 1.01 }}
         transition={{ duration: 2.5, delay: 0, ease: "easeOut" }}
       >
         {/* Parallax scroll + filter — applied directly to the image wrapper */}
@@ -57,7 +57,7 @@ export default function HeroSection() {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/bg.png"
+              src="/bg.webp"
               alt="Dubai construction site"
               fill
               priority
@@ -91,18 +91,17 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
             className="mb-3 sm:mb-4"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/projects/logoorevamp.png"
-              alt="Rohit Contracting L.L.C"
-              style={{
-                height: "clamp(60px, 8vw, 90px)",
-                width: "auto",
-                objectFit: "contain",
-                filter: "brightness(0) invert(1)",
-                margin: "0 auto",
-              }}
-            />
+            <div className="relative block mx-auto" style={{ height: "clamp(60px, 8vw, 90px)", aspectRatio: "800 / 565" }}>
+              <Image
+                src="/projects/logoorevamp.webp"
+                alt="Rohit Contracting L.L.C"
+                fill
+                priority
+                sizes="128px"
+                className="object-contain"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+            </div>
           </motion.div>
 
           {/* Badge */}
