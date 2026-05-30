@@ -3,8 +3,7 @@ import { Phone, Mail, MapPin, Clock, MessageCircle, ChevronRight } from "lucide-
 export default function ContactStatic() {
   return (
     <section 
-      className="static-fallback relative overflow-hidden bg-[#FAF7F2]" 
-      style={{ padding: "var(--section-padding) 0" }}
+      className="static-fallback relative overflow-hidden bg-[#FAF7F2] py-24 sm:py-32"
     >
       <div className="section-container relative z-10">
         {/* Header */}
@@ -41,23 +40,13 @@ export default function ContactStatic() {
                   </p>
                 </div>
               </div>
-              {/* Google Maps embed — clickable to open in Maps app */}
-              <a
-                href="https://maps.app.goo.gl/cYSoZG6jWdF1d41K7"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 rounded-xl overflow-hidden block"
-                style={{ border: "1px solid var(--color-border-warm)" }}
+              {/* Static map placeholder — iframe loads in client version instead */}
+              <div
+                className="mt-4 rounded-xl overflow-hidden bg-[#E8DCC8] flex items-center justify-center"
+                style={{ height: 200, border: "1px solid var(--color-border-warm)" }}
               >
-                <iframe
-                  src="https://maps.google.com/maps?q=Sky+Business+Centre+%23109+Office+Nad+Al+Hamar+Road+Al+Kheeran+Dubai+Festival+City+Dubai&output=embed"
-                  width="100%"
-                  height="200"
-                  style={{ border: 0, display: "block", pointerEvents: "none" }}
-                  loading="lazy"
-                  title="Rohit Contracting Location - Dubai Festival City"
-                />
-              </a>
+                <span className="text-[#8B6347] text-sm font-medium">Dubai Festival City</span>
+              </div>
             </div>
 
             {/* Phone Card */}

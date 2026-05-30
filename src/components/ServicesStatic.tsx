@@ -42,8 +42,7 @@ const services = [
 export default function ServicesStatic() {
   return (
     <section 
-      className="static-fallback relative overflow-hidden bg-[#F0E6D6]"
-      style={{ padding: "var(--section-padding) 0" }}
+      className="static-fallback relative overflow-hidden bg-[#F0E6D6] py-24 sm:py-32"
     >
       <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">

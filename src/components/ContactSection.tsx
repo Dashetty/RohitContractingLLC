@@ -140,7 +140,6 @@ export default function ContactSection() {
                   style={{ border: 0, display: "block", pointerEvents: "none" }}
                   loading="lazy"
                   title="Rohit Contracting Location - Dubai Festival City"
-                  sandbox="allow-scripts allow-same-origin"
                 />
               </a>
             </div>

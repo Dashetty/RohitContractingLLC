@@ -82,7 +82,7 @@ export default function Footer() {
                 <div className="relative">
                   {/* Logo with warm tint instead of harsh black */}
                   <Image
-                    src="/projects/logoorevamp.png"
+                    src="/projects/logoorevamp.webp"
                     alt="Rohit Contracting L.L.C"
                     width={240}
                     height={72}

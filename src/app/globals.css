@@ -193,7 +193,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -465,5 +465,6 @@ body {
   }
   html {
     @apply font-sans;
+    background: #1C1A17;
   }
 }

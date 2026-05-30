@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { MapPin, CheckCircle2, Clock } from "lucide-react";
 
 const completedProjects = [
@@ -152,16 +151,10 @@ export default function ProjectsStatic() {
             <article
               key={project.id}
               className={`rounded-2xl overflow-hidden bg-[#F5EDE4] border border-[#D8C7B5] ${project.featured ? 'md:col-span-2' : ''}`}
-              style={{ minHeight: project.featured ? "380px" : "320px" }}
+               style={{ minHeight: project.featured ? "460px" : "420px" }}
             >
               <div className={`relative overflow-hidden ${project.featured ? 'h-[65%]' : 'h-[60%]'}`}>
-                <Image
-                  src={project.image}
-                  alt={`${project.villaNo} at ${project.location}`}
-                  fill
-                  sizes={project.featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
-                  className="object-cover"
-                />
+                <div className="absolute inset-0 bg-[#D8C7B5]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1C1A17]/70 via-transparent to-transparent opacity-60" />
 
                 <div className="absolute top-4 left-4 flex items-center gap-2">
