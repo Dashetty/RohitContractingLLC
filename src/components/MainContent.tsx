@@ -67,7 +67,7 @@ export default function MainContent() {
     <>
       <LoadingScreen />
       <ScrollProgress />
-      <div className="relative min-h-screen bg-primary">
+      <div className="relative min-h-screen bg-primary" style={{ minHeight: '100vh' }}>
         <Navbar />
         <main>
           <HeroSection />
