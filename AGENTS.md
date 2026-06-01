@@ -4,7 +4,7 @@
 
 A premium construction & building materials company website for **Rohit Contracting**, a UAE-based contracting firm. Built as a modern, light-mode single-page website with smooth animations and a luxury corporate aesthetic. Dark mode is preserved via a `.dark` class selector for potential future theme toggling.
 
-**Live site:** Local dev server at `http://localhost:3000`
+**Live site:** Local dev server at `http://localhost:3000`.
 
 ---
 
