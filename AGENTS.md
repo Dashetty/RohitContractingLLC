@@ -1,4 +1,4 @@
-# Rohit Contracting Website — Full Project Context
+# Rohit Contracting Website — Full Project Context.
 
 ## 📋 Overview
 
