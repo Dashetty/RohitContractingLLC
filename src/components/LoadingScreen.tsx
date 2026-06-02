@@ -13,7 +13,9 @@ export default function LoadingScreen() {
     return () => { clearTimeout(fadeTimer); clearTimeout(removeTimer); };
   }, []);
 
-  if (!visible) return null;
+  if (!visible) return (
+    <div id="rc-loading-screen" style={{ display: "none" }} aria-hidden="true" />
+  );
 
   return (
     <div
