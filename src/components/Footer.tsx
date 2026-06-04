@@ -213,7 +213,7 @@ export default function Footer() {
 
                 {/* Email */}
                 <a
-                  href="mailto:info@rohitcontracting.ae"
+                  href="mailto:rohitcontracting@gmail.com"
                   onMouseEnter={() => setHoveredLink("email")}
                   onMouseLeave={() => setHoveredLink(null)}
                   className="group flex items-center gap-3.5 p-3.5 rounded-xl transition-all duration-300 sm:col-span-2"
@@ -247,7 +247,7 @@ export default function Footer() {
                       className="text-sm font-medium"
                       style={{ color: colors.bgCream }}
                     >
-                      info@rohitcontracting.ae
+                      rohitcontracting@gmail.com
                     </div>
                   </div>
                 </a>
