@@ -2,7 +2,7 @@ export default function WhyChooseUsStatic() {
   const stats = [
     { value: "5+", label: "Years Experience" },
     { value: "10+", label: "Projects Completed" },
-    { value: "50+", label: "Expert Professionals" },
+    { value: "60+", label: "Expert Professionals" },
     { value: "100%", label: "Client Satisfaction" },
   ];
 

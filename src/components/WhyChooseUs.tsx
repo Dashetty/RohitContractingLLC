@@ -50,7 +50,7 @@ const featureCards: FeatureCard[] = [
 const stats = [
   { value: 5, suffix: "+", label: "Years Experience" },
   { value: 10, suffix: "+", label: "Projects Completed" },
-  { value: 50, suffix: "+", label: "Expert Professionals" },
+  { value: 60, suffix: "+", label: "Expert Professionals" },
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
 
@@ -122,10 +122,16 @@ function TypewriterHeading() {
     >
       Built on{" "}
       <span
-        className="italic"
+        className="inline-grid italic"
         style={{ color: "var(--color-accent)", fontFamily: "var(--font-cormorant), Georgia, serif" }}
       >
-        {displayed}
+        {/* Invisible placeholder reserves the full width of "Excellence" — prevents layout shifts as text types */}
+        <span className="invisible col-start-1 row-start-1" aria-hidden="true">
+          Excellence
+        </span>
+        <span className="col-start-1 row-start-1">
+          {displayed}
+        </span>
       </span>
       <span
         className="inline-block rounded-sm ml-0.5"

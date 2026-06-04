@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect } from "react";
+
 import LoadingScreen from "@/components/LoadingScreen";
 import HeroStatic from "@/components/HeroStatic";
 import AboutStatic from "@/components/AboutStatic";
@@ -57,12 +57,6 @@ const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
 });
 
 export default function MainContent() {
-  // When the client wrapper mounts, mark the document so server fallbacks
-  // can be hidden via CSS to avoid duplicate content (server static + client).
-  useEffect(() => {
-    document.documentElement.classList.add("client-mounted");
-    return () => document.documentElement.classList.remove("client-mounted");
-  }, []);
   return (
     <>
       <LoadingScreen />
