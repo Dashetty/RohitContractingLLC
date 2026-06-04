@@ -21,11 +21,100 @@ export default function ContactSection() {
   });
 
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+
+    // Name: required, min 2 chars
+    if (!formState.name.trim()) {
+      errors.name = "Name is required";
+    } else if (formState.name.trim().length < 2) {
+      errors.name = "Name must be at least 2 characters";
+    }
+
+    // Email: required, valid format
+    if (!formState.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+
+    // Phone: optional, but validate format if filled
+    if (formState.phone.trim()) {
+      // Check for invalid characters first
+      if (!/^\+?[\d\s\-()]+$/.test(formState.phone.trim())) {
+        errors.phone = "Phone contains invalid characters";
+      } else {
+        // Then check digit count (7-15 for international numbers)
+        const cleaned = formState.phone.replace(/[\s\-()]/g, "");
+        const digitsOnly = cleaned.replace(/\+/g, "");
+        if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+          errors.phone = "Please enter a valid phone number (7–15 digits)";
+        }
+      }
+    }
+
+    // Message: required, min 5 chars
+    if (!formState.message.trim()) {
+      errors.message = "Message is required";
+    } else if (formState.message.trim().length < 5) {
+      errors.message = "Message must be at least 5 characters";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission handler
-    console.log("Form submitted:", formState);
+    setSubmitError(null);
+
+    if (!validateForm()) return;
+
+    setSubmitting(true);
+
+    try {
+      const payload = {
+        access_key: "c5226d22-9b4d-4440-8177-487510321feb",
+        name: formState.name,
+        email: formState.email,
+        phone: formState.phone,
+        message: formState.message,
+      };
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        setFormState({ name: "", email: "", phone: "", message: "" });
+      } else {
+        setSubmitError(result.message || "Submission failed. Please try again.");
+      }
+    } catch {
+      setSubmitError("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const clearError = (field: string) => {
+    if (formErrors[field]) {
+      setFormErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    }
   };
 
   const cardStyle = (id: string) =>
@@ -207,10 +296,10 @@ export default function ContactSection() {
                     Email
                   </h3>
                   <a
-                    href="mailto:info@rohitcontracting.ae"
+                    href="mailto:rohitcontracting@gmail.com"
                     className="text-sm text-accent hover:text-accent-light transition-colors"
                   >
-                    info@rohitcontracting.ae
+                    rohitcontracting@gmail.com
                   </a>
                   <p
                     className="text-xs mt-1"
@@ -340,141 +429,275 @@ export default function ContactSection() {
                 Fill in the form and our team will get back to you shortly
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="group">
-                  <label
-                    className="block text-sm font-medium mb-2"
+              {submitted ? (
+                /* Success State */
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-12"
+                >
+                  <div
+                    className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                    style={{
+                      background: "color-mix(in oklch, var(--color-accent-brand) calc(0.1 * 100%), transparent)",
+                    }}
+                  >
+                    <svg
+                      className="text-accent"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <h4
+                    className="text-xl font-bold mb-2"
+                    style={{ color: "var(--color-heading)" }}
+                  >
+                    Message Sent!
+                  </h4>
+                  <p
+                    className="text-sm"
                     style={{ color: "var(--color-warm-text)" }}
                   >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    value={formState.name}
-                    onChange={(e) =>
-                      setFormState({ ...formState, name: e.target.value })
-                    }
-                    className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
-                    style={{
-                      background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
-                      border: "1px solid var(--color-border-warm)",
-                      color: "var(--color-heading)",
-                    }}
-                    placeholder="Your name"
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
-                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "var(--color-border-warm)";
-                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
-                    }}
-                    required
-                  />
-                </div>
-                <div className="group">
-                  <label
-                    className="block text-sm font-medium mb-2"
-                    style={{ color: "var(--color-warm-text)" }}
+                    Thank you for reaching out. We'll get back to you within 2 hours.
+                  </p>
+                </motion.div>
+              ) : (
+                <>
+                  {/* Error message */}
+                  {submitError && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="px-4 py-3 rounded-xl text-sm"
+                      style={{
+                        background: "color-mix(in oklch, oklch(0.55 0.2 30) calc(0.1 * 100%), transparent)",
+                        border: "1px solid color-mix(in oklch, oklch(0.55 0.2 30) calc(0.25 * 100%), transparent)",
+                        color: "oklch(0.55 0.2 30)",
+                      }}
+                    >
+                      {submitError}
+                    </motion.div>
+                  )}
+
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="group">
+                      <label
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: "var(--color-warm-text)" }}
+                      >
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        value={formState.name}
+                        onChange={(e) => {
+                          setFormState({ ...formState, name: e.target.value });
+                          clearError("name");
+                        }}
+                        className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
+                        style={{
+                          background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                          border: formErrors.name ? "1px solid oklch(0.55 0.2 30)" : "1px solid var(--color-border-warm)",
+                          color: "var(--color-heading)",
+                        }}
+                        placeholder="Your full name"
+                        onFocus={(e) => {
+                          e.currentTarget.style.borderColor = formErrors.name ? "oklch(0.55 0.2 30)" : "var(--color-accent, var(--color-accent-brand))";
+                          e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.borderColor = formErrors.name ? "oklch(0.55 0.2 30)" : "var(--color-border-warm)";
+                          e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
+                        }}
+                        required
+                      />
+                      {formErrors.name && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-xs mt-1.5"
+                          style={{ color: "oklch(0.55 0.2 30)" }}
+                        >
+                          {formErrors.name}
+                        </motion.p>
+                      )}
+                    </div>
+                    <div className="group">
+                      <label
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: "var(--color-warm-text)" }}
+                      >
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        value={formState.email}
+                        onChange={(e) => {
+                          setFormState({ ...formState, email: e.target.value });
+                          clearError("email");
+                        }}
+                        className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
+                        style={{
+                          background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                          border: formErrors.email ? "1px solid oklch(0.55 0.2 30)" : "1px solid var(--color-border-warm)",
+                          color: "var(--color-heading)",
+                        }}
+                        placeholder="your@email.com"
+                        onFocus={(e) => {
+                          e.currentTarget.style.borderColor = formErrors.email ? "oklch(0.55 0.2 30)" : "var(--color-accent, var(--color-accent-brand))";
+                          e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.borderColor = formErrors.email ? "oklch(0.55 0.2 30)" : "var(--color-border-warm)";
+                          e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
+                        }}
+                        required
+                      />
+                      {formErrors.email && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-xs mt-1.5"
+                          style={{ color: "oklch(0.55 0.2 30)" }}
+                        >
+                          {formErrors.email}
+                        </motion.p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-2"
+                      style={{ color: "var(--color-warm-text)" }}
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      value={formState.phone}
+                      onChange={(e) => {
+                        setFormState({ ...formState, phone: e.target.value });
+                        clearError("phone");
+                      }}
+                      className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
+                      style={{
+                        background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                        border: formErrors.phone ? "1px solid oklch(0.55 0.2 30)" : "1px solid var(--color-border-warm)",
+                        color: "var(--color-heading)",
+                      }}
+                      placeholder="+1 234 567 8900"
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = formErrors.phone ? "oklch(0.55 0.2 30)" : "var(--color-accent, var(--color-accent-brand))";
+                        e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = formErrors.phone ? "oklch(0.55 0.2 30)" : "var(--color-border-warm)";
+                        e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
+                      }}
+                    />
+                    {formErrors.phone && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-xs mt-1.5"
+                        style={{ color: "oklch(0.55 0.2 30)" }}
+                      >
+                        {formErrors.phone}
+                      </motion.p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-2"
+                      style={{ color: "var(--color-warm-text)" }}
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      value={formState.message}
+                      onChange={(e) => {
+                        setFormState({ ...formState, message: e.target.value });
+                        clearError("message");
+                      }}
+                      rows={4}
+                      className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none resize-none placeholder-[var(--color-warm-muted)]"
+                      style={{
+                        background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
+                        border: formErrors.message ? "1px solid oklch(0.55 0.2 30)" : "1px solid var(--color-border-warm)",
+                        color: "var(--color-heading)",
+                      }}
+                      placeholder="Tell us about your project — e.g., 'I'd like a quote for a 3-bedroom villa in Al Barsha'"
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = formErrors.message ? "oklch(0.55 0.2 30)" : "var(--color-accent, var(--color-accent-brand))";
+                        e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = formErrors.message ? "oklch(0.55 0.2 30)" : "var(--color-border-warm)";
+                        e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
+                      }}
+                      required
+                    />
+                    {formErrors.message && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-xs mt-1.5"
+                        style={{ color: "oklch(0.55 0.2 30)" }}
+                      >
+                        {formErrors.message}
+                      </motion.p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full py-4 bg-accent hover:bg-accent-dark text-accent-foreground font-semibold rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-accent/25 flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    value={formState.email}
-                    onChange={(e) =>
-                      setFormState({ ...formState, email: e.target.value })
-                    }
-                    className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
-                    style={{
-                      background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
-                      border: "1px solid var(--color-border-warm)",
-                      color: "var(--color-heading)",
-                    }}
-                    placeholder="your@email.com"
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
-                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "var(--color-border-warm)";
-                      e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
-                    }}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: "var(--color-warm-text)" }}
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  value={formState.phone}
-                  onChange={(e) =>
-                    setFormState({ ...formState, phone: e.target.value })
-                  }
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none placeholder-[var(--color-warm-muted)]"
-                  style={{
-                    background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
-                    border: "1px solid var(--color-border-warm)",
-                    color: "var(--color-heading)",
-                  }}
-                  placeholder="+971 XX XXX XXXX"
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
-                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-border-warm)";
-                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
-                  }}
-                />
-              </div>
-
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: "var(--color-warm-text)" }}
-                >
-                  Message
-                </label>
-                <textarea
-                  value={formState.message}
-                  onChange={(e) =>
-                    setFormState({ ...formState, message: e.target.value })
-                  }
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-300 outline-none resize-none placeholder-[var(--color-warm-muted)]"
-                  style={{
-                    background: "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)",
-                    border: "1px solid var(--color-border-warm)",
-                    color: "var(--color-heading)",
-                  }}
-                  placeholder="Tell us about your project..."
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-accent, var(--color-accent-brand))";
-                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-accent-brand) calc(0.05 * 100%), transparent)";
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-border-warm)";
-                    e.currentTarget.style.background = "color-mix(in oklch, var(--color-shadow-warm) calc(0.05 * 100%), transparent)";
-                  }}
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-4 bg-accent hover:bg-accent-dark text-accent-foreground font-semibold rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-accent/25 flex items-center justify-center gap-2 group"
-              >
-                <Send size="18" />
-                Send Message
-              </button>
+                    {submitting ? (
+                      <>
+                        <svg
+                          className="animate-spin"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                          />
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send size="18" />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </>
+              )}
             </form>
           </motion.div>
         </div>
