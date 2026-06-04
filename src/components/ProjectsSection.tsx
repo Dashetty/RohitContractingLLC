@@ -504,7 +504,7 @@ function ProjectModal({ project, onClose }: { project: CompletedProject; onClose
                 src={project.images[activeImage]}
                 alt={`${project.title} — ${project.villaNo}, ${project.location} (Image ${activeImage + 1} of ${project.images.length})`}
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 100vw, 60vw"
                 priority
               />
