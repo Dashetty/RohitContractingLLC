@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useSyncExternalStore } from "react";
 import Image from "next/image";
 import {
   Target,
@@ -10,7 +10,7 @@ import {
   TrendingUp,
   Truck,
 } from "lucide-react";
-import HorizontalTimeline from "@/components/timeline-demo";
+import HorizontalTimeline from "@/components/HorizontalTimeline";
 
 const aboutImages = [
   "/projects/AboutSectionLogo.webp",
@@ -35,7 +35,6 @@ const values = [
 export default function AboutSection() {
   const [currentImage, setCurrentImage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
   const [isInView, setIsInView] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
  
@@ -46,14 +45,16 @@ export default function AboutSection() {
     []
   );
 
-  // Detect viewport width for ambient drift gating
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    setIsDesktop(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  // Viewport width gating for ambient drift — media query synced without effect setState
+  const isDesktop = useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia("(min-width: 1024px)");
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia("(min-width: 1024px)").matches,
+    () => false
+  );
 
   // IntersectionObserver — pause carousel when scrolled out of view
   useEffect(() => {
@@ -88,8 +89,8 @@ export default function AboutSection() {
 
   const isProjectSlide = currentImage !== LOGO_INDEX;
   const enableDrift = isDesktop && isProjectSlide;
-  // Stable random duration per slide — prevents drift restart on hover re-renders
-  const driftDuration = useMemo(() => 18 + Math.random() * 6, [currentImage]);
+  // Stable, deterministic duration per slide — prevents drift restart on hover re-renders
+  const driftDuration = useMemo(() => 18 + ((currentImage * 7) % 6), [currentImage]);
 
   const handleMouseEnterCarousel = () => {
     if (!isTouchDevice) setIsPaused(true);

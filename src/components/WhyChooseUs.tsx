@@ -104,7 +104,6 @@ function TypewriterHeading() {
         }
 
         timer = setTimeout(tick, 200);
-        // eslint-disable-next-line consistent-return
         return () => clearTimeout(timer);
       },
       { threshold: 0.4 }

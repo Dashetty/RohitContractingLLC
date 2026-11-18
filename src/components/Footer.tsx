@@ -416,7 +416,7 @@ export default function Footer() {
                   className="text-sm mb-5 relative z-10"
                   style={{ color: colors.textMuted }}
                 >
-                  Let's discuss your next villa project in Dubai.
+                  Let&rsquo;s discuss your next villa project in Dubai.
                 </p>
 
                 <a

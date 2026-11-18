@@ -80,12 +80,12 @@ function TimelineCard({
           <span className="text-sm font-bold tracking-wider text-accent">{milestone.year}</span>
         </div>
 
-        <h4
+        <h3
           className="text-lg font-bold mb-2 leading-snug"
           style={{ color: "var(--color-heading)" }}
         >
           {milestone.title}
-        </h4>
+        </h3>
 
         <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--color-warm-text)" }}>
           {milestone.description}

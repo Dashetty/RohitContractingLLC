@@ -20,7 +20,7 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rohitcontracting.com"),
+  metadataBase: new URL("https://www.rohitcontracting.ae"),
   title: {
     default: "Rohit Contracting L.L.C | Premier Villa Construction in Dubai",
     template: "%s | Rohit Contracting L.L.C"
@@ -47,11 +47,11 @@ export const metadata: Metadata = {
     title: "Rohit Contracting L.L.C | Building Excellence Across Dubai",
     description:
       "Premier villa construction and turnkey contracting in Dubai. Delivering excellence through precision and reliability.",
-    url: "https://rohitcontracting.com",
+    url: "https://www.rohitcontracting.ae",
     siteName: "Rohit Contracting L.L.C",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Rohit Contracting L.L.C | Dubai Construction Excellence",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rohit Contracting L.L.C | Dubai Construction Excellence",
     description: "Premier villa construction and turnkey contracting in Dubai.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
   icons: {
     icon: [
@@ -125,11 +125,11 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "name": "Rohit Contracting L.L.C",
-              "image": "https://rohitcontracting.com/logo.png",
+              "image": "https://www.rohitcontracting.ae/projects/logo.png",
               "description":
                 "Rohit Contracting L.L.C is a premier Dubai-based construction company specializing in villa construction and turnkey contracting.",
-              "@id": "https://rohitcontracting.com",
-              "url": "https://rohitcontracting.com",
+              "@id": "https://www.rohitcontracting.ae",
+              "url": "https://www.rohitcontracting.ae",
               "telephone": "+971559239581",
               "address": {
                 "@type": "PostalAddress",
@@ -166,9 +166,17 @@ export default function RootLayout({
         <ErrorBoundary>
           {children}
         </ErrorBoundary>
+        <noscript>
+          {/* Without JS the loading overlay would never dismiss — keep content visible */}
+          <style>{`#rc-loading-screen{display:none!important}`}</style>
+        </noscript>
         <WebVitalsReporter />
-        <Analytics />
-        <SpeedInsights />
+        {process.env.VERCEL && (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        )}
       </body>
     </html>
   );

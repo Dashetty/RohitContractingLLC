@@ -1,0 +1,5 @@
+# https://www.rohitcontracting.ae/
+User-agent: *
+Allow: /
+
+Sitemap: https://www.rohitcontracting.ae/sitemap.xml

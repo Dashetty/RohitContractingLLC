@@ -466,7 +466,7 @@ export default function ContactSection() {
                     className="text-sm"
                     style={{ color: "var(--color-warm-text)" }}
                   >
-                    Thank you for reaching out. We'll get back to you within 2 hours.
+                    Thank you for reaching out. We&rsquo;ll get back to you within 2 hours.
                   </p>
                 </motion.div>
               ) : (

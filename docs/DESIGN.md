@@ -1,7 +1,3 @@
-Here's the complete rewritten brief:
-
----
-
 # Rohit Contracting — Warm Rhythm Redesign
 ## Phase 1: Color System + Card System Overhaul
 

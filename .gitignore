@@ -54,3 +54,9 @@ doc_text.txt
 .idea/
 Thumbs.db
 public/.DS_Store
+
+# Lighthouse / audit artifacts (keep reports out of the repo)
+*.report.html
+*.report.json
+lighthouse-*.json
+lighthouse-*.html
